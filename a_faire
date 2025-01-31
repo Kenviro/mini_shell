@@ -1,0 +1,20 @@
+Tache repartie - Mini_Shell
+
+achille :
+		Execution -
+				tout pipex (gestion des pipes et des redirection)
+		
+		Builtin =	export
+					env
+					unset
+
+Kilian :
+		Signaux
+		
+		Builtin =	exit
+					echo
+					cd
+					pwd
+
+Maniere de travail
+
