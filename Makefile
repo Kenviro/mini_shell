@@ -6,7 +6,9 @@ SRCDIR = src/
 OBJDIR = obj/
 LIBFT_DIR = ./Libft
 
-SRC = $(SRCDIR)minishell.c
+SRC =	$(SRCDIR)minishell.c \
+		$(SRCDIR)parsin/parse.c \
+
 OBJ = $(patsubst $(SRCDIR)%.c, $(OBJDIR)%.o, $(SRC))
 
 HEADER = includes/minishell.h
