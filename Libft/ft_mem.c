@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mem.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:27:52 by ktintim-          #+#    #+#             */
-/*   Updated: 2024/10/01 15:27:54 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:03:22 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	*ft_memset(void *ptr, int c, size_t len)

@@ -7,25 +7,27 @@ OBJDIR = obj/
 LIBFT_DIR = ./Libft
 
 SRC =	$(SRCDIR)minishell.c \
-		$(SRCDIR)parsing/parse.c \
-		$(SRCDIR)utils/holy_split.c	\
-		$(SRCDIR)utils/splitonsteroids.c \
+		$(SRCDIR)holy_split.c	\
+		$(SRCDIR)splitonsteroids.c \
+		$(SRCDIR)error.c
 
-OBJ = $(patsubst $(SRCDIR)%.c, $(OBJDIR)%.o, $(SRC))
+OBJ = $(patsubst $(SRCDIR)%, $(OBJDIR)%, $(SRC:.c=.o))
 
 HEADER = includes/minishell.h
 LIBFT = $(LIBFT_DIR)/libft.a
 INCLUDES = -I includes -I $(LIBFT_DIR) -I /usr/include/readline
 
-READLINE_LIBS = -lreadline -lhistory -L/usr/lib
+READLINE_LIBS = -L/usr/lib -lreadline -lncurses
 
-all: $(LIBFT) $(NAME)
+all: $(OBJDIR) $(LIBFT) $(NAME)
+
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft $(READLINE_LIBS) -o $(NAME)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(HEADER)
-	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(LIBFT):
@@ -41,4 +43,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re header
+.PHONY: all clean fclean re

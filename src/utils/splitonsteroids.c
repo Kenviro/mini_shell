@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   splitonsteroids.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 16:07:01 by psoulie           #+#    #+#             */
-/*   Updated: 2025/02/03 16:08:15 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/03 17:10:28 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
 int	ft_splitonsteroids(char *str, int start, char c)
 {

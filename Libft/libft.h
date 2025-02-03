@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:37:30 by ktintim-          #+#    #+#             */
-/*   Updated: 2024/11/26 11:11:52 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:45:37 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 typedef struct s_list
 {
-	void			*content;
+	char			*content;
 	struct s_list	*next;
 }					t_list;
 
@@ -84,7 +84,7 @@ char			**ft_split(char const *s, char c);
 char			*get_next_line(int fd);
 unsigned int	ft_strlcat(char *src, char *dest, unsigned int size);
 unsigned int	ft_strlcpy(char *dest, char const *src, unsigned int size);
-t_list			*ft_lstnew(void *content);
+t_list			*ft_lstnew(char *content);
 t_list			*ft_lstlast(t_list *lst);
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), \
 							void (*del)(void *));

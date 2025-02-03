@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   holy_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2025/02/03 16:12:15 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/03 17:10:25 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
 void	toggle_quote(int *in_quote)
 {

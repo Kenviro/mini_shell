@@ -6,11 +6,11 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:05:04 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/03 15:07:20 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:10:10 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "includes/minishell.h"
 
 void	error(char *message)
 {
