@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/03 15:24:22 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:25:04 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	main(int ac, char **av, char **env)
 		if (splited == NULL)
 			error("Error: split failed");
 		error("Error: split failed");
+		bonjour
+		rl_insert_comment
+		callocv
+		va_arg
 		usleep(50);
 	}
 }
