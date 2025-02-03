@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/03 10:28:17 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:21:20 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,11 @@
 # include <time.h>
 
 // minishell.c
+
+// error.c
+void	error(char *message);
+
+// parse.c
+void	parse(char **splited);
 
 #endif 
