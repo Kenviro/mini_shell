@@ -6,14 +6,14 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/03 16:12:06 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/03 17:32:42 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../Libft/libft.h"
+# include "../../Libft/libft.h"
 # include <readline/readline.h>
 # include <sys/types.h>
 # include <sys/stat.h>

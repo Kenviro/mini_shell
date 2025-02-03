@@ -16,9 +16,7 @@ HEADERS = libft.h
 
 NAME = libft.a
 
-all: $(NAME)
-
-bonus : $(O_BONUS) $(O_FILES)
+all : $(O_BONUS) $(O_FILES)
 	ar rcs $(NAME) $(O_BONUS) $(O_FILES)
 
 $(NAME) : $(O_FILES)
