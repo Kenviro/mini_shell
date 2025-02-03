@@ -7,7 +7,9 @@ OBJDIR = obj/
 LIBFT_DIR = ./Libft
 
 SRC =	$(SRCDIR)minishell.c \
-		$(SRCDIR)parsin/parse.c \
+		$(SRCDIR)parsing/parse.c \
+		$(SRCDIR)utils/holy_split.c	\
+		$(SRCDIR)utils/splitonsteroids.c \
 
 OBJ = $(patsubst $(SRCDIR)%.c, $(OBJDIR)%.o, $(SRC))
 
