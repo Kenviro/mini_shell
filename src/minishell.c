@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/04 10:02:02 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:33:15 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,37 @@ static void	init_list(char **splited, t_list *list)
 	free(splited);
 }
 
-int	main(int ac, char **av, char **env)
+static int	input_work(char *input, char **splited)
 {
 	t_list	*list;
-	char	*input;
+
+	list = NULL;
+	splited = holy_split(input, ' ');
+	free(input);
+	if (semi_parse(splited) == 1)
+		exit_shell(splited);
+	init_list(splited, list);
+	// parse(list);
+	ft_lstclear(&list, free);
+	return (0);
+}
+
+int	main(int ac, char **av, char **env)
+{
 	char	**splited;
+	char	*input;
 
 	(void)ac;
 	(void)av;
 	(void)env;
-	list = NULL;
+	splited = NULL;
 	while (1)
 	{
 		input = readline("minishell$ ");
-		splited = holy_split(input, ' ');
-		if (splited == NULL)
-			error("Error: split failed");
-		if (ft_strnstr(splited[0], "exit", 4) != NULL)
-			break ;
-		init_list(splited, list);
-		// parse(list);
-		ft_lstclear(&list, free);
+		if (input[0] == '\0')
+			new_line(input);
+		else
+			input_work(input, splited);
 	}
-	exit_shell(splited);
 	return (0);
 }
