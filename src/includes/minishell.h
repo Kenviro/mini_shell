@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/04 09:40:03 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:01:50 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@
 
 // error.c
 void	error(char *message);
+void	exit_shell(char **splited);
 
 // parse.c
-void	parse(char **splited);
+void	parse(t_list *list);
 
 //holy_split.c && splitonsteroids.c
 int		quote(char c, int *in_quote);

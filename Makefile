@@ -14,6 +14,7 @@ UTILS = utils/
 PARSING = parsing/
 
 FILES = minishell \
+		error \
 		$(UTILS)holy_split \
 		$(UTILS)splitonsteroids \
 		$(PARSING)parse \

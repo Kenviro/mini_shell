@@ -6,13 +6,13 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/03 17:01:13 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:01:28 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	parse(char **splited)
+void	parse(t_list *list)
 {
-	(void)splited;
+	(void)list;
 }
