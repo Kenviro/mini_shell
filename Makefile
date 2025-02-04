@@ -12,6 +12,7 @@ ODIR = obj/
 LIBFT = Libft/
 UTILS = utils/
 PARSING = parsing/
+SIGNAL = signal/
 
 FILES = minishell \
 		error \
@@ -19,6 +20,7 @@ FILES = minishell \
 		$(UTILS)splitonsteroids \
 		$(PARSING)parse \
 		$(PARSING)semi_parse \
+		$(SIGNAL)setup_signal \
 
 LIB = libft.a
 LIBPATH = $(LIBFT)$(LIB)
@@ -41,7 +43,7 @@ $(LIBPATH):
 	@make -C $(LIBFT)
 
 $(ODIR)%.o: $(SRCSDIR)%.c
-	@mkdir -p $(ODIR) $(ODIR)$(UTILS) $(ODIR)parsing
+	@mkdir -p $(ODIR) $(ODIR)$(UTILS) $(ODIR)parsing $(ODIR)signal
 	@echo "$(YELLOW)$(BOLD)💾 Compiling $<...$(COLOUR_RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@
 

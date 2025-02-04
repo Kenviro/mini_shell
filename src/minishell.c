@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/04 11:33:15 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:51:16 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,17 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	(void)env;
 	splited = NULL;
+	setup_signal_handler();
 	while (1)
 	{
 		input = readline("minishell$ ");
-		if (input[0] == '\0')
+		if (input == NULL)
+			break ;
+		else if (input[0] == '\0')
 			new_line(input);
 		else
 			input_work(input, splited);
 	}
+	free (input);
 	return (0);
 }
