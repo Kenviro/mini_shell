@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/04 10:02:02 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:09:02 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int ac, char **av, char **env)
 			break ;
 		init_list(splited, list);
 		// parse(list);
-		ft_lstclear(&list, free);
+		ft_lstclear(&list, free); // leak quelque part la dedans jai pas trouver ou serai le pb ??
 	}
 	exit_shell(splited);
 	return (0);
