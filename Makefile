@@ -18,6 +18,7 @@ FILES = minishell \
 		$(UTILS)holy_split \
 		$(UTILS)splitonsteroids \
 		$(PARSING)parse \
+		$(PARSING)semi_parse \
 
 LIB = libft.a
 LIBPATH = $(LIBFT)$(LIB)

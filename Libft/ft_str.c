@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strn.c                                          :+:      :+:    :+:   */
+/*   ft_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:46:49 by ktintim-          #+#    #+#             */
-/*   Updated: 2024/10/01 14:46:51 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:21:28 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_strncmp(char *s1, char *s2, unsigned int n)
@@ -38,7 +39,7 @@ char	*ft_strnstr(char *str, char *to_find, int n)
 	j = 0;
 	if (*to_find == '\0')
 		return ((char *)str);
-	while (str[i] && i < n)
+	while (str && str[i] && i < n)
 	{
 		j = 0;
 		while (str[i + j] == to_find[j] && (i + j) < n && to_find[j] != '\0')
