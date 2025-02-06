@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:13:02 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/06 13:16:36 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:31:40 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 static int	check_echo_arg(t_list *list)
 {
-	t_list	*next;
 	int		i;
 
 	i = 1;
-	next = list->next;
-	if (next->content[0] == '-')
+	if (list->content[0] == '-')
 	{
-		while (next->content[i] == 'n')
+		while (list->content[i] == 'n')
 			i++;
-		if (next->content[i] == '\0')
+		if (list->content[i] == '\0')
 			return (1);
 	}
 	return (0);
@@ -37,13 +35,12 @@ void	echo(t_list *list)
 
 	n_arg = 0;
 	joined = NULL;
-	if (list->next && check_echo_arg(list))
+	tmp = list->next;
+	while (tmp->next && check_echo_arg(tmp))
 	{
-		tmp = list->next->next;
+		tmp = tmp->next;
 		n_arg = 1;
 	}
-	else
-		tmp = list->next;
 	while (tmp)
 	{
 		joined = ft_strjoin(joined, tmp->content);
