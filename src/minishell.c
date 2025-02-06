@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/06 12:59:37 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:12:36 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int	main(int ac, char **av, char **env)
 			input_work(input, splited);
 	}
 	free (input);
+	printf("exit\n");
 	return (0);
 }
