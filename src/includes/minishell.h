@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/04 14:19:42 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:13:24 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ void	parse(t_list *list);
 // semi_parse.c
 int		semi_parse(char **splited);
 void	new_line(char *input);
+
+// built_in.c
+int		check_built_in(t_list *list);
+
+// echo.c
+void	echo(t_list *list);
 
 // signal/setup_signal.c
 void	handle_signal(int signal);

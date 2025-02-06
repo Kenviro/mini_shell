@@ -13,6 +13,7 @@ LIBFT = Libft/
 UTILS = utils/
 PARSING = parsing/
 SIGNAL = signal/
+BUILTINS = builtins/
 
 FILES = minishell \
 		error \
@@ -21,6 +22,8 @@ FILES = minishell \
 		$(PARSING)parse \
 		$(PARSING)semi_parse \
 		$(SIGNAL)setup_signal \
+		$(BUILTINS)builtin \
+		$(BUILTINS)echo \
 
 LIB = libft.a
 LIBPATH = $(LIBFT)$(LIB)
@@ -43,7 +46,7 @@ $(LIBPATH):
 	@make -C $(LIBFT)
 
 $(ODIR)%.o: $(SRCSDIR)%.c
-	@mkdir -p $(ODIR) $(ODIR)$(UTILS) $(ODIR)parsing $(ODIR)signal
+	@mkdir -p $(ODIR) $(ODIR)$(UTILS) $(ODIR)parsing $(ODIR)signal $(ODIR)builtins
 	@echo "$(YELLOW)$(BOLD)💾 Compiling $<...$(COLOUR_RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@
 
