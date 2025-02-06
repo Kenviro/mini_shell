@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achillesoulie <achillesoulie@student.42    +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/05 11:30:18 by achillesoul      ###   ########.fr       */
+/*   Updated: 2025/02/06 16:08:49 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,12 @@ int	command(char **cmds, char **red, char **env)
 	dup2(fdout, 1);
 	if (cmds && !cmds[1])
 		execute(cmds[0], env);
-	else while (cmds && cmds[i])
-		pipex(cmds[i++], env);
-	dup2(fdout, 1);
-	execute(cmds[i], env);
-	cnf(cmds[i]);
+	else
+	{
+		while (cmds && cmds[i])
+			pipex(cmds[i++], env);
+		dup2(fdout, 1);
+		execute(cmds[i], env);
+		cnf(cmds[i]);
+	}
 }

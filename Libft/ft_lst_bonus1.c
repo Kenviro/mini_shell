@@ -6,29 +6,35 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 09:59:07 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/03 15:46:23 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:44:11 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear(t_list **lst)
 {
 	t_list	*temp;
 
+	if (!lst || !*lst)
+		return ;
 	while (*lst)
 	{
 		temp = (*lst)->next;
-		ft_lstdelone(*lst, del);
+		if ((*lst)->content)
+			free((*lst)->content);
+		free(*lst);
 		*lst = temp;
 	}
+	*lst = NULL;
 }
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstdelone(t_list *lst, void (*del)(void *) )
 {
 	if (!lst)
 		return ;
-	del(lst->content);
+	if (lst->content)
+		del(lst->content);
 	free(lst);
 }
 
@@ -58,7 +64,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		{
 			if (temp)
 				del(temp);
-			ft_lstclear(&new_list, del);
+			ft_lstclear(&new_list);
 			return (NULL);
 		}
 		ft_lstadd_back(&new_list, new_node);

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:05:04 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/04 10:00:23 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:12:24 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	exit_shell(char **splited)
 		i++;
 	}
 	free(splited);
+	ft_printf("exit\n");
 	exit(EXIT_SUCCESS);
 }

@@ -12,6 +12,8 @@ ODIR = obj/
 LIBFT = Libft/
 UTILS = utils/
 PARSING = parsing/
+SIGNAL = signal/
+BUILTINS = builtins/
 
 FILES = minishell \
 		error \
@@ -19,6 +21,9 @@ FILES = minishell \
 		$(UTILS)splitonsteroids \
 		$(PARSING)parse \
 		$(PARSING)semi_parse \
+		$(SIGNAL)setup_signal \
+		$(BUILTINS)builtin \
+		$(BUILTINS)echo \
 
 LIB = libft.a
 LIBPATH = $(LIBFT)$(LIB)
@@ -37,11 +42,11 @@ NAME = minishell
 all: $(NAME)
 
 $(LIBPATH):
-	@echo "$(BLUE)$(BOLD)💾 Compiling MLX library...$(COLOUR_RESET)"
+	@echo "$(BLUE)$(BOLD)💾 Compiling Libft...$(COLOUR_RESET)"
 	@make -C $(LIBFT)
 
 $(ODIR)%.o: $(SRCSDIR)%.c
-	@mkdir -p $(ODIR) $(ODIR)$(UTILS) $(ODIR)parsing
+	@mkdir -p $(ODIR) $(ODIR)$(UTILS) $(ODIR)parsing $(ODIR)signal $(ODIR)builtins
 	@echo "$(YELLOW)$(BOLD)💾 Compiling $<...$(COLOUR_RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@
 
