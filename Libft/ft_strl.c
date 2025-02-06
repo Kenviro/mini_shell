@@ -6,10 +6,11 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:24:28 by ktintim-          #+#    #+#             */
-/*   Updated: 2024/10/21 15:39:51 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:44:46 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
 int	ft_strlen(const char *str)
 {
