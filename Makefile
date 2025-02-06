@@ -16,14 +16,14 @@ SIGNAL = signal/
 BUILTINS = builtins/
 
 FILES = minishell \
-		error \
+		$(UTILS)error \
 		$(UTILS)holy_split \
 		$(UTILS)splitonsteroids \
 		$(PARSING)parse \
-		$(PARSING)semi_parse \
 		$(SIGNAL)setup_signal \
 		$(BUILTINS)builtin \
 		$(BUILTINS)echo \
+		$(BUILTINS)exit \
 
 LIB = libft.a
 LIBPATH = $(LIBFT)$(LIB)

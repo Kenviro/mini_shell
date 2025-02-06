@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/06 14:12:36 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:35:26 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ static int	input_work(char *input, char **splited)
 	list = NULL;
 	splited = holy_split(input, ' ');
 	free(input);
-	if (semi_parse(splited) == 1)
-		exit_shell(splited);
 	init_list(splited, &list);
 	if (check_built_in(list) == 0)
 		parse(list);

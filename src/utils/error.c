@@ -6,11 +6,11 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:05:04 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/06 14:12:24 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:35:18 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
 void	error(char *message)
 {
@@ -18,17 +18,8 @@ void	error(char *message)
 	exit(EXIT_FAILURE);
 }
 
-void	exit_shell(char **splited)
+void	new_line(char *input)
 {
-	int	i;
-
-	i = 0;
-	while (splited[i])
-	{
-		free(splited[i]);
-		i++;
-	}
-	free(splited);
-	ft_printf("exit\n");
-	exit(EXIT_SUCCESS);
+	free(input);
+	rl_replace_line("", 0);
 }
