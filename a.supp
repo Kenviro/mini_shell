@@ -1,0 +1,14 @@
+{
+	ignore_readline
+	Memcheck: Leak
+	mathc-leak-kinds: reachable
+	...
+	fun: readline
+}
+{
+	ignore_add_history
+	Memcheck: Leak
+	mathc-leak-kinds: reachable
+	...
+	fun: add_history
+}
