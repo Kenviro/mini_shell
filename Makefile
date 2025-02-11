@@ -19,6 +19,7 @@ FILES = minishell \
 		$(UTILS)error \
 		$(UTILS)holy_split \
 		$(UTILS)splitonsteroids \
+		$(UTILS)split_redirect \
 		$(PARSING)parse \
 		$(SIGNAL)setup_signal \
 		$(BUILTINS)builtin \

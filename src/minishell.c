@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/06 16:43:47 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/11 09:43:04 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ static void	init_list(char **splited, t_list **list)
 	i = 0;
 	while (splited[i])
 	{
-		new_node = ft_lstnew(ft_strdup(splited[i]));
-		ft_lstadd_back(list, new_node);
+		if (found_redirection(splited[i], list) == 0)
+		{
+			new_node = ft_lstnew(ft_strdup(splited[i]));
+			ft_lstadd_back(list, new_node);
+		}
 		i++;
 	}
 	i = 0;
@@ -65,12 +68,13 @@ int	main(int ac, char **av, char **env)
 		if (input == NULL)
 			break ;
 		while (input[i] == ' ')
-			i++; 
+			i++;
 		if (input[i] == '\0')
 			new_line(input);
 		else
 			input_work(input, splited);
 	}
 	free (input);
+	printf("exit\n");
 	return (0);
 }

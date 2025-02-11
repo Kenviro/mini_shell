@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/06 16:15:12 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/11 09:31:14 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,8 @@ int		quote(char c, int *in_quote);
 int		ft_splitonsteroids(char *str, int start, char c);
 void	toggle_quote(int *in_quote);
 char	**holy_split(char *str, char c);
+
+// split_redirect.c
+int		found_redirection(char *str, t_list **list);
 
 #endif 
