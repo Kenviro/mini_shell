@@ -25,6 +25,7 @@ FILES = minishell \
 		$(BUILTINS)builtin \
 		$(BUILTINS)echo \
 		$(BUILTINS)exit \
+		$(BUILTINS)pwd \
 
 LIB = libft.a
 LIBPATH = $(LIBFT)$(LIB)

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/11 09:31:14 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:11:03 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ int		check_built_in(t_list *list);
 
 // echo.c
 void	echo(t_list *list);
+
+// pwd.c
+void	pwd(void);
 
 // exit.c
 void	exit_shell(t_list *list);
