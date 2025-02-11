@@ -6,77 +6,110 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:33:16 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/11 09:42:11 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/11 10:49:38 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	split_string(char *str, int i, int r_m[2], t_list **list)
+static int	count_redirection(char *str, int i)
+{
+	int	count;
+
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == '>' || str[i] == '<' || str[i] == '|')
+		{
+			count++;
+			if (str[i + 1] == str[i])
+				i++;
+		}
+		i++;
+	}
+	return (count);
+}
+
+static int	count_parts(char *str)
+{
+	int	parts;
+	int	i;
+
+	i = 0;
+	parts = 1;
+	while (str[i])
+	{
+		if (str[i] == '>' || str[i] == '<' || str[i] == '|')
+		{
+			parts++;
+			if (str[i + 1] == str[i])
+				i++;
+			if (str[i + 1] != '\0')
+				parts++;
+		}
+		i++;
+	}
+	return (parts);
+}
+
+static void	create_node(char *str, t_list **list, int *index)
 {
 	t_list	*new_node;
+	int		parts;
+	int		i;
 
-	if (r_m[1] != 1)
+	i = 0;
+	if (index[i + 1] == 0)
+		i++;
+	parts = count_parts(str);
+	while (i < parts)
 	{
-		new_node = ft_lstnew(ft_substr(str, 0, i));
+		new_node = ft_lstnew(ft_substr(str, index[i], index[i + 1] - index[i]));
 		ft_lstadd_back(list, new_node);
-	}
-	if (r_m[0] == 1)
-	{
-		new_node = ft_lstnew(ft_substr(str, i, 1));
-		ft_lstadd_back(list, new_node);
-	}
-	else if (r_m[0] == 2)
-	{
-		new_node = ft_lstnew(ft_substr(str, i, 2));
-		ft_lstadd_back(list, new_node);
-	}
-	if (r_m[1] != 2)
-	{
-		new_node = ft_lstnew(ft_substr(str, i + r_m[0], \
-								ft_strlen(str) - i - r_m[0]));
-		ft_lstadd_back(list, new_node);
+		i++;
 	}
 }
 
-static int	check_char(char *str, int i, char c, t_list **list)
+static void	split_redirection(char *str, t_list **list, int count)
 {
-	int	r_m[2];
+	int		*index;
+	int		i;
+	int		j;
 
-	if (str[i] != c)
-		return (0);
-	r_m[0] = 1;
-	r_m[1] = 3;
-	if (i == 0)
+	i = 0;
+	j = 0;
+	index = (int *)malloc(sizeof(int) * count + 2);
+	if (!index)
+		error("Memory Allocation Failed");
+	index[j++] = 0;
+	while (str[i])
 	{
-		r_m[1] = 1;
-		if (str[i + 1] && str[i + 1] == c)
+		if (str[i] == '>' || str[i] == '<' || str[i] == '|')
 		{
-			r_m[0] = 2;
-			if (str[i + 2] == '\0')
-				return (1);
+			index[j] = i;
+			j++;
+			if (str[i + 1] == str[i])
+				i++;
+			index[j] = i + 1;
+			j++;
 		}
-		else if (str[i + 1] == '\0')
-			return (1);
+		i++;
 	}
-	else if (str[i + 1] == '\0')
-		r_m[1] = 2;
-	split_string(str, i, r_m, list);
-	return (1);
+	index[j] = ft_strlen(str);
+	create_node(str, list, index);
 }
 
 int	found_redirection(char *str, t_list **list)
 {
-	int	i;
+	int	count;
 
-	i = 0;
-	while (str[i])
+	if (count_redirection(str, 0) > 0)
 	{
-		if (check_char(str, i, '<', list) \
-			|| check_char(str, i, '>', list) \
-			|| check_char(str, i, '|', list))
-			return (1);
-		i++;
+		if (count_redirection(str, 0) == ft_strlen(str))
+			return (0);
+		count = count_redirection(str, 0);
+		split_redirection(str, list, count);
+		return (1);
 	}
 	return (0);
 }
