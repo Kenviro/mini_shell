@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:33:16 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/11 10:49:38 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:51:32 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static void	create_node(char *str, t_list **list, int *index)
 		ft_lstadd_back(list, new_node);
 		i++;
 	}
+	free(index);
 }
 
 static void	split_redirection(char *str, t_list **list, int count)
