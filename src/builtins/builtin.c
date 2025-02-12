@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:06:14 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/11 11:12:11 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/12 10:37:45 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ int	check_built_in(t_list *list)
 	else if (ft_strncmp(list->content, "pwd", ft_strlen(list->content)) == 0)
 	{
 		pwd();
+		return (1);
+	}
+	else if (ft_strncmp(list->content, "cd", ft_strlen(list->content)) == 0)
+	{
+		if (list->next)
+			cd(list->next->content);
+		else
+			cd(NULL);
 		return (1);
 	}
 	return (0);
