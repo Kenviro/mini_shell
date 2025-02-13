@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:28 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/06 16:23:36 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:46:21 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	proper_exit(t_list *list, int status)
 {
 	ft_lstclear(&list);
+	ft_putstr_fd("exit\n", 1);
 	exit(status);
 }
 

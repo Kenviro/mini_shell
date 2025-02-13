@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/12 10:30:35 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:34:04 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../../Libft/libft.h"
 # include <readline/readline.h>
+# include <readline/history.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>

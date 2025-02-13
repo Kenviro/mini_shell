@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/12 10:36:34 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/13 11:06:23 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static char	*get_pwd(void)
 
 	path = getcwd(NULL, 0);
 	joined = ft_strjoin(path, "$ ");
+	free (path);
 	return (joined);
 }
 
@@ -51,6 +52,7 @@ static int	input_work(char *input)
 	t_list	*list;
 	char	**splited;
 
+	add_history(input);
 	splited = NULL;
 	list = NULL;
 	splited = holy_split(input, ' ');
@@ -65,6 +67,7 @@ static int	input_work(char *input)
 int	main(int ac, char **av, char **env)
 {
 	char	*input;
+	char	*path;
 	int		i;
 
 	(void)ac;
@@ -74,7 +77,9 @@ int	main(int ac, char **av, char **env)
 	setup_signal_handler();
 	while (1)
 	{
-		input = readline(get_pwd());
+		path = get_pwd();
+		input = readline(path);
+		free(path);
 		if (input == NULL)
 			break ;
 		while (input[i] == ' ')
