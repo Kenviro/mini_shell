@@ -55,7 +55,7 @@ $(ODIR)%.o: $(SRCSDIR)%.c
 
 $(NAME): $(OFILES) $(LIBPATH)
 	@echo "$(YELLOW)$(BOLD)Executable: $@$(COLOUR_RESET)"
-	$(CC) $(CFLAGS) $(OFILES) $(LIBPATH) -lX11 -lXext -lm $(LINK) -o $(NAME)
+	$(CC) $(CFLAGS) $(OFILES) $(LIBPATH) $(LINK) -o $(NAME)
 	@echo "$(GREEN)$(BOLD)🎊 Compilation complete! 🎊$(COLOUR_RESET)"
 
 clean:
