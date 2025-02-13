@@ -45,7 +45,7 @@ NAME = minishell
 all: $(NAME)
 
 $(LIBPATH):
-	@echo "$(BLUE)$(BOLD)💾 Compiling MLX library...$(COLOUR_RESET)"
+	@echo "$(BLUE)$(BOLD)💾 Compiling Libft library...$(COLOUR_RESET)"
 	@make -C $(LIBFT)
 
 $(ODIR)%.o: $(SRCSDIR)%.c
@@ -67,7 +67,7 @@ clean:
 fclean: clean
 	@echo "$(RED)$(BOLD)🗑️  Removing executable $(NAME)...$(COLOUR_RESET)"
 	rm -f $(NAME)
-	@make -C $(LIBFT) clean
+	@make -C $(LIBFT) fclean
 	@echo "$(GREEN)$(BOLD)✨ All clean! ✨$(COLOUR_RESET)"
 
 party:
