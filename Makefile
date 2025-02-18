@@ -16,14 +16,17 @@ SIGNAL = signal/
 BUILTINS = builtins/
 
 FILES = minishell \
-		error \
+		$(UTILS)error \
 		$(UTILS)holy_split \
 		$(UTILS)splitonsteroids \
+		$(UTILS)split_redirect \
 		$(PARSING)parse \
-		$(PARSING)semi_parse \
 		$(SIGNAL)setup_signal \
 		$(BUILTINS)builtin \
 		$(BUILTINS)echo \
+		$(BUILTINS)exit \
+		$(BUILTINS)pwd \
+		$(BUILTINS)cd \
 
 LIB = libft.a
 LIBPATH = $(LIBFT)$(LIB)
@@ -42,7 +45,7 @@ NAME = minishell
 all: $(NAME)
 
 $(LIBPATH):
-	@echo "$(BLUE)$(BOLD)💾 Compiling Libft...$(COLOUR_RESET)"
+	@echo "$(BLUE)$(BOLD)💾 Compiling Libft library...$(COLOUR_RESET)"
 	@make -C $(LIBFT)
 
 $(ODIR)%.o: $(SRCSDIR)%.c
@@ -52,7 +55,7 @@ $(ODIR)%.o: $(SRCSDIR)%.c
 
 $(NAME): $(OFILES) $(LIBPATH)
 	@echo "$(YELLOW)$(BOLD)Executable: $@$(COLOUR_RESET)"
-	$(CC) $(CFLAGS) $(OFILES) $(LIBPATH) -lX11 -lXext -lm $(LINK) -o $(NAME)
+	$(CC) $(CFLAGS) $(OFILES) $(LIBPATH) $(LINK) -o $(NAME)
 	@echo "$(GREEN)$(BOLD)🎊 Compilation complete! 🎊$(COLOUR_RESET)"
 
 clean:
@@ -64,7 +67,7 @@ clean:
 fclean: clean
 	@echo "$(RED)$(BOLD)🗑️  Removing executable $(NAME)...$(COLOUR_RESET)"
 	rm -f $(NAME)
-	@make -C $(LIBFT) clean
+	@make -C $(LIBFT) fclean
 	@echo "$(GREEN)$(BOLD)✨ All clean! ✨$(COLOUR_RESET)"
 
 party:
@@ -82,11 +85,5 @@ party:
 	@echo "$(GREEN)$(BOLD) \\(^-^)/ $(COLOUR_RESET)"
 	@sleep 0.5
 	@echo "$(BOLD)Party time is over! Back to work! \n  (^-^)7$(COLOUR_RESET)"
-
-apull:
-	git checkout main
-	git pull
-	git checkout achille
-	git merge main
 
 re: fclean all

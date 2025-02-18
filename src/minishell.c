@@ -6,11 +6,22 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/06 15:59:46 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/18 16:41:58 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+
+static char	*get_pwd(void)
+{
+	char	*path;
+	char	*joined;
+
+	path = getcwd(NULL, 0);
+	joined = ft_strjoin(path, "$ ");
+	free (path);
+	return (joined);
+}
 
 static void	init_list(char **splited, t_list **list)
 {
@@ -20,8 +31,11 @@ static void	init_list(char **splited, t_list **list)
 	i = 0;
 	while (splited[i])
 	{
-		new_node = ft_lstnew(ft_strdup(splited[i]));
-		ft_lstadd_back(list, new_node);
+		if (found_redirection(splited[i], list) == 0)
+		{
+			new_node = ft_lstnew(ft_strdup(splited[i]));
+			ft_lstadd_back(list, new_node);
+		}
 		i++;
 	}
 	i = 0;
@@ -33,15 +47,16 @@ static void	init_list(char **splited, t_list **list)
 	free(splited);
 }
 
-static int	input_work(char *input, char **splited)
+static int	input_work(char *input)
 {
 	t_list	*list;
+	char	**splited;
 
+	add_history(input);
+	splited = NULL;
 	list = NULL;
 	splited = holy_split(input, ' ');
 	free(input);
-	if (semi_parse(splited) == 1)
-		exit_shell(splited);
 	init_list(splited, &list);
 	if (check_built_in(list) == 0)
 		parse(list);
@@ -51,27 +66,28 @@ static int	input_work(char *input, char **splited)
 
 int	main(int ac, char **av, char **env)
 {
-	char	**splited;
 	char	*input;
+	char	*path;
 	int		i;
 
 	(void)ac;
 	(void)av;
 	(void)env;
 	i = 0;
-	splited = NULL;
 	setup_signal_handler();
 	while (1)
 	{
-		input = readline("minishell$ ");
+		path = get_pwd();
+		input = readline(path);
+		free(path);
 		if (input == NULL)
 			break ;
 		while (input[i] == ' ')
-			i++; 
+			i++;
 		if (input[i] == '\0')
 			new_line(input);
 		else
-			input_work(input, splited);
+			input_work(input);
 	}
 	free (input);
 	printf("exit\n");

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/04 15:13:24 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:34:04 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../../Libft/libft.h"
 # include <readline/readline.h>
+# include <readline/history.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
@@ -32,20 +33,28 @@
 
 // error.c
 void	error(char *message);
-void	exit_shell(char **splited);
+void	new_line(char *input);
 
 // parse.c
 void	parse(t_list *list);
 
 // semi_parse.c
 int		semi_parse(char **splited);
-void	new_line(char *input);
 
 // built_in.c
 int		check_built_in(t_list *list);
 
 // echo.c
 void	echo(t_list *list);
+
+// pwd.c
+void	pwd(void);
+
+// cd.c
+void	cd(char *path);
+
+// exit.c
+void	exit_shell(t_list *list);
 
 // signal/setup_signal.c
 void	handle_signal(int signal);
@@ -56,5 +65,8 @@ int		quote(char c, int *in_quote);
 int		ft_splitonsteroids(char *str, int start, char c);
 void	toggle_quote(int *in_quote);
 char	**holy_split(char *str, char c);
+
+// split_redirect.c
+int		found_redirection(char *str, t_list **list);
 
 #endif 

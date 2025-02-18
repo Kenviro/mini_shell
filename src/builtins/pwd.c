@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   semi_parse.c                                       :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achillesoulie <achillesoulie@student.42    +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 10:20:41 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/05 11:12:24 by achillesoul      ###   ########.fr       */
+/*   Created: 2025/02/11 11:10:27 by ktintim-          #+#    #+#             */
+/*   Updated: 2025/02/11 11:10:50 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	new_line(char *input)
+void	pwd(void)
 {
-	free(input);
-	rl_replace_line("", 0);
-}
+	char	*path;
 
-int	semi_parse(char **splited)
-{
-	if (splited == NULL)
-	{
-		error("Error: split failed");
-		return (1);
-	}
-	else if (ft_strnstr(splited[0], "exit", 4) != NULL)
-		return (1);
-	return (0);
+	path = getcwd(NULL, 0);
+	ft_printf("%s\n", path);
+	free(path);
 }

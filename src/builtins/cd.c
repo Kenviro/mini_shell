@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 15:05:04 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/06 14:12:24 by ktintim-         ###   ########.fr       */
+/*   Created: 2025/02/12 10:23:42 by ktintim-          #+#    #+#             */
+/*   Updated: 2025/02/12 10:49:23 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
-void	error(char *message)
+void	cd(char *path)
 {
-	ft_printf("%s\n", message);
-	exit(EXIT_FAILURE);
-}
-
-void	exit_shell(char **splited)
-{
-	int	i;
-
-	i = 0;
-	while (splited[i])
+	if (!path)
 	{
-		free(splited[i]);
-		i++;
+		//faire que ca renvoie a la racine
 	}
-	free(splited);
-	ft_printf("exit\n");
-	exit(EXIT_SUCCESS);
+	else if (chdir(path) == -1)
+	{
+		ft_putstr_fd("cd: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd("No such file or directory", 2);
+		ft_putstr_fd("\n", 2);
+	}
 }

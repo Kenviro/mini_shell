@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 17:25:00 by ktintim-          #+#    #+#             */
-/*   Updated: 2024/10/03 17:25:04 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:28:28 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*subloop(char const *s, unsigned int start, size_t len, char *end)
@@ -39,6 +40,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	i = ft_strlen(s);
+	end = NULL;
 	if (start >= i)
 	{
 		end = (char *)malloc(1);
