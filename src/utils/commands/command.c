@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/19 13:40:27 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:43:47 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,15 @@ static void	pipex(char **av, char **env)
 	{
 		close(end[0]);
 		dup2(end[1], STDOUT_FILENO);
-		if (!check_built_in(av))
-			execute(av, env);
+		close(end[1]);
+		execute(av, env);
 		cnf(*av);
 	}
 	else
 	{
-		wait(NULL);
 		close(end[1]);
 		dup2(end[0], STDIN_FILENO);
+		close(end[0]);
 	}
 }
 
@@ -118,18 +118,18 @@ int	command(char ***cmds, char **red, char **env)
 	pid = fork();
 	if (pid == 0)
 	{
-	fdin = red_in(red[0]);
-	fdout = red_out(red[1]);
-	dup2(fdin, 0);
-	dup2(fdout, 1);
-	while (cmds && cmds[i + 1])
-		pipex(cmds[i++], env);
-	dup2(fdout, 1);
-	if (!check_built_in(cmds[i]))
-			execute(cmds[i], env);
-	cnf(*cmds[i]);
+		fdin = red_in(red[0]);
+		fdout = red_out(red[1]);
+		dup2(fdin, 0);
+		dup2(fdout, 1);
+		while (cmds && cmds[i + 1])
+			pipex(cmds[i++], env);
+		dup2(fdout, 1);
+		execute(cmds[i], env);
+		cnf(*cmds[i]);
+		exit(0);
 	}
 	else
-		wait(NULL);
+		waitpid(pid, NULL, 0);
 	return (0);
 }

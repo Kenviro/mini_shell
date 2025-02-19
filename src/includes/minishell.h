@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 13:16:32 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:37:19 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	conditioning(t_list *lst, char **env);
 char	*filename(char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 int		command(char ***cmds, char **red, char **env);
-int		find_nbargs(t_list *lst);
+int		find_nbargs(t_list *lst, int icmd);
 int		red_out(char *red);
 int		red_in(char *red);
 char	**red_init(void);

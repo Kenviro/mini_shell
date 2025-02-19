@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 12:59:28 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:32:30 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**find_args(t_list *lst, int icmd)
 	int		nbargs;
 	char	**args;
 
-	nbargs = find_nbargs(lst);
+	nbargs = find_nbargs(lst, icmd);
 	args = (char **)malloc((nbargs + 1) * sizeof(char *));
 	args = set_args(lst, nbargs, icmd);
 	return (args);

@@ -91,4 +91,10 @@ party:
 	@sleep 0.5
 	@echo "$(BOLD)Party time is over! Back to work! \n  (^-^)7$(COLOUR_RESET)"
 
+apull:
+	git checkout main
+	git pull
+	git checkout achille
+	git merge main
+
 re: fclean all
