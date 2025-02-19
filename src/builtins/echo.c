@@ -6,47 +6,47 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:13:02 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/06 13:31:40 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:27:10 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	check_echo_arg(t_list *list)
+static int	check_echo_arg(char *flag)
 {
 	int		i;
 
 	i = 1;
-	if (list->content[0] == '-')
+	if (flag[0] == '-')
 	{
-		while (list->content[i] == 'n')
+		while (flag[i] == 'n')
 			i++;
-		if (list->content[i] == '\0')
+		if (flag[i] == '\0')
 			return (1);
 	}
 	return (0);
 }
 
-void	echo(t_list *list)
+void	echo(char **cmd)
 {
-	t_list	*tmp;
+	int		i;
 	int		n_arg;
 	char	*joined;
 
+	i = 1;
 	n_arg = 0;
 	joined = NULL;
-	tmp = list->next;
-	while (tmp->next && check_echo_arg(tmp))
+	while (cmd[i] && check_echo_arg(cmd[i]))
 	{
-		tmp = tmp->next;
+		i++;
 		n_arg = 1;
 	}
-	while (tmp)
+	while (cmd[i])
 	{
-		joined = ft_strjoin(joined, tmp->content);
-		if (tmp->next)
+		joined = ft_strjoin(joined, cmd[i]);
+		if (cmd[i + 1])
 			joined = ft_strjoin(joined, " ");
-		tmp = tmp->next;
+		i++;
 	}
 	if (!n_arg)
 		printf("%s\n", joined);

@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 14:37:19 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:53:54 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	error(char *message);
 void	new_line(char *input);
 
 // built_in.c
-int		check_built_in(t_list *list);
+int		check_built_in(char **cmd);
 
 // echo.c
-void	echo(t_list *list);
+void	echo(char **cmd);
 
 // pwd.c
 void	pwd(void);

@@ -6,17 +6,22 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:55:44 by psoulie           #+#    #+#             */
-/*   Updated: 2025/02/19 15:23:08 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/19 16:20:51 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	find_nbargs(t_list *lst, int cmd)
+int	find_nbargs(t_list *lst, int icmd)
 {
 	int	i;
 
-	(void)cmd;
+	while (lst && icmd)
+	{
+		if (lst->content[0] == '|')
+			icmd--;
+		lst = lst->next;
+	}
 	i = 0;
 	while (lst && lst->content[0] != '|')
 	{

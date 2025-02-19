@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 14:32:30 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:53:45 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	conditioning(t_list *lst, char **env)
 	char	**red;
 	int		nbcmds;
 	int		i;
-	
+
 	iter = lst;
 	red = red_init();
 	nbcmds = count_cmds(iter);
