@@ -20,7 +20,11 @@ FILES = minishell \
 		$(UTILS)holy_split \
 		$(UTILS)splitonsteroids \
 		$(UTILS)split_redirect \
-		$(PARSING)parse \
+		$(UTILS)ft_strcmp \
+		$(UTILS)commands/command \
+		$(UTILS)commands/command2 \
+		$(PARSING)conditioning \
+		$(PARSING)conargs \
 		$(SIGNAL)setup_signal \
 		$(BUILTINS)builtin \
 		$(BUILTINS)echo \
@@ -49,7 +53,7 @@ $(LIBPATH):
 	@make -C $(LIBFT)
 
 $(ODIR)%.o: $(SRCSDIR)%.c
-	@mkdir -p $(ODIR) $(ODIR)$(UTILS) $(ODIR)parsing $(ODIR)signal $(ODIR)builtins
+	@mkdir -p $(ODIR) $(ODIR)$(UTILS) $(ODIR)$(UTILS)commands $(ODIR)parsing $(ODIR)signal $(ODIR)builtins
 	@echo "$(YELLOW)$(BOLD)💾 Compiling $<...$(COLOUR_RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -67,6 +71,7 @@ clean:
 fclean: clean
 	@echo "$(RED)$(BOLD)🗑️  Removing executable $(NAME)...$(COLOUR_RESET)"
 	rm -f $(NAME)
+	rm -f out
 	@make -C $(LIBFT) fclean
 	@echo "$(GREEN)$(BOLD)✨ All clean! ✨$(COLOUR_RESET)"
 

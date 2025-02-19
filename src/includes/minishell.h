@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/12 13:34:04 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:16:32 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@
 void	error(char *message);
 void	new_line(char *input);
 
-// parse.c
-void	parse(t_list *list);
-
-// semi_parse.c
-int		semi_parse(char **splited);
-
 // built_in.c
 int		check_built_in(t_list *list);
 
@@ -68,5 +62,18 @@ char	**holy_split(char *str, char c);
 
 // split_redirect.c
 int		found_redirection(char *str, t_list **list);
+
+//command.c && command2.c
+void	cnf(char *cmd);
+void	here_doc(char *limiter);
+void	conditioning(t_list *lst, char **env);
+char	*filename(char *str);
+int		ft_strcmp(const char *s1, const char *s2);
+int		command(char ***cmds, char **red, char **env);
+int		find_nbargs(t_list *lst);
+int		red_out(char *red);
+int		red_in(char *red);
+char	**red_init(void);
+char	**set_args(t_list *lst, int nbargs, int icmd);
 
 #endif 

@@ -6,11 +6,11 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:55:44 by psoulie           #+#    #+#             */
-/*   Updated: 2025/02/13 15:01:21 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/19 12:59:18 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../includes/minishell.h"
 
 int	find_nbargs(t_list *lst)
 {

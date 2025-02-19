@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/18 16:41:58 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:26:17 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*get_pwd(void)
 	char	*joined;
 
 	path = getcwd(NULL, 0);
-	joined = ft_strjoin(path, "$ ");
+	joined = ft_strjoin(path, "$ :3 ");
 	free (path);
 	return (joined);
 }
@@ -47,7 +47,7 @@ static void	init_list(char **splited, t_list **list)
 	free(splited);
 }
 
-static int	input_work(char *input)
+static int	input_work(char *input, char **env)
 {
 	t_list	*list;
 	char	**splited;
@@ -58,8 +58,7 @@ static int	input_work(char *input)
 	splited = holy_split(input, ' ');
 	free(input);
 	init_list(splited, &list);
-	if (check_built_in(list) == 0)
-		parse(list);
+	conditioning(list, env);
 	ft_lstclear(&list);
 	return (0);
 }
@@ -72,7 +71,6 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	(void)env;
 	i = 0;
 	setup_signal_handler();
 	while (1)
@@ -87,7 +85,7 @@ int	main(int ac, char **av, char **env)
 		if (input[i] == '\0')
 			new_line(input);
 		else
-			input_work(input);
+			input_work(input, env);
 	}
 	free (input);
 	printf("exit\n");

@@ -3,19 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   command2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achillesoulie <achillesoulie@student.42    +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/05 11:33:54 by achillesoul      ###   ########.fr       */
+/*   Updated: 2025/02/19 12:58:36 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+int	red_in(char *red)
+{
+	char	*infile;
+	int		fdin;
+
+	fdin = 0;
+	if (red)
+	{
+		if (!ft_strncmp(red, "<<", 2))
+			here_doc(filename(red));
+		else
+		{
+			infile = filename(red);
+			fdin = open(infile, O_RDONLY);
+		}
+	}
+	return (fdin);
+}
+
 char	*filename(char *str)
 {
-	while (*str == '<' || *str == '>' || *str == ' ')
-		*str++;
+	while (str && (*str == '<' || *str == '>' || *str == ' '))
+		str++;
 	return (str);
 }
 

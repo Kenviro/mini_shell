@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_redirect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:33:16 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/13 11:06:01 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:34:22 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,9 @@ static void	create_node(char *str, t_list **list, int *index)
 	if (index[i + 1] == 0)
 		i++;
 	parts = count_parts(str);
-	printf("parts = %d\n", parts);
 	while (i < parts)
 	{
 		new_node = ft_lstnew(ft_substr(str, index[i], index[i + 1] - index[i]));
-		printf("new_node = %s\n", new_node->content);
 		ft_lstadd_back(list, new_node);
 		i++;
 	}

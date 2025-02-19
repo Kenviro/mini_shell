@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 14:36:21 by psoulie           #+#    #+#             */
-/*   Updated: 2025/02/13 10:44:39 by psoulie          ###   ########.fr       */
+/*   Created: 2024/10/02 11:53:23 by psoulie           #+#    #+#             */
+/*   Updated: 2025/02/19 13:02:40 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_list *stuff;
-	t_list *save;
-	int i = 1;
+	size_t	i;
 
-	av = ft_split(av[1], ' ');
-	(void)ac;
-	stuff = ft_lstnew(av[0]);
-	save = stuff;
-	while (av[i])
-	{
-		stuff->next = ft_lstnew(av[i]);
-		stuff = stuff->next;
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
-	}
-	conditioning(save, env);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
+
+/* int main()
+{
+	char s1[] = "abcdef";
+	char s2[] = "abc\375xx";
+	printf("%d\n", ft_strncmp(s1, s2, 5));
+} */
