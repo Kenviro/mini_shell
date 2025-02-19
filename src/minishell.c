@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 13:26:17 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:53:08 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static int	input_work(char *input, char **env)
 	splited = holy_split(input, ' ');
 	free(input);
 	init_list(splited, &list);
+	if (ft_strcmp(list->content, "exit") == 0)
+		exit_shell(list);
 	conditioning(list, env);
 	ft_lstclear(&list);
 	return (0);

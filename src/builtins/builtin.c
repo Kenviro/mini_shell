@@ -3,35 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:06:14 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 13:41:28 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:30:43 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_built_in(char *cmd)
+int	check_built_in(char **cmd)
 {
-	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
+	if (ft_strcmp(cmd[0], "echo") == 0)
 	{
-		echo(list);
+		echo(cmd);
 		return (1);
 	}
-	else if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
-		exit_shell(list);
-	else if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
+	else if (ft_strcmp(cmd[0], "pwd") == 0)
 	{
 		pwd();
 		return (1);
 	}
-	else if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
+	else if (ft_strcmp(cmd[0], "cd") == 0)
 	{
-		if (list->next)
-			cd(list->next->content);
-		else
-			cd(NULL);
+		cd(cmd[1]);
 		return (1);
 	}
 	return (0);

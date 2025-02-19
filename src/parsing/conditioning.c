@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conditioning.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 12:59:28 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:11:09 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	conditioning(t_list *lst, char **env)
 	char	**red;
 	int		nbcmds;
 	int		i;
-	
+
 	iter = lst;
 	red = red_init();
 	nbcmds = count_cmds(iter);

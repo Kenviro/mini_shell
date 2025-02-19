@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 13:16:32 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:30:17 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	error(char *message);
 void	new_line(char *input);
 
 // built_in.c
-int		check_built_in(t_list *list);
+int		check_built_in(char **cmd);
 
 // echo.c
-void	echo(t_list *list);
+void	echo(char **cmd);
 
 // pwd.c
 void	pwd(void);
