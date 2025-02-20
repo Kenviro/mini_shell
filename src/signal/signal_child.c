@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup_signal.c                                     :+:      :+:    :+:   */
+/*   signal_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 13:51:08 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/20 15:02:22 by ktintim-         ###   ########.fr       */
+/*   Created: 2025/02/20 14:32:25 by ktintim-          #+#    #+#             */
+/*   Updated: 2025/02/20 15:03:49 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <signal.h>
 
-void	handle_signal(int signal)
+void	handle_signal_child(int signal)
 {
 	if (signal == SIGINT)
 	{
 		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+	}
+	else if (signal == SIGQUIT)
+	{
+		ft_printf("Quit (core dumped)\n");
 	}
 }
 
-void	setup_signal_handler(void)
+void	signal_handler_child(void)
 {
 	struct sigaction	sa;
 
-	signal(SIGQUIT, SIG_IGN);
-	sa.sa_handler = handle_signal;
+	sa.sa_handler = handle_signal_child;
 	sa.sa_flags = SA_RESTART | SA_NODEFER;
 	sigemptyset(&sa.sa_mask);
-	if (sigaction(SIGINT, &sa, NULL) == -1)
+	if (sigaction(SIGINT, &sa, NULL) == -1 || \
+			sigaction(SIGQUIT, &sa, NULL) == -1)
 	{
 		perror("Erreur lors de la configuration des signaux");
 		exit(EXIT_FAILURE);

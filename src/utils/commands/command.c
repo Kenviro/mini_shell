@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/19 15:45:21 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:46:00 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int	command(char ***cmds, char **red, char **env)
 
 	i = 0;
 	pid = fork();
+	signal_handler_child();
 	if (pid == 0)
 	{
 		fdin = red_in(red[0]);

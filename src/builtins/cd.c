@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:42 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/12 10:49:23 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:23:06 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	cd(char *path)
 {
+	const char	*home;
+
 	if (!path)
 	{
-		//faire que ca renvoie a la racine
+		home = getenv("HOME");
+		chdir(home);
 	}
 	else if (chdir(path) == -1)
 	{

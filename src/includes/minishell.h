@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 14:30:17 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:33:34 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void	exit_shell(t_list *list);
 // signal/setup_signal.c
 void	handle_signal(int signal);
 void	setup_signal_handler(void);
+
+// signal/signal_child.c
+void	handle_signal_child(int signal);
+void	signal_handler_child(void);
 
 //holy_split.c && splitonsteroids.c
 int		quote(char c, int *in_quote);
