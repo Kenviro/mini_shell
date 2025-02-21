@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/19 16:27:23 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/21 10:48:06 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,76 +61,57 @@ static void	execute(char **cmd, char **env)
 	}
 }
 
-static void	pipex(char **av, char **env)
+static void	pipex(t_cmds *cmds, char **env)
 {
-	int		end[2];
 	pid_t	pid;
-
-	if (pipe(end) == -1)
-		exit(EXIT_FAILURE);
+	int		end[2];
+	
+	pipe(end);
 	pid = fork();
 	if (pid == 0)
 	{
 		close(end[0]);
-		dup2(end[1], STDOUT_FILENO);
-		close(end[1]);
-		execute(av, env);
-		cnf(*av);
+		if (cmds->fds[1] != 1)
+			dup2(cmds->fds[1], STDOUT_FILENO);
+		else
+			dup2(end[1], STDOUT_FILENO);
+		if (!check_built_in(cmds->cmd))
+		{
+			execute(cmds->cmd, env);
+			cnf(cmds->cmd[0]);
+		}
 	}
 	else
 	{
 		close(end[1]);
-		dup2(end[0], STDIN_FILENO);
-		close(end[0]);
+		if (cmds->next->fds[0] == -2)
+			exec_heredoc(cmds->next->limiter, end[0]);
+		if (cmds->next->fds[0] != 0)
+			dup2(cmds->next->fds[0], STDIN_FILENO);
+		else
+			dup2(end[0], STDIN_FILENO);
 	}
 }
 
-int	red_out(char *red)
+int	command(t_cmds *cmds, char **env)
 {
-	char	*outfile;
-	int		fdout;
-
-	fdout = 1;
-	if (red)
-	{
-		if (!ft_strncmp(red, ">>", 2))
-		{
-			outfile = filename(red);
-			fdout = open(outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		}
-		else if (red[1])
-		{
-			outfile = filename(red);
-			fdout = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		}
-	}
-	return (fdout);
-}
-
-int	command(char ***cmds, char **red, char **env)
-{
-	int		i;
-	int		fdin;
-	int		fdout;
 	pid_t	pid;
 
-	i = 0;
 	pid = fork();
 	if (pid == 0)
 	{
-		fdin = red_in(red[0]);
-		fdout = red_out(red[1]);
-		dup2(fdin, 0);
-		dup2(fdout, 1);
-		while (cmds && cmds[i + 1])
-			pipex(cmds[i++], env);
-		dup2(fdout, 1);
-		if (!check_built_in(cmds[i]))
+		if (cmds->fds[0] == -2)
+			here_doc(cmds->limiter);
+		else
+			dup2(cmds->fds[0], STDIN_FILENO);
+		while (cmds && cmds->next)
 		{
-			execute(cmds[i], env);
-			cnf(*cmds[i]);
+			pipex(cmds, env);
+			cmds = cmds->next;
 		}
-		exit(0);
+		dup2(cmds->fds[1], STDOUT_FILENO);
+		execute(cmds->cmd, env);
+		cnf(cmds->cmd[0]);
 	}
 	else
 		waitpid(pid, NULL, 0);

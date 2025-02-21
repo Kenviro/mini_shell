@@ -6,22 +6,32 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:55:44 by psoulie           #+#    #+#             */
-/*   Updated: 2025/02/19 16:20:51 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:31:16 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	find_nbargs(t_list *lst, int icmd)
+int	count_cmds(t_list *lst)
 {
 	int	i;
 
-	while (lst && icmd)
+	i = 0;
+	if (lst)
+		i++;
+	while (lst && lst->content)
 	{
-		if (lst->content[0] == '|')
-			icmd--;
+		if (lst->content[0] == '|' && lst->next)
+			i++;
 		lst = lst->next;
 	}
+	return (i);
+}
+
+int	find_nbargs(t_list *lst)
+{
+	int	i;
+
 	i = 0;
 	while (lst && lst->content[0] != '|')
 	{
@@ -38,29 +48,13 @@ int	find_nbargs(t_list *lst, int icmd)
 	return (i);
 }
 
-char	**red_init(void)
-{
-	char	**red;
-
-	red = (char **)malloc(2 * sizeof(char *));
-	red[0] = NULL;
-	red[1] = NULL;
-	return (red);
-}
-
-char	**set_args(t_list *lst, int nbargs, int icmd)
+char	**set_args(t_list *lst, int nbargs)
 {
 	int		i;
 	char	**args;
 
 	i = 0;
 	args = (char **)malloc((nbargs + 1) * sizeof(char *));
-	while (icmd)
-	{
-		if (lst->content[0] == '|')
-			icmd--;
-		lst = lst->next;
-	}
 	while (i < nbargs)
 	{
 		if (lst->content[0] == '>' || lst->content[0] == '<')
@@ -74,5 +68,16 @@ char	**set_args(t_list *lst, int nbargs, int icmd)
 		lst = lst->next;
 	}
 	args[i] = NULL;
+	return (args);
+}
+
+char	**find_args(t_list *lst)
+{
+	int		nbargs;
+	char	**args;
+
+	nbargs = find_nbargs(lst);
+	args = (char **)malloc((nbargs + 1) * sizeof(char *));
+	args = set_args(lst, nbargs);
 	return (args);
 }

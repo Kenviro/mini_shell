@@ -6,30 +6,11 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/19 12:58:36 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/21 10:56:22 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	red_in(char *red)
-{
-	char	*infile;
-	int		fdin;
-
-	fdin = 0;
-	if (red)
-	{
-		if (!ft_strncmp(red, "<<", 2))
-			here_doc(filename(red));
-		else
-		{
-			infile = filename(red);
-			fdin = open(infile, O_RDONLY);
-		}
-	}
-	return (fdin);
-}
 
 char	*filename(char *str)
 {
@@ -45,22 +26,23 @@ void	cnf(char *cmd)
 	exit(EXIT_FAILURE);
 }
 
-void	exec_heredoc(char *limiter, int *end)
+void	exec_heredoc(char *limiter, int end)
 {
 	char	*line;
 
-	close(end[0]);
 	while (1)
 	{
+		ft_printf("> ");
 		line = get_next_line(0);
 		if (ft_strcmp(line, limiter) == 10)
 		{
 			free(line);
 			exit(EXIT_SUCCESS);
 		}
-		write(end[1], line, ft_strlen(line));
+		write(end, line, ft_strlen(line));
 		free(line);
 	}
+	close(end);
 }
 
 void	here_doc(char *limiter)
@@ -72,10 +54,13 @@ void	here_doc(char *limiter)
 		exit(EXIT_FAILURE);
 	pid = fork();
 	if (pid == 0)
-		exec_heredoc(limiter, end);
+	{
+		close(end[0]);
+		exec_heredoc(limiter, end[1]);
+	}
 	else
 	{
-		wait(NULL);
+		waitpid(pid, NULL, 0);
 		close(end[1]);
 		dup2(end[0], STDIN_FILENO);
 	}

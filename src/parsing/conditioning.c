@@ -6,94 +6,103 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 15:53:45 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/21 10:27:38 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	**find_args(t_list *lst, int icmd)
+int	find_fdout(t_list *lst)
 {
-	int		nbargs;
-	char	**args;
+	int	fd;
 
-	nbargs = find_nbargs(lst, icmd);
-	args = (char **)malloc((nbargs + 1) * sizeof(char *));
-	args = set_args(lst, nbargs, icmd);
-	return (args);
-}
-
-static int	count_cmds(t_list *lst)
-{
-	int	i;
-
-	i = 0;
-	if (lst)
-		i++;
-	while (lst && lst->content)
+	fd = 1;
+	while (lst && lst->content[0] != '|')
 	{
-		if (lst->content[0] == '|' && lst->next)
-			i++;
+		if (lst->content[0] == '>')
+		{
+			if (fd != 1)
+				close(fd);
+			if (lst->content[1] == '>')
+			{
+				lst = lst->next;
+				fd = open(lst->content, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			}
+			else
+			{
+				lst = lst->next;
+				fd = open(lst->content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			}
+		}
 		lst = lst->next;
 	}
-	return (i);
+	return (fd);
 }
 
-char	**assign_redirection(char **red, t_list *lst)
+int	find_fdin(t_list *lst)
 {
-	if (lst->content[0] == '<')
-	{
-		if (red[0])
-			free(red[0]);
-		if (lst->content[1] == '<')
-			red[0] = ft_strjoin("<< ", lst->next->content);
-		else
-			red[0] = ft_strjoin("< ", lst->next->content);
-	}
-	else
-	{
-		if (red[1])
-			free(red[1]);
-		if (lst->content[1] == '>')
-			red[1] = ft_strjoin(">> ", lst->next->content);
-		else
-			red[1] = ft_strjoin("> ", lst->next->content);
-	}
-	return (red);
-}
+	int	fd;
 
-void	distribute(t_list *lst, char ***cmds, char **red, char **env)
-{
-	int	i;
-
-	i = 0;
-	while (lst && lst->content)
+	fd = 0;
+	while (lst && lst->content[0] != '|')
 	{
-		if ((lst->content[0] == '>' || lst->content[0] == '<') && lst->next)
-			red = assign_redirection(red, lst);
+		if (lst->content[0] == '<')
+		{
+			if (fd != 0)
+				close(fd);
+			if (lst->content[1] != '<')
+			{
+				lst = lst->next;
+				fd = open(lst->content, O_RDONLY);
+			}
+			else
+				fd = -2;
+		}
 		lst = lst->next;
-		i++;
 	}
-	command(cmds, red, env);
+	return (fd);
+}
+
+t_cmds *new_cmd(t_list *lst)
+{
+	t_cmds	*cmds;
+
+	cmds = (t_cmds *)malloc(sizeof(t_cmds));
+	cmds->next = NULL;
+	cmds->cmd = find_args(lst);
+	cmds->fds[0] = find_fdin(lst);
+	cmds->fds[1] = find_fdout(lst);
+	return (cmds);
 }
 
 void	conditioning(t_list *lst, char **env)
 {
-	t_list	*iter;
-	char	***cmds;
-	char	**red;
-	int		nbcmds;
-	int		i;
+	t_cmds	*cmds;
+	t_cmds	*save;
 
-	iter = lst;
-	red = red_init();
-	nbcmds = count_cmds(iter);
-	cmds = (char ***)malloc((nbcmds + 1) * sizeof(char **));
-	i = 0;
-	while (nbcmds--)
+	cmds = new_cmd(lst);
+	save = cmds;
+	while (lst && lst->content[0] != '|')
+		lst = lst->next;
+	if (lst && lst->content[0] == '|')
+		lst = lst->next;
+	while (lst)
 	{
-		cmds[i] = find_args(lst, i);
-		i++;
+		cmds->next = new_cmd(lst);
+		cmds = cmds->next;
+		if (cmds->fds[0] == -2)
+		{
+			while (lst->content[0] != '<' && lst->content[1] != '<')
+				lst = lst->next;
+			lst = lst->next;
+			cmds->limiter = lst->content;
+		}
+		else
+			cmds->limiter = NULL;
+		while (lst && lst->content[0] != '|')
+			lst = lst->next;
+		if (lst && lst->content[0] == '|')
+			lst = lst->next;
 	}
-	distribute(iter, cmds, red, env);
+	command(save, env);
 }

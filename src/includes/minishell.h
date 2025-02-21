@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 15:53:54 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/21 10:31:56 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <time.h>
+
+typedef struct s_cmds
+{
+	char			**cmd;
+	int				fds[2];
+	char			*limiter;
+	struct s_cmds	*next;
+}				t_cmds;
 
 // minishell.c
 
@@ -67,13 +75,17 @@ int		found_redirection(char *str, t_list **list);
 void	cnf(char *cmd);
 void	here_doc(char *limiter);
 void	conditioning(t_list *lst, char **env);
+void	data_init(t_list *lst);
+void	exec_heredoc(char *limiter, int end);
 char	*filename(char *str);
+char	**set_args(t_list *lst, int nbargs);
+char	**find_args(t_list *lst);
+char	***red_init(void);
 int		ft_strcmp(const char *s1, const char *s2);
-int		command(char ***cmds, char **red, char **env);
-int		find_nbargs(t_list *lst, int icmd);
+int		command(t_cmds *cmds, char **env);
+int		find_nbargs(t_list *lst);
 int		red_out(char *red);
 int		red_in(char *red);
-char	**red_init(void);
-char	**set_args(t_list *lst, int nbargs, int icmd);
+int		count_cmds(t_list *lst);
 
 #endif 
