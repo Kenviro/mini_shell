@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/21 10:56:22 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/21 11:39:26 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ void	cnf(char *cmd)
 	exit(EXIT_FAILURE);
 }
 
-void	exec_heredoc(char *limiter, int end)
+int here_doc(char *limiter)
 {
 	char	*line;
+	int		fd;
 
+	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	while (1)
 	{
 		ft_printf("> ");
@@ -37,31 +39,12 @@ void	exec_heredoc(char *limiter, int end)
 		if (ft_strcmp(line, limiter) == 10)
 		{
 			free(line);
-			exit(EXIT_SUCCESS);
+			break ;
 		}
-		write(end, line, ft_strlen(line));
+		write(fd, line, ft_strlen(line));
 		free(line);
 	}
-	close(end);
-}
-
-void	here_doc(char *limiter)
-{
-	int		end[2];
-	pid_t	pid;
-
-	if (pipe(end) == -1)
-		exit(EXIT_FAILURE);
-	pid = fork();
-	if (pid == 0)
-	{
-		close(end[0]);
-		exec_heredoc(limiter, end[1]);
-	}
-	else
-	{
-		waitpid(pid, NULL, 0);
-		close(end[1]);
-		dup2(end[0], STDIN_FILENO);
-	}
+	close(fd);
+	fd = open(".heredoc", O_RDONLY);
+	return (fd);
 }

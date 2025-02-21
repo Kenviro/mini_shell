@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/21 10:31:56 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/21 11:39:43 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,13 @@ int		found_redirection(char *str, t_list **list);
 
 //command.c && command2.c
 void	cnf(char *cmd);
-void	here_doc(char *limiter);
 void	conditioning(t_list *lst, char **env);
 void	data_init(t_list *lst);
-void	exec_heredoc(char *limiter, int end);
 char	*filename(char *str);
 char	**set_args(t_list *lst, int nbargs);
 char	**find_args(t_list *lst);
 char	***red_init(void);
+int		here_doc(char *limiter);
 int		ft_strcmp(const char *s1, const char *s2);
 int		command(t_cmds *cmds, char **env);
 int		find_nbargs(t_list *lst);

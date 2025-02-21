@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/21 10:48:06 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/21 14:15:52 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,8 @@ static void	pipex(t_cmds *cmds, char **env)
 	}
 	else
 	{
+		wait(NULL);
 		close(end[1]);
-		if (cmds->next->fds[0] == -2)
-			exec_heredoc(cmds->next->limiter, end[0]);
 		if (cmds->next->fds[0] != 0)
 			dup2(cmds->next->fds[0], STDIN_FILENO);
 		else
@@ -100,10 +99,7 @@ int	command(t_cmds *cmds, char **env)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (cmds->fds[0] == -2)
-			here_doc(cmds->limiter);
-		else
-			dup2(cmds->fds[0], STDIN_FILENO);
+		dup2(cmds->fds[0], STDIN_FILENO);
 		while (cmds && cmds->next)
 		{
 			pipex(cmds, env);
@@ -114,6 +110,10 @@ int	command(t_cmds *cmds, char **env)
 		cnf(cmds->cmd[0]);
 	}
 	else
+	{
 		waitpid(pid, NULL, 0);
+		if (access(".heredoc", F_OK) == 0)
+			unlink(".heredoc");
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/21 10:27:38 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/21 11:39:54 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ int	find_fdin(t_list *lst)
 				fd = open(lst->content, O_RDONLY);
 			}
 			else
-				fd = -2;
+			{
+				lst = lst->next;
+				fd = here_doc(lst->content);
+			}
 		}
 		lst = lst->next;
 	}
