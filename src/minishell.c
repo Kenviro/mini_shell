@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 14:53:08 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:27:30 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,15 @@ static int	input_work(char *input, char **env)
 	init_list(splited, &list);
 	if (ft_strcmp(list->content, "exit") == 0)
 		exit_shell(list);
-	conditioning(list, env);
-	ft_lstclear(&list);
+	if (ft_strcmp(list->content, "cd") == 0)
+	{
+		if (list->next)
+			cd(list->next->content);
+		else
+			cd(NULL);
+	}
+	else
+		conditioning(list, env);
 	return (0);
 }
 
@@ -74,9 +81,9 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	i = 0;
-	setup_signal_handler();
 	while (1)
 	{
+		setup_signal_handler();
 		path = get_pwd();
 		input = readline(path);
 		free(path);

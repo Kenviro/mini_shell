@@ -26,6 +26,7 @@ FILES = minishell \
 		$(PARSING)conditioning \
 		$(PARSING)conargs \
 		$(SIGNAL)setup_signal \
+		$(SIGNAL)signal_child \
 		$(BUILTINS)builtin \
 		$(BUILTINS)echo \
 		$(BUILTINS)exit \

@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:42 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 14:01:14 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/21 14:23:42 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	cd(char *path)
 {
+	const char	*home;
+
 	if (!path)
 	{
-		//faire que ca renvoie a la racine
+		home = getenv("HOME");
+		chdir(home);
 	}
 	else if (chdir(path) == -1)
 	{

@@ -6,11 +6,23 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/21 11:39:54 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/21 15:16:29 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	find_nbcmds(t_cmds *cmds)
+{
+	int	i;
+
+	while (cmds)
+	{
+		cmds = cmds->next;
+		i++;
+	}
+	return (i);
+}
 
 int	find_fdout(t_list *lst)
 {

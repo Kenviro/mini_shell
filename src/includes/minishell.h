@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/21 11:39:43 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/21 16:16:30 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void	exit_shell(t_list *list);
 void	handle_signal(int signal);
 void	setup_signal_handler(void);
 
+// signal/signal_child.c
+void	handle_signal_child(int signal);
+void	signal_handler_child(void);
+
 //holy_split.c && splitonsteroids.c
 int		quote(char c, int *in_quote);
 int		ft_splitonsteroids(char *str, int start, char c);
@@ -75,16 +79,17 @@ int		found_redirection(char *str, t_list **list);
 void	cnf(char *cmd);
 void	conditioning(t_list *lst, char **env);
 void	data_init(t_list *lst);
+void	command(t_cmds *cmds, char **env);
 char	*filename(char *str);
 char	**set_args(t_list *lst, int nbargs);
 char	**find_args(t_list *lst);
 char	***red_init(void);
 int		here_doc(char *limiter);
 int		ft_strcmp(const char *s1, const char *s2);
-int		command(t_cmds *cmds, char **env);
 int		find_nbargs(t_list *lst);
 int		red_out(char *red);
 int		red_in(char *red);
 int		count_cmds(t_list *lst);
+int		find_nbcmds(t_cmds *cmds);
 
 #endif 
