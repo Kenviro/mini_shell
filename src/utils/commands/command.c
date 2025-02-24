@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/24 10:16:40 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:45:30 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ pid_t	pipex(t_cmds *cmds, char **env)
 {
 	pid_t	pid;
 	int		end[2];
-	
+
 	pipe(end);
 	pid = fork();
 	if (pid == 0)
@@ -84,7 +84,7 @@ pid_t	pipex(t_cmds *cmds, char **env)
 			dup2(cmds->fds[1], STDOUT_FILENO);
 		else
 			dup2(end[1], STDOUT_FILENO);
-		if (!check_built_in(cmds->cmd))
+		if (!check_built_in(cmds->cmd, env))
 		{
 			execute(cmds->cmd, env);
 			cnf(cmds->cmd[0]);
@@ -108,7 +108,7 @@ void	command(t_cmds *cmds, char **env)
 	pid_t	*to_wait;
 	int		i;
 	int		nbcmds;
-	
+
 	nbcmds = find_nbcmds(cmds);
 	i = 0;
 	to_wait = (pid_t *)malloc((nbcmds + 1) * sizeof(pid_t));

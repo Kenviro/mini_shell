@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/24 10:15:10 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:41:51 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,24 @@ static int	input_work(char *input, char ***env)
 	splited = holy_split(input, ' ');
 	free(input);
 	init_list(splited, &list);
-	if (ft_strcmp(list->content, "exit") == 0)
-		exit_shell(list);
-	if (ft_strcmp(list->content, "cd") == 0)
+	if (strcmp(list->content, "unset") == 0)
 	{
-		if (list->next)
-			cd(list->next->content);
-		else
-			cd(NULL);
+		unset(list, env);
+		return (0);
 	}
-	else
-		conditioning(list, env);
+	else if (other_builtin(list) == 0)
+		conditioning(list, *env);
 	return (0);
 }
 
-static void	prompt_boucle(char ***env)
+static void	prompt_boucle(char **env)
 {	
 	char	*input;
 	char	*path;
+	char	**envcpy;
 	int		i;
 
+	envcpy = ft_strdup_2d(env);
 	i = 0;
 	while (1)
 	{
@@ -93,7 +91,7 @@ static void	prompt_boucle(char ***env)
 		if (input[i] == '\0')
 			new_line(input);
 		else
-			input_work(input, env);
+			input_work(input, &envcpy);
 	}
 	free(input);
 }
@@ -102,7 +100,7 @@ int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
-	prompt_boucle(&env);
+	prompt_boucle(env);
 	printf("exit\n");
 	return (0);
 }

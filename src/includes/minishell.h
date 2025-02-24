@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/24 10:16:27 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:45:04 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	new_line(char *input);
 
 // built_in.c
 int		check_built_in(char **cmd, char **env);
+int		other_builtin(t_list *list);
 
 // echo.c
 void	echo(char **cmd);
@@ -56,7 +57,7 @@ void	pwd(void);
 void	cd(char *path);
 
 // unset.c
-void	unset(char **cmd, char **env);
+void	unset(t_list *list, char ***env);
 
 // env.c
 void	env_builtin(char **cmd, char **env);
@@ -98,6 +99,7 @@ char	**find_args(t_list *lst);
 char	***red_init(void);
 int		here_doc(char *limiter);
 int		ft_strcmp(const char *s1, const char *s2);
+char	**ft_strdup_2d(char **str);
 int		find_nbargs(t_list *lst);
 int		red_out(char *red);
 int		red_in(char *red);
