@@ -21,6 +21,7 @@ FILES = minishell \
 		$(UTILS)splitonsteroids \
 		$(UTILS)split_redirect \
 		$(UTILS)ft_strcmp \
+		$(UTILS)check_input \
 		$(UTILS)commands/command \
 		$(UTILS)commands/command2 \
 		$(PARSING)conditioning \
@@ -32,6 +33,9 @@ FILES = minishell \
 		$(BUILTINS)exit \
 		$(BUILTINS)pwd \
 		$(BUILTINS)cd \
+		$(BUILTINS)unset \
+		$(BUILTINS)export \
+		$(BUILTINS)env
 
 LIB = libft.a
 LIBPATH = $(LIBFT)$(LIB)

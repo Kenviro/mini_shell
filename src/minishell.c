@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/20 16:24:26 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:13:00 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	init_list(char **splited, t_list **list)
 	free(splited);
 }
 
-static int	input_work(char *input, char **env)
+static int	input_work(char *input, char ***env)
 {
 	t_list	*list;
 	char	**splited;
@@ -55,6 +55,7 @@ static int	input_work(char *input, char **env)
 	add_history(input);
 	splited = NULL;
 	list = NULL;
+	input = found_dollar(input);
 	splited = holy_split(input, ' ');
 	free(input);
 	init_list(splited, &list);
@@ -72,14 +73,12 @@ static int	input_work(char *input, char **env)
 	return (0);
 }
 
-int	main(int ac, char **av, char **env)
-{
+static void	prompt_boucle(char ***env)
+{	
 	char	*input;
 	char	*path;
 	int		i;
 
-	(void)ac;
-	(void)av;
 	i = 0;
 	while (1)
 	{
@@ -96,7 +95,14 @@ int	main(int ac, char **av, char **env)
 		else
 			input_work(input, env);
 	}
-	free (input);
+	free(input);
+}
+
+int	main(int ac, char **av, char **env)
+{
+	(void)ac;
+	(void)av;
+	prompt_boucle(&env);
 	printf("exit\n");
 	return (0);
 }

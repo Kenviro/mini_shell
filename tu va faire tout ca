@@ -1,0 +1,9 @@
+
+
+probleme qui reste :
+		- controle+C qui se fait pllusieur fois quand y a un pipe
+		- verifier si control+\ fonctionne correctement dans tout les cas
+
+chose a faire :
+		- les builtins (recup ceux de achille)
+		- gerer "$?"

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/20 14:46:00 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:39:29 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	pipex(char **av, char **env)
 	{
 		close(end[0]);
 		dup2(end[1], STDOUT_FILENO);
-		if (!check_built_in(av))
+		if (!check_built_in(av, env))
 			execute(av, env);
 		cnf(*av);
 	}
@@ -126,7 +126,7 @@ int	command(char ***cmds, char **red, char **env)
 		while (cmds && cmds[i + 1])
 			pipex(cmds[i++], env);
 		dup2(fdout, 1);
-		if (!check_built_in(cmds[i]))
+		if (!check_built_in(cmds[i], env))
 		{
 			execute(cmds[i], env);
 			cnf(*cmds[i]);

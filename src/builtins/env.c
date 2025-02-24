@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup_signal.c                                     :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 13:51:08 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/21 14:29:21 by ktintim-         ###   ########.fr       */
+/*   Created: 2025/02/21 12:53:14 by ktintim-          #+#    #+#             */
+/*   Updated: 2025/02/21 13:19:34 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <signal.h>
 
-void	handle_signal(int signal)
+void	env_builtin(char **cmd, char **env)
 {
-	if (signal == SIGINT)
+	int	i;
+
+	i = 0;
+	if (cmd[1])
 	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
+		ft_printf("env: too many arguments\n");
+		return ;
 	}
-}
-
-void	setup_signal_handler(void)
-{
-	struct sigaction	sa;
-
-	signal(SIGQUIT, SIG_IGN);
-	sa.sa_handler = handle_signal;
-	sa.sa_flags = SA_RESTART | SA_NODEFER;
-	sigemptyset(&sa.sa_mask);
-	if (sigaction(SIGINT, &sa, NULL) == -1)
+	while (env[i])
 	{
-		perror("Erreur lors de la configuration des signaux");
-		exit(EXIT_FAILURE);
+		ft_printf("%s\n", env[i]);
+		i++;
 	}
 }

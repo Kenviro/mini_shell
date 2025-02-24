@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/20 14:33:34 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:19:28 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	error(char *message);
 void	new_line(char *input);
 
 // built_in.c
-int		check_built_in(char **cmd);
+int		check_built_in(char **cmd, char **env);
 
 // echo.c
 void	echo(char **cmd);
@@ -46,6 +46,15 @@ void	pwd(void);
 
 // cd.c
 void	cd(char *path);
+
+// unset.c
+void	unset(char **cmd, char **env);
+
+// env.c
+void	env_builtin(char **cmd, char **env);
+
+// export.c
+void	export(char **cmd, char **env);
 
 // exit.c
 void	exit_shell(t_list *list);
@@ -66,6 +75,9 @@ char	**holy_split(char *str, char c);
 
 // split_redirect.c
 int		found_redirection(char *str, t_list **list);
+
+// check_input.c
+char	*found_dollar(char *input);
 
 //command.c && command2.c
 void	cnf(char *cmd);

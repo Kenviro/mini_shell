@@ -6,13 +6,23 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:06:14 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 14:30:43 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:19:23 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_built_in(char **cmd)
+static int	check_export(char **cmd, char **env)
+{
+	if (ft_strcmp(cmd[0], "export") == 0)
+	{
+		export(cmd, env);
+		return (1);
+	}
+	return (0);
+}
+
+int	check_built_in(char **cmd, char **env)
 {
 	if (ft_strcmp(cmd[0], "echo") == 0)
 	{
@@ -24,10 +34,17 @@ int	check_built_in(char **cmd)
 		pwd();
 		return (1);
 	}
-	else if (ft_strcmp(cmd[0], "cd") == 0)
+	else if (ft_strcmp(cmd[0], "unset") == 0)
 	{
-		cd(cmd[1]);
+		unset(cmd, env);
 		return (1);
 	}
+	else if (ft_strcmp(cmd[0], "env") == 0)
+	{
+		env_builtin(cmd, env);
+		return (1);
+	}
+	else if (check_export(cmd, env) == 1)
+		return (1);
 	return (0);
 }
