@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:32:25 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/20 15:03:49 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:12:59 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	signal_handler_child(void)
 {
 	struct sigaction	sa;
 
+	//signal(SIGTTOU, SIG_IGN);
 	sa.sa_handler = handle_signal_child;
 	sa.sa_flags = SA_RESTART | SA_NODEFER;
 	sigemptyset(&sa.sa_mask);

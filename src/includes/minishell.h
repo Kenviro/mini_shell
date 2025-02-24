@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/21 13:19:28 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:16:27 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <time.h>
+
+typedef struct s_cmds
+{
+	char			**cmd;
+	int				fds[2];
+	char			*limiter;
+	struct s_cmds	*next;
+}				t_cmds;
 
 // minishell.c
 
@@ -81,15 +89,19 @@ char	*found_dollar(char *input);
 
 //command.c && command2.c
 void	cnf(char *cmd);
-void	here_doc(char *limiter);
 void	conditioning(t_list *lst, char **env);
+void	data_init(t_list *lst);
+void	command(t_cmds *cmds, char **env);
 char	*filename(char *str);
+char	**set_args(t_list *lst, int nbargs);
+char	**find_args(t_list *lst);
+char	***red_init(void);
+int		here_doc(char *limiter);
 int		ft_strcmp(const char *s1, const char *s2);
-int		command(char ***cmds, char **red, char **env);
 int		find_nbargs(t_list *lst);
 int		red_out(char *red);
 int		red_in(char *red);
-char	**red_init(void);
-char	**set_args(t_list *lst, int nbargs, int icmd);
+int		count_cmds(t_list *lst);
+int		find_nbcmds(t_cmds *cmds);
 
 #endif 
