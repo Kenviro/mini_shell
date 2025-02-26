@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/26 14:31:13 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:37:04 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,6 @@ void	command(t_cmds *cmds, char **env)
 	}
 	else
 	{
-		signal(SIGQUIT, SIG_IGN);
-		signal(SIGINT, SIG_IGN);
 		waitpid(pid, NULL, 0);
 		if (access(".heredoc", F_OK))
 			unlink(".heredoc");
