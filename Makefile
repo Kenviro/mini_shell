@@ -49,7 +49,7 @@ LINK = -lreadline -lncurses
 
 NAME = minishell
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re party leak
 
 all: $(NAME)
 
@@ -79,6 +79,9 @@ fclean: clean
 	rm -f out
 	@make -C $(LIBFT) fclean
 	@echo "$(GREEN)$(BOLD)✨ All clean! ✨$(COLOUR_RESET)"
+
+leak:
+	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes --suppressions=ignore_readline_leaks.supp ./minishell
 
 party:
 	@echo "$(BOLD)Let's party!"
