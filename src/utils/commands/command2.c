@@ -6,11 +6,21 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/21 11:39:26 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/25 10:25:04 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	close_fds(t_cmds *cmds)
+{
+	while (cmds)
+	{
+		close(cmds->fds[0]);
+		close(cmds->fds[1]);
+		cmds = cmds->next;
+	}
+}
 
 char	*filename(char *str)
 {

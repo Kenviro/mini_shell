@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/24 14:45:30 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:25:18 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,15 @@ pid_t	pipex(t_cmds *cmds, char **env)
 	{
 		close(end[0]);
 		if (!(cmds->next) || cmds->fds[1] != 1)
+		{
+			close(end[1]);
 			dup2(cmds->fds[1], STDOUT_FILENO);
+		}
 		else
+		{
 			dup2(end[1], STDOUT_FILENO);
+			close(end[1]);
+		}
 		if (!check_built_in(cmds->cmd, env))
 		{
 			execute(cmds->cmd, env);
@@ -97,7 +103,12 @@ pid_t	pipex(t_cmds *cmds, char **env)
 		if (cmds->next && cmds->next->fds[0] != 0)
 			dup2(cmds->next->fds[0], STDIN_FILENO);
 		else if (cmds->next)
+		{
 			dup2(end[0], STDIN_FILENO);
+			close(end[0]);
+		}
+		else
+			close(end[0]);
 	}
 	return (pid);
 }
@@ -106,9 +117,11 @@ void	command(t_cmds *cmds, char **env)
 {
 	pid_t	pid;
 	pid_t	*to_wait;
+	t_cmds	*save;
 	int		i;
 	int		nbcmds;
 
+	save = cmds;
 	nbcmds = find_nbcmds(cmds);
 	i = 0;
 	to_wait = (pid_t *)malloc((nbcmds + 1) * sizeof(pid_t));
@@ -122,6 +135,7 @@ void	command(t_cmds *cmds, char **env)
 			to_wait[i++] = pipex(cmds, env);
 			cmds = cmds->next;
 		}
+		close_fds(save);
 		to_wait[i] = -1;
 		wait_all(to_wait, nbcmds);
 		exit(0);
