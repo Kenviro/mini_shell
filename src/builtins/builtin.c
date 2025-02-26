@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:06:14 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/26 14:33:06 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:56:38 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int	other_builtin(t_list *list, char ***env)
 	else if (ft_strcmp(list->content, "cd") == 0)
 	{
 		if (list->next)
-			cd(list->next->content);
+			cd(list->next->content, env);
 		else
-			cd(NULL);
+			cd(NULL, env);
 		return (1);
 	}
 	return (0);

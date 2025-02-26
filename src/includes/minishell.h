@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/26 14:15:18 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:49:02 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	echo(char **cmd);
 void	pwd(void);
 
 // cd.c
-void	cd(char *path);
+void	cd(char *path, char ***env);
 
 // unset.c
 void	unset(t_list *list, char ***env);

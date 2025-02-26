@@ -6,50 +6,44 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:42 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/26 14:37:45 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:50:59 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	change_env(char *path, char **env)
+static void	change_env(char **env, char *old_pwd)
 {
-	char	*pwd;
-	char	*old_pwd;
-	char	*new_pwd;
+	int		i;
 
-	pwd = getcwd(NULL, 0);
-	old_pwd = ft_strjoin("OLDPWD=", pwd);
-	new_pwd = ft_strjoin("PWD=", pwd);
-	if (!old_pwd || !new_pwd)
-		error("Malloc failed");
-	if (path)
+	i = 0;
+	while (env[i])
 	{
-		if (ft_strncmp(path, "..", 2) == 0)
+		if (ft_strncmp(env[i], "OLDPWD=", 7) == 0)
 		{
-			ft_putstr_fd(pwd, 1);
-			ft_putstr_fd("\n", 1);
+			free(env[i]);
+			env[i] = ft_strjoin("OLDPWD=", old_pwd);
 		}
+		if (ft_strncmp(env[i], "PWD=", 4) == 0)
+		{
+			free(env[i]);
+			env[i] = ft_strjoin("PWD=", getcwd(NULL, 0));
+		}
+		i++;
 	}
-	else
-	{
-		ft_putstr_fd(pwd, 1);
-		ft_putstr_fd("\n", 1);
-	}
-	free(pwd);
 }
 
-void	cd(char *path)
+void	cd(char *path, char ***env)
 {
 	const char	*home;
 	char		*old_pwd;
 
+	old_pwd = getcwd(NULL, 0);
 	if (!path)
 	{
 		home = getenv("HOME");
 		chdir(home);
-		change_env(path, env);
-		return ;
+		change_env(*env, old_pwd);
 	}
 	else if (chdir(path) == -1)
 	{
@@ -59,5 +53,6 @@ void	cd(char *path)
 		ft_putstr_fd("No such file or directory", 2);
 		ft_putstr_fd("\n", 2);
 	}
-	change_env(path, env);
+	else
+		change_env(*env, old_pwd);
 }
