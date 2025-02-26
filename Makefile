@@ -24,6 +24,7 @@ FILES = minishell \
 		$(UTILS)check_input \
 		$(UTILS)commands/command \
 		$(UTILS)commands/command2 \
+		$(UTILS)commands/command3 \
 		$(PARSING)conditioning \
 		$(PARSING)conargs \
 		$(SIGNAL)setup_signal \
@@ -49,7 +50,7 @@ LINK = -lreadline -lncurses
 
 NAME = minishell
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re party leak
 
 all: $(NAME)
 
@@ -95,5 +96,8 @@ party:
 	@echo "$(GREEN)$(BOLD) \\(^-^)/ $(COLOUR_RESET)"
 	@sleep 0.5
 	@echo "$(BOLD)Party time is over! Back to work! \n  (^-^)7$(COLOUR_RESET)"
+
+leak:
+	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=ignore_readline_leaks.supp --log-file="leaks.log" ./minishell
 
 re: fclean all
