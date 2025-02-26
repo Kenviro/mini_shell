@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:58:49 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/26 11:11:27 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/26 18:23:57 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static t_list	*ft_lstsort(t_list *l_env)
 static void	print_export(char **env)
 {
 	t_list	*l_env;
+	t_list	*tmp;
 	int		i;
 
 	i = 0;
@@ -54,12 +55,13 @@ static void	print_export(char **env)
 	while (env[++i])
 		ft_lstadd_back(&l_env, ft_lstnew(env[i]));
 	l_env = ft_lstsort(l_env);
-	while (l_env)
+	tmp = l_env;
+	while (tmp)
 	{
 		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(l_env->content, 1);
+		ft_putstr_fd(tmp->content, 1);
 		ft_putstr_fd("\n", 1);
-		l_env = l_env->next;
+		tmp = tmp->next;
 	}
 	ft_lstclear(&l_env);
 }
