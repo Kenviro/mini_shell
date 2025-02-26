@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/24 14:41:51 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:33:11 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,9 @@ static int	input_work(char *input, char ***env)
 	splited = holy_split(input, ' ');
 	free(input);
 	init_list(splited, &list);
-	if (strcmp(list->content, "unset") == 0)
-	{
-		unset(list, env);
-		return (0);
-	}
-	else if (other_builtin(list) == 0)
+	if (other_builtin(list, env) == 0)
 		conditioning(list, *env);
+	ft_lstclear(&list);
 	return (0);
 }
 
@@ -93,6 +89,7 @@ static void	prompt_boucle(char **env)
 		else
 			input_work(input, &envcpy);
 	}
+	free_2d(envcpy);
 	free(input);
 }
 

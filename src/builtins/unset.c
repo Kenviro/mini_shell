@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:22:44 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/26 10:30:01 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:09:46 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char	**ft_remove_str(char **env, int index_to_remove)
 		i_env++;
 	}
 	new_env[i_new] = NULL;
-	free(env);
+	free_2d(env);
 	return (new_env);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:06:14 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/26 10:45:11 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:33:06 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,16 @@ int	check_built_in(char **cmd, char **env)
 	return (0);
 }
 
-int	other_builtin(t_list *list)
+int	other_builtin(t_list *list, char ***env)
 {
-	if (ft_strcmp(list->content, "exit") == 0)
+	if (strcmp(list->content, "unset") == 0)
 	{
-		exit_shell(list);
+		unset(list, env);
+		return (1);
+	}
+	else if (ft_strcmp(list->content, "exit") == 0)
+	{
+		exit_shell(list, env);
 		return (1);
 	}
 	else if (ft_strcmp(list->content, "cd") == 0)

@@ -6,20 +6,21 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:28 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/20 14:35:01 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:16:06 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	proper_exit(t_list *list, int status)
+static void	proper_exit(t_list *list, int status, char ***env)
 {
 	ft_lstclear(&list);
+	free_2d(*env);
 	ft_putstr_fd("exit\n", 1);
 	exit(status);
 }
 
-void	exit_shell(t_list *list)
+void	exit_shell(t_list *list, char ***env)
 {
 	if (list->next)
 	{
@@ -31,15 +32,15 @@ void	exit_shell(t_list *list)
 				return ;
 			}
 			ft_printf("exit\n");
-			proper_exit(list, ft_atoi(list->next->content));
+			proper_exit(list, ft_atoi(list->next->content), env);
 		}
 		else
 		{
 			ft_printf("exit\nminishell: exit: %s: numeric argument required\n", \
 						list->next->content);
-			proper_exit(list, 2);
+			proper_exit(list, 2, env);
 		}
 	}
 	else
-		proper_exit(list, EXIT_SUCCESS);
+		proper_exit(list, EXIT_SUCCESS, env);
 }

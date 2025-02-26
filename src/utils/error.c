@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:05:04 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/18 16:42:37 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:08:40 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,17 @@ void	new_line(char *input)
 {
 	free(input);
 	rl_replace_line("", 0);
+}
+
+void	free_2d(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }

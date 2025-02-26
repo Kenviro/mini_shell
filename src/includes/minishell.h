@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/26 13:17:26 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:15:18 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ typedef struct s_cmds
 // error.c
 void	error(char *message);
 void	new_line(char *input);
+void	free_2d(char **str);
 
 // built_in.c
 int		check_built_in(char **cmd, char **env);
-int		other_builtin(t_list *list);
+int		other_builtin(t_list *list, char ***env);
 
 // echo.c
 void	echo(char **cmd);
@@ -66,7 +67,7 @@ void	env_builtin(char **cmd, char **env);
 void	export(char **cmd, char **env);
 
 // exit.c
-void	exit_shell(t_list *list);
+void	exit_shell(t_list *list, char ***env);
 
 // signal/setup_signal.c
 void	handle_signal(int signal);
