@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/26 14:37:04 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/26 18:23:29 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*findpath(char *cmd, char **env)
 	return (free(paths), NULL);
 }
 
-static void	execute(char **cmd, char **env)
+void	execute(char **cmd, char **env)
 {
 	char	*path;
 
@@ -79,23 +79,7 @@ pid_t	pipex(t_cmds *cmds, char **env)
 	pid = fork();
 	if (pid == 0)
 	{
-		close(end[0]);
-		if (!(cmds->next) || cmds->fds[1] != 1)
-		{
-			close(end[1]);
-			dup2(cmds->fds[1], STDOUT_FILENO);
-		}
-		else
-		{
-			dup2(end[1], STDOUT_FILENO);
-			close(end[1]);
-		}
-		if (!check_built_in(cmds->cmd, env))
-		{
-			if (env && env[0])
-				execute(cmds->cmd, env);
-			cnf(cmds->cmd[0]);
-		}
+		pipex_child(cmds, end, env);
 		exit(0);
 	}
 	else
@@ -117,28 +101,12 @@ pid_t	pipex(t_cmds *cmds, char **env)
 void	command(t_cmds *cmds, char **env)
 {
 	pid_t	pid;
-	pid_t	*to_wait;
-	t_cmds	*save;
-	int		i;
-	int		nbcmds;
 
-	save = cmds;
-	nbcmds = find_nbcmds(cmds);
-	i = 0;
-	to_wait = (pid_t *)malloc((nbcmds + 1) * sizeof(pid_t));
 	signal_handler_child();
 	pid = fork();
 	if (pid == 0)
 	{
-		dup2(cmds->fds[0], STDIN_FILENO);
-		while (cmds)
-		{
-			to_wait[i++] = pipex(cmds, env);
-			cmds = cmds->next;
-		}
-		close_fds(save);
-		to_wait[i] = -1;
-		wait_all(to_wait, nbcmds);
+		pipex_launcher(cmds, env);
 		exit(0);
 	}
 	else

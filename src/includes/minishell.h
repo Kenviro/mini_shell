@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/26 17:49:02 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/26 18:24:20 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ void	conditioning(t_list *lst, char **env);
 void	data_init(t_list *lst);
 void	command(t_cmds *cmds, char **env);
 void	close_fds(t_cmds *cmds);
+void	pipex_child(t_cmds *cmds, int *end, char **env);
+void	execute(char **cmd, char **env);
+void	pipex_launcher(t_cmds *cmds, char **env);
+void	wait_all(pid_t *to_wait, int nbcmds);
 char	*filename(char *str);
 char	**set_args(t_list *lst, int nbargs);
 char	**find_args(t_list *lst);
@@ -107,5 +111,6 @@ int		red_out(char *red);
 int		red_in(char *red);
 int		count_cmds(t_list *lst);
 int		find_nbcmds(t_cmds *cmds);
+pid_t	pipex(t_cmds *cmds, char **env);
 
 #endif
