@@ -78,6 +78,7 @@ fclean: clean
 	@echo "$(RED)$(BOLD)🗑️  Removing executable $(NAME)...$(COLOUR_RESET)"
 	rm -f $(NAME)
 	rm -f out
+	rm -f leaks.log
 	@make -C $(LIBFT) fclean
 	@echo "$(GREEN)$(BOLD)✨ All clean! ✨$(COLOUR_RESET)"
 
@@ -99,8 +100,5 @@ party:
 	@echo "$(GREEN)$(BOLD) \\(^-^)/ $(COLOUR_RESET)"
 	@sleep 0.5
 	@echo "$(BOLD)Party time is over! Back to work! \n  (^-^)7$(COLOUR_RESET)"
-
-leak:
-	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=ignore_readline_leaks.supp --log-file="leaks.log" ./minishell
 
 re: fclean all
