@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/26 14:01:01 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:37:04 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ pid_t	pipex(t_cmds *cmds, char **env)
 		}
 		if (!check_built_in(cmds->cmd, env))
 		{
-			execute(cmds->cmd, env);
+			if (env && env[0])
+				execute(cmds->cmd, env);
 			cnf(cmds->cmd[0]);
 		}
 		exit(0);
