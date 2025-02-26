@@ -6,13 +6,13 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:22:44 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/24 15:43:01 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:30:01 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static char **create_new_env(char **env)
+static char	**create_new_env(char **env)
 {
 	int	n;
 
@@ -59,7 +59,6 @@ static void	check_env(t_list *list, char ***env)
 		if (ft_strncmp((*env)[i], list->content, ft_strlen(list->content)) == 0)
 		{
 			*env = ft_remove_str((*env), i);
-			printf("env = %s\n", (*env)[i]);
 			return ;
 		}
 		i++;
