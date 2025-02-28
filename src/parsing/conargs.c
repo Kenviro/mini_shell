@@ -6,11 +6,23 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:55:44 by psoulie           #+#    #+#             */
-/*   Updated: 2025/02/20 20:31:16 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/28 15:46:19 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	next_cmd(t_list **firstlist)
+{
+	t_list	*lst;
+
+	lst = *firstlist;
+	while (lst && lst->content[0] != '|')
+		lst = lst->next;
+	if (lst && lst->content[0] == '|')
+		lst = lst->next;
+	*firstlist = lst;
+}
 
 int	count_cmds(t_list *lst)
 {
@@ -77,7 +89,6 @@ char	**find_args(t_list *lst)
 	char	**args;
 
 	nbargs = find_nbargs(lst);
-	args = (char **)malloc((nbargs + 1) * sizeof(char *));
 	args = set_args(lst, nbargs);
 	return (args);
 }

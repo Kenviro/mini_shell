@@ -83,7 +83,7 @@ fclean: clean
 	@echo "$(GREEN)$(BOLD)✨ All clean! ✨$(COLOUR_RESET)"
 
 leak:
-	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes --suppressions=ignore_readline_leaks.supp ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes --suppressions=ignore_readline_leaks.supp --log-file="leaks.log" ./minishell
 
 party:
 	@echo "$(BOLD)Let's party!"

@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/26 18:23:29 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/28 15:09:01 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	wait_all(pid_t *to_wait, int nbcmds)
 		waitpid(to_wait[nbcmds], NULL, 0);
 		nbcmds--;
 	}
+	free(to_wait);
 }
 
 static char	*findpath(char *cmd, char **env)
