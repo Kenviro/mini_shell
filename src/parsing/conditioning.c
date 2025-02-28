@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/28 15:46:05 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/28 15:55:30 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ void	conditioning(t_list *lst, char **env)
 
 	cmds = new_cmd(lst);
 	save = cmds;
+	next_cmd(&lst);
 	while (lst)
 	{
 		cmds->next = new_cmd(lst);
 		cmds = cmds->next;
-		next_cmd(&lst);
 		if (cmds->fds[0] == -2)
 		{
 			while (lst->content[0] != '<' && lst->content[1] != '<')

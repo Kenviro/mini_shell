@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:03:50 by psoulie           #+#    #+#             */
-/*   Updated: 2025/02/28 15:45:00 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/02/28 16:37:29 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	pipex_launcher(t_cmds *cmds, char **env)
 	dup2(cmds->fds[0], STDIN_FILENO);
 	while (cmds)
 	{
-		printf("%s\n", cmds->cmd[0]);
 		to_wait[i++] = pipex(cmds, env);
 		cmds = cmds->next;
 	}
