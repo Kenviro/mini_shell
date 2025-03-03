@@ -37,6 +37,7 @@ FILES = minishell \
 		$(BUILTINS)unset \
 		$(BUILTINS)export \
 		$(BUILTINS)print_export \
+		$(BUILTINS)export_utils \
 		$(BUILTINS)env
 
 LIB = libft.a

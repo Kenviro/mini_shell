@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:07:44 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/03 16:46:28 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ void	unset(t_list *list, char ***env);
 // env.c
 void	env_builtin(char **cmd, char **env);
 
-// export.c && print_export.c
+// export.c && print_export.c && export_utils.c
 void	print_export(char **env);
-int		export(char **cmd, char **env);
+int		export(t_list *list, char ***env);
+char	*get_key(char *str);
+char	*get_value(char *str);
 
 // exit.c
 void	exit_shell(t_list *list, char ***env);
