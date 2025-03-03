@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/26 18:23:29 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:06:02 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	wait_all(pid_t *to_wait, int nbcmds)
 		waitpid(to_wait[nbcmds], NULL, 0);
 		nbcmds--;
 	}
+	free(to_wait);
 }
 
 static char	*findpath(char *cmd, char **env)
@@ -107,6 +108,7 @@ void	command(t_cmds *cmds, char **env)
 	if (pid == 0)
 	{
 		pipex_launcher(cmds, env);
+		free_stuff(cmds);
 		exit(0);
 	}
 	else
@@ -114,5 +116,6 @@ void	command(t_cmds *cmds, char **env)
 		waitpid(pid, NULL, 0);
 		if (access(".heredoc", F_OK))
 			unlink(".heredoc");
+		free_stuff(cmds);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:53:23 by psoulie           #+#    #+#             */
-/*   Updated: 2025/02/26 14:06:23 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:27:21 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 char	**ft_strdup_2d(char **str)
 {
 	int		i;
-	char	 **new_str;
+	char	**new_str;
 
 	i = 0;
 	while (str[i])

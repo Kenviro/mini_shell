@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conditioning.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/24 14:34:56 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:55:30 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	find_fdin(t_list *lst)
 	return (fd);
 }
 
-t_cmds *new_cmd(t_list *lst)
+t_cmds	*new_cmd(t_list *lst)
 {
 	t_cmds	*cmds;
 
@@ -97,10 +97,7 @@ void	conditioning(t_list *lst, char **env)
 
 	cmds = new_cmd(lst);
 	save = cmds;
-	while (lst && lst->content[0] != '|')
-		lst = lst->next;
-	if (lst && lst->content[0] == '|')
-		lst = lst->next;
+	next_cmd(&lst);
 	while (lst)
 	{
 		cmds->next = new_cmd(lst);
@@ -114,10 +111,7 @@ void	conditioning(t_list *lst, char **env)
 		}
 		else
 			cmds->limiter = NULL;
-		while (lst && lst->content[0] != '|')
-			lst = lst->next;
-		if (lst && lst->content[0] == '|')
-			lst = lst->next;
+		next_cmd(&lst);
 	}
 	command(save, env);
 }

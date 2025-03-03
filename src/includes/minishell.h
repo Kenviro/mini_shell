@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/27 11:01:58 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:07:44 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int		found_redirection(char *str, t_list **list);
 char	*found_dollar(char *input);
 
 //command.c && command2.c
+void	free_stuff(t_cmds *cmds);
+void	next_cmd(t_list **lst);
 void	cnf(char *cmd);
 void	conditioning(t_list *lst, char **env);
 void	data_init(t_list *lst);
