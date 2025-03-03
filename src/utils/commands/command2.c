@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/02/28 16:37:34 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/03 14:45:46 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	pipex_child(t_cmds *cmds, int *end, char **env)
 
 void	free_stuff(t_cmds *cmds)
 {
-	t_cmds *save;
+	t_cmds	*save;
 
 	while (cmds)
 	{
