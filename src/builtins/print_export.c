@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 11:01:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:43:44 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:54:54 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	print_export(char **env)
 	int		i;
 
 	i = 0;
-	l_env = ft_lstnew(env[i]);
+	l_env = ft_lstnew(ft_strdup(env[i]));
 	while (env[++i])
-		ft_lstadd_back(&l_env, ft_lstnew(env[i]));
+		ft_lstadd_back(&l_env, ft_lstnew(ft_strdup(env[i])));
 	l_env = ft_lstsort(l_env);
 	tmp = l_env;
 	while (tmp)

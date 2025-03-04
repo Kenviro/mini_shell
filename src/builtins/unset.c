@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:22:44 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/26 14:09:46 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:42:15 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,25 @@ static char	**create_new_env(char **env)
 	return ((char **)malloc(sizeof(char *) * n));
 }
 
-static char	**ft_remove_str(char **env, int index_to_remove)
+static char	**ft_remove_str(char ***env, int index_to_remove)
 {
 	char	**new_env;
 	int		i_env;
 	int		i_new;
 
-	new_env = create_new_env(env);
+	new_env = create_new_env(*env);
 	if (!new_env)
 		error("Malloc failed");
 	i_env = 0;
 	i_new = 0;
-	while (env[i_env])
+	while ((*env)[i_env])
 	{
 		if (i_env == index_to_remove)
 		{
 			i_env++;
 			continue ;
 		}
-		new_env[i_new] = ft_strdup(env[i_env]);
+		new_env[i_new] = ft_strdup((*env)[i_env]);
 		i_new++;
 		i_env++;
 	}
@@ -58,7 +58,7 @@ static void	check_env(t_list *list, char ***env)
 	{
 		if (ft_strncmp((*env)[i], list->content, ft_strlen(list->content)) == 0)
 		{
-			*env = ft_remove_str((*env), i);
+			*env = ft_remove_str(env, i);
 			return ;
 		}
 		i++;

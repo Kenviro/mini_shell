@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:05:04 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/26 14:08:40 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:38:35 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,16 @@ void	new_line(char *input)
 	rl_replace_line("", 0);
 }
 
-void	free_2d(char **str)
+void	free_2d(char ***str)
 {
 	int	i;
 
 	i = 0;
-	while (str && str[i])
+	while ((*str) && (*str)[i])
 	{
-		free(str[i]);
+		free((*str)[i]);
 		i++;
 	}
-	free(str);
+	free((*str));
+	(*str) = NULL;
 }

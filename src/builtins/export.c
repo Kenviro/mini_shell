@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:58:49 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:39:07 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:50:41 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static char	**ft_realloc_env(char ***env, int size)
 	while ((*env)[i])
 	{
 		new_env[i] = ft_strdup((*env)[i]);
+		free((*env)[i]);
 		i++;
 	}
 	new_env[i] = NULL;
@@ -36,7 +37,6 @@ static int	cmp_env(char *key, char *env)
 	char	*tmp;
 
 	tmp = get_key(env);
-	printf("tmp: %s\n", tmp);
 	if (ft_strcmp(key, tmp) == 0)
 	{
 		free(tmp);
@@ -71,22 +71,25 @@ static char	check_env(char *key, char *value, char ***env)
 
 int	export(t_list *list, char ***env)
 {
+	t_list	*tmp;
 	char	*key;
 	char	*value;
 
-	if (list->next->content == NULL)
-		return (print_export(*env), 0);
-	list = list->next;
-	while (list)
+	tmp = list;
+	if (tmp->next == NULL)
 	{
-		key = get_key(list->content);
-		printf("key: %s\n", key);
-		value = get_value(list->content);
-		printf("value: %s\n", value);
+		print_export(*env);
+		return (0);
+	}
+	tmp = tmp->next;
+	while (tmp)
+	{
+		key = get_key(tmp->content);
+		value = get_value(tmp->content);
 		check_env(key, value, env);
 		free(key);
 		free(value);
-		list = list->next;
+		tmp = tmp->next;
 	}
 	return (0);
 }

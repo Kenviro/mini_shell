@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:46:28 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:29:54 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_cmds
 // error.c
 void	error(char *message);
 void	new_line(char *input);
-void	free_2d(char **str);
+void	free_2d(char ***str);
 
 // built_in.c
 int		check_built_in(char **cmd, char **env);

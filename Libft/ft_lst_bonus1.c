@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 09:59:07 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/06 11:44:11 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:23:10 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	ft_lstclear(t_list **lst)
 	{
 		temp = (*lst)->next;
 		if ((*lst)->content)
+		{
 			free((*lst)->content);
+			(*lst)->content = NULL;
+		}
 		free(*lst);
 		*lst = temp;
 	}

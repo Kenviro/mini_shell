@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/03 14:08:13 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:38:32 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ static void	prompt_boucle(char **env)
 	int		i;
 
 	envcpy = ft_strdup_2d(env);
-	i = 0;
 	while (1)
 	{
+		i = 0;
 		setup_signal_handler();
 		path = get_pwd();
 		input = readline(path);
@@ -89,7 +89,7 @@ static void	prompt_boucle(char **env)
 		else
 			input_work(input, &envcpy);
 	}
-	free_2d(envcpy);
+	free_2d(&envcpy);
 	free(input);
 }
 
