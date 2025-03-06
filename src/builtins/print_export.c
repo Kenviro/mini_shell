@@ -6,25 +6,61 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 11:01:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/04 10:54:54 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:34:11 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static inline void	ft_lstswap(t_list *a, t_list *b)
+static t_env	*envadd_back(t_env **l_env, t_env *new)
 {
-	void	*tmp;
+	t_env	*tmp;
 
-	tmp = a->content;
-	a->content = b->content;
-	b->content = tmp;
+	if (!*l_env)
+		return (new);
+	tmp = *l_env;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+	return (*l_env);
 }
 
-static t_list	*ft_lstsort(t_list *l_env)
+static t_env	*envnew(char *str)
+{
+	t_env	*new;
+	char	*tmp1;
+	char	*tmp2;
+
+	new = (t_env *)malloc(sizeof(t_env));
+	if (!new)
+		return (NULL);
+	new->key = get_key(str);
+	tmp1 = get_value(str);
+	tmp2 = ft_strjoin("\"", tmp1);
+	new->value = ft_strjoin(tmp2, "\"");
+	free(tmp1);
+	free(tmp2);
+	new->next = NULL;
+	return (new);
+}
+
+static inline void	ft_lstswap(t_env *a, t_env *b)
+{
+	void	*tmp_key;
+	void	*tmp_value;
+
+	tmp_key = a->key;
+	tmp_value = a->value;
+	a->key = b->key;
+	a->value = b->value;
+	b->key = tmp_key;
+	b->value = tmp_value;
+}
+
+static t_env	*ft_lstsort(t_env *l_env)
 {
 	int		sorted;
-	t_list	*tmp;
+	t_env	*tmp;
 
 	sorted = 1;
 	while (sorted != 0)
@@ -33,7 +69,7 @@ static t_list	*ft_lstsort(t_list *l_env)
 		tmp = l_env;
 		while (tmp->next)
 		{
-			if (ft_strcmp(tmp->content, tmp->next->content) > 0)
+			if (ft_strcmp(tmp->key, tmp->next->key) > 0)
 			{
 				ft_lstswap(tmp, tmp->next);
 				sorted = 1;
@@ -46,22 +82,24 @@ static t_list	*ft_lstsort(t_list *l_env)
 
 void	print_export(char **env)
 {
-	t_list	*l_env;
-	t_list	*tmp;
+	t_env	*l_env;
+	t_env	*tmp;
 	int		i;
 
 	i = 0;
-	l_env = ft_lstnew(ft_strdup(env[i]));
+	l_env = envnew(env[i]);
 	while (env[++i])
-		ft_lstadd_back(&l_env, ft_lstnew(ft_strdup(env[i])));
+		envadd_back(&l_env, envnew(env[i]));
 	l_env = ft_lstsort(l_env);
 	tmp = l_env;
 	while (tmp)
 	{
 		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(tmp->content, 1);
+		ft_putstr_fd(tmp->key, 1);
+		ft_putstr_fd("=", 1);
+		ft_putstr_fd(tmp->value, 1);
 		ft_putstr_fd("\n", 1);
 		tmp = tmp->next;
 	}
-	ft_lstclear(&l_env);
+	ft_envclear(&l_env);
 }

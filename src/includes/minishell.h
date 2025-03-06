@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/05 14:35:57 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:06:50 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,20 @@ typedef struct s_cmds
 	struct s_cmds	*next;
 }				t_cmds;
 
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}				t_env;
+
 // minishell.c
 
 // error.c
 void	error(char *message);
 void	new_line(char *input);
 void	free_2d(char ***str);
+void	ft_envclear(t_env **l_env);
 
 // built_in.c
 int		check_built_in(char **cmd, char **env);

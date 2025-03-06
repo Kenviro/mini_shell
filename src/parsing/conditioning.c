@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/05 14:31:08 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/06 10:19:12 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_cmds	*new_cmd(t_list *lst)
 	return (cmds);
 }
 
-void	conditioning(t_list *lst, char ***env)
+void	conditioning(t_list *lst, char **env)
 {
 	t_cmds	*cmds;
 	t_cmds	*save;
