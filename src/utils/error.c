@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:05:04 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/04 10:38:35 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:30:53 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,21 @@ void	free_2d(char ***str)
 	}
 	free((*str));
 	(*str) = NULL;
+}
+
+void	ft_envclear(t_env **l_env)
+{
+	t_env	*tmp;
+
+	while (*l_env)
+	{
+		tmp = (*l_env)->next;
+		free((*l_env)->key);
+		(*l_env)->key = NULL;
+		free((*l_env)->value);
+		(*l_env)->value = NULL;
+		free(*l_env);
+		*l_env = tmp;
+	}
+	*l_env = NULL;
 }

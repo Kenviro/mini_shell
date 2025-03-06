@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:46:39 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/06 10:19:12 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	find_nbcmds(t_cmds *cmds)
 {
 	int	i;
 
+	i = 0;
 	while (cmds)
 	{
 		cmds = cmds->next;
