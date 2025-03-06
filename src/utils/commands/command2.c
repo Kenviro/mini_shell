@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: achillesoulie <achillesoulie@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/03 14:45:46 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/06 16:17:30 by achillesoul      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	cnf(char *cmd)
 int	here_doc(char *limiter)
 {
 	char	*line;
-	int		fd;
+	int		end[2];
 
-	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	pipe(end);
 	while (1)
 	{
 		ft_printf("> ");
@@ -74,10 +74,9 @@ int	here_doc(char *limiter)
 			free(line);
 			break ;
 		}
-		write(fd, line, ft_strlen(line));
+		write(end[1], line, ft_strlen(line));
 		free(line);
 	}
-	close(fd);
-	fd = open(".heredoc", O_RDONLY);
-	return (fd);
+	close(end[1]);
+	return (end[0]);
 }
