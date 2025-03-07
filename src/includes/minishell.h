@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/07 11:27:28 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/07 13:58:40 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	**holy_split(char *str, char c);
 int		found_redirection(char *str, t_list **list);
 
 // check_input.c
-char	*found_dollar(char *input, char **env);
+char	*found_dollar(char *input, char **env, int ms_status);
 
 //command.c && command2.c
 void	free_stuff(t_cmds *cmds);

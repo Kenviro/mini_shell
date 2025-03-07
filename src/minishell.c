@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/07 11:27:47 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/07 14:29:39 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,16 @@ static void	init_list(char **splited, t_list **list)
 
 static int	input_work(char *input, char ***env)
 {
-	t_list	*list;
-	char	**splited;
+	t_list		*list;
+	char		**splited;
+	static int	ms_status = 0;
 
 	add_history(input);
 	splited = NULL;
 	list = NULL;
-	input = found_dollar(input, *env);
+	input = found_dollar(input, *env, ms_status);
+	if (input[0] == '\0')
+		return (0);
 	splited = holy_split(input, ' ');
 	free(input);
 	init_list(splited, &list);
