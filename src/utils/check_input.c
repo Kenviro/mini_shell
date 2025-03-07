@@ -6,57 +6,72 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:00:16 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:44:10 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/07 11:50:37 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static char	*create_new_input(char *input, char *new_input)
+static char	*ft_getenv(char *key, char **env)
 {
-	int		i;
+	int	i;
+	int	j;
 
 	i = 0;
-	while (*input)
+	while (env[i])
 	{
-		if (*input == '$' && *(input + 1) == '?')
-		{
-			new_input[i] = '0';
-			input++;
-		}
-		else
-			new_input[i] = *input;
+		j = 0;
+		while (env[i][j] && env[i][j] == key[j])
+			j++;
+		if (env[i][j] == '=' && key[j] == '\0')
+			return (ft_strdup(&env[i][j + 1]));
 		i++;
-		input++;
 	}
-	new_input[i] = '\0';
+	return (NULL);
+}
+
+static char	*new_input(char *input, int i, int j, char **env)
+{
+	char	*new_input;
+	char	*beg;
+	char	*new;
+	char	*name_env;
+	char	*value;
+
+	beg = ft_substr(input, 0, i);
+	name_env = ft_substr(input, i + 1, j - i - 1);
+	value = ft_getenv(name_env, env);
+	new = ft_strjoin(beg, value);
+	free(beg);
+	free(name_env);
+	free(value);
+	new_input = ft_strjoin(new, &input[j]);
+	free(new);
+	free(input);
 	return (new_input);
 }
 
-char	*found_dollar(char *input)
+char	*found_dollar(char *input, char **env)
 {
-	int		i;
-	int		nbr;
-	char	*new_input;
+	int	i;
+	int	j;
 
 	i = 0;
-	nbr = 0;
 	while (input[i])
 	{
-		if (input[i] == '$' && input[i + 1] == '?')
+		if (input[i] == '$')
 		{
-			nbr++;
-			i++;
+			j = i;
+			while (input[j] && input[j] != ' ')
+				j++;
+			if (j - i > 1)
+			{
+				input = new_input(input, i, j, env);
+			}
+			else
+				input[i] = ' ';
 		}
 		i++;
 	}
-	if (nbr == 0)
-		return (input);
-	new_input = malloc(sizeof(char) * (ft_strlen(input) - nbr + 1));
-	if (new_input == NULL)
-		error("Malloc failed");
-	new_input = create_new_input(input, new_input);
-	free(input);
-	printf("new_input = %s\n", new_input);
-	return (new_input);
+	return (input);
 }
