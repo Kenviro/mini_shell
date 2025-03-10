@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:06:14 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/04 10:15:04 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:16:25 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_built_in(char **cmd, char **env)
 
 int	other_builtin(t_list *list, char ***env)
 {
-	if (strcmp(list->content, "unset") == 0)
+	if (ft_strcmp(list->content, "unset") == 0)
 	{
 		unset(list, env);
 		return (1);

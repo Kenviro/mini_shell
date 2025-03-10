@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/10 16:42:13 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:34:56 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	command(t_cmds *cmds, char **env, int *ms_status)
 	}
 	else
 	{
-		waitpid(0, ms_status, 0);
+		waitpid(pid, ms_status, 0);
 		*ms_status = *ms_status >> 8;
 		free_stuff(cmds);
 	}
