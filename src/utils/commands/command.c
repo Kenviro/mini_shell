@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/10 15:31:35 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:42:13 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,6 @@ void	command(t_cmds *cmds, char **env, int *ms_status)
 	{
 		waitpid(0, ms_status, 0);
 		*ms_status = *ms_status >> 8;
-		if (access(".heredoc", F_OK))
-			unlink(".heredoc");
 		free_stuff(cmds);
 	}
 }

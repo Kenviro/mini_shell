@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/05 14:36:04 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:43:34 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,21 @@ void	pipex_child(t_cmds *cmds, int *end, char **env)
 	if (!check_built_in(cmds->cmd, env))
 	{
 		execute(cmds->cmd, env);
-		cnf(cmds->cmd[0]);
+		cnf(cmds);
 	}
 }
 
 void	free_stuff(t_cmds *cmds)
 {
 	t_cmds	*save;
+	int		i;
 
 	while (cmds)
 	{
+		i = 0;
 		save = cmds;
+		while (cmds->cmd[i])
+			free(cmds->cmd[i++]);
 		free(cmds->cmd);
 		cmds = cmds->next;
 		free(save);
@@ -52,19 +56,21 @@ char	*filename(char *str)
 	return (str);
 }
 
-void	cnf(char *cmd)
+void	cnf(t_cmds *cmds)
 {
 	dup2(STDERR_FILENO, STDOUT_FILENO);
-	ft_printf("command not found: %s\n", cmd);
+	ft_printf("command not found: %s\n", cmds->cmd[0]);
+	close_fds(cmds);
+	free_stuff(cmds);
 	exit(EXIT_FAILURE);
 }
 
 int	here_doc(char *limiter)
 {
 	char	*line;
-	int		fd;
+	int		end[2];
 
-	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	pipe(end);
 	while (1)
 	{
 		ft_printf("> ");
@@ -74,10 +80,9 @@ int	here_doc(char *limiter)
 			free(line);
 			break ;
 		}
-		write(fd, line, ft_strlen(line));
+		write(end[1], line, ft_strlen(line));
 		free(line);
 	}
-	close(fd);
-	fd = open(".heredoc", O_RDONLY);
-	return (fd);
+	close(end[1]);
+	return (end[0]);
 }

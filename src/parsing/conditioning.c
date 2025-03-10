@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conditioning.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/07 14:50:25 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:41:29 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	find_nbcmds(t_cmds *cmds)
 {
 	int	i;
 
+	i = 0;
 	i = 0;
 	while (cmds)
 	{
@@ -95,7 +96,9 @@ void	conditioning(t_list *lst, char **env, int *ms_status)
 {
 	t_cmds	*cmds;
 	t_cmds	*save;
+	t_list	*save_list;
 
+	save_list = lst;
 	cmds = new_cmd(lst);
 	save = cmds;
 	next_cmd(&lst);
@@ -108,11 +111,12 @@ void	conditioning(t_list *lst, char **env, int *ms_status)
 			while (lst->content[0] != '<' && lst->content[1] != '<')
 				lst = lst->next;
 			lst = lst->next;
-			cmds->limiter = lst->content;
+			cmds->limiter = ft_strdup(lst->content);
 		}
 		else
 			cmds->limiter = NULL;
 		next_cmd(&lst);
 	}
+	ft_lstclear(&save_list);
 	command(save, env, ms_status);
 }

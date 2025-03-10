@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/03/07 14:50:09 by ktintim-         ###   ########.fr       */
+=======
+/*   Updated: 2025/03/05 14:03:42 by psoulie          ###   ########.fr       */
+>>>>>>> achille
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +67,14 @@ static int	input_work(char *input, char ***env)
 	free(input);
 	init_list(splited, &list);
 	if (other_builtin(list, env) == 0)
+<<<<<<< HEAD
 		conditioning(list, *env, &ms_status);
 	ft_lstclear(&list);
+=======
+		conditioning(list, *env);
+	else
+		ft_lstclear(&list);
+>>>>>>> achille
 	return (0);
 }
 

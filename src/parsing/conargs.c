@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:55:44 by psoulie           #+#    #+#             */
-/*   Updated: 2025/02/28 15:46:19 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/05 14:08:01 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	**set_args(t_list *lst, int nbargs)
 				lst = lst->next;
 			continue ;
 		}
-		args[i++] = lst->content;
+		args[i++] = ft_strdup(lst->content);
 		lst = lst->next;
 	}
 	args[i] = NULL;
