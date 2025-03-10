@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/28 15:55:30 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/05 14:09:02 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	find_nbcmds(t_cmds *cmds)
 {
 	int	i;
 
+	i = 0;
 	while (cmds)
 	{
 		cmds = cmds->next;
@@ -94,7 +95,9 @@ void	conditioning(t_list *lst, char **env)
 {
 	t_cmds	*cmds;
 	t_cmds	*save;
+	t_list	*save_list;
 
+	save_list = lst;
 	cmds = new_cmd(lst);
 	save = cmds;
 	next_cmd(&lst);
@@ -107,11 +110,12 @@ void	conditioning(t_list *lst, char **env)
 			while (lst->content[0] != '<' && lst->content[1] != '<')
 				lst = lst->next;
 			lst = lst->next;
-			cmds->limiter = lst->content;
+			cmds->limiter = ft_strdup(lst->content);
 		}
 		else
 			cmds->limiter = NULL;
 		next_cmd(&lst);
 	}
+	ft_lstclear(&save_list);
 	command(save, env);
 }

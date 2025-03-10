@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/28 14:57:29 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/05 14:32:59 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	*found_dollar(char *input);
 //command.c && command2.c
 void	free_stuff(t_cmds *cmds);
 void	next_cmd(t_list **lst);
-void	cnf(char *cmd);
+void	cnf(t_cmds *cmds);
 void	conditioning(t_list *lst, char **env);
 void	data_init(t_list *lst);
 void	command(t_cmds *cmds, char **env);
