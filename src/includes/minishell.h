@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/05 14:32:59 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:41:38 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	handle_signal_child(int signal);
 void	signal_handler_child(void);
 
 //holy_split.c && splitonsteroids.c
-int		quote(char c, int *in_quote);
+int		quote(char c, int (*in_quote)[2]);
 int		ft_splitonsteroids(char *str, int start, char c);
-void	toggle_quote(int *in_quote);
+int		toggle_quote(int (*in_quote)[2], char quote);
 char	**holy_split(char *str, char c);
 
 // split_redirect.c
@@ -89,7 +89,7 @@ int		found_redirection(char *str, t_list **list);
 // check_input.c
 char	*found_dollar(char *input);
 
-//command.c && command2.c
+//command.c && command2.c && command3.c
 void	free_stuff(t_cmds *cmds);
 void	next_cmd(t_list **lst);
 void	cnf(t_cmds *cmds);

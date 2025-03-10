@@ -3,33 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   holy_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achillesoulie <achillesoulie@student.42    +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/06 16:49:05 by achillesoul      ###   ########.fr       */
+/*   Updated: 2025/03/10 16:32:33 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	toggle_quote(int **in_quote, char quote)
+int	toggle_quote(int (*in_quote)[2], char quote)
 {
 	if (quote == '\'')
-		if (!*in_quote[1])
+	{
+		if (!(*in_quote)[1])
 		{
-			*in_quote[0] = !*in_quote[0];
+			(*in_quote)[0] = !(*in_quote)[0];
 			return (1);
 		}
+	}
 	else
-		if (!*in_quote[0])
+	{
+		if (!(*in_quote)[0])
 		{
-			*in_quote[1] = !*in_quote[1];
+			(*in_quote)[1] = !(*in_quote)[1];
 			return (1);
 		}
+	}
 	return (0);
 }
 
-int	quote(char c, int **in_quote)
+int	quote(char c, int (*in_quote)[2])
 {
 	if (c == '\"' || c == '\'')
 	{
@@ -57,10 +61,7 @@ static int	count(char *str, char c)
 			count++;
 			i++;
 			while (str[i] && (str[i] != c || in_quote[0] || in_quote[1]))
-			{
-				quote(str[i], &in_quote);
-				i++;
-			}
+				quote(str[i++], &in_quote);
 		}
 		while (str[i] == c && (!in_quote[0] || !in_quote[1]))
 			i++;
@@ -90,7 +91,8 @@ static char	*word(char *str, int start, char c)
 		word[i] = str[start + i];
 		i++;
 	}
-	if (quote(str[start + i], &in_quote) < 2 && (in_quote[0] || in_quote[1]))
+	if (quote(str[start + i], &in_quote) < 2 &&
+			(in_quote[0] || in_quote[1]) && !quote(str[start + i + 1], &in_quote))
 		return (dup2(2, 1), ft_printf("trailing quote\n"), NULL);
 	word[i] = 0;
 	return (word);
@@ -116,8 +118,7 @@ char	**holy_split(char *str, char c)
 		{
 			quote(str[i], &in_quote);
 			spliff[nbstr++] = word(str, i, c);
-			i++;
-			while (str[i] && (str[i] != c || in_quote[0] || in_quote[1]))
+			while (str[++i] && (str[i] != c || in_quote[0] || in_quote[1]))
 				quote(str[i++], &in_quote);
 		}
 		while (str[i] == c && (!in_quote[0] || !in_quote[1]))
