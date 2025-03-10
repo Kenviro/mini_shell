@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/07 14:50:09 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:21:08 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,16 @@ static int	input_work(char *input, char ***env)
 	splited = holy_split(input, ' ');
 	free(input);
 	init_list(splited, &list);
-	if (other_builtin(list, env) == 0)
-		conditioning(list, *env, &ms_status);
+	if (list != NULL || list->content != NULL)
+	{
+		if (other_builtin(list, env) == 0)
+			conditioning(list, *env, &ms_status);
+	}
+	else
+	{
+		ms_status = 127;
+		ft_printf("command not found :''\n");
+	}
 	ft_lstclear(&list);
 	return (0);
 }
