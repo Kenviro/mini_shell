@@ -6,13 +6,13 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:03:50 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/05 14:36:12 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:05:07 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	pipex_launcher(t_cmds *cmds, char **env)
+void	pipex_launcher(t_cmds *cmds, char **env, int *ms_status)
 {
 	t_cmds	*save;
 	pid_t	*to_wait;
@@ -31,7 +31,7 @@ void	pipex_launcher(t_cmds *cmds, char **env)
 	}
 	close_fds(save);
 	to_wait[i] = -1;
-	wait_all(to_wait, nbcmds);
+	wait_all(to_wait, nbcmds, ms_status);
 	free_stuff(cmds);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/07 13:58:40 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:04:43 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,14 @@ char	*found_dollar(char *input, char **env, int ms_status);
 void	free_stuff(t_cmds *cmds);
 void	next_cmd(t_list **lst);
 void	cnf(char *cmd);
-void	conditioning(t_list *lst, char **env);
+void	conditioning(t_list *lst, char **env, int *ms_status);
 void	data_init(t_list *lst);
-void	command(t_cmds *cmds, char **env);
+void	command(t_cmds *cmds, char **env, int *ms_status);
 void	close_fds(t_cmds *cmds);
 void	pipex_child(t_cmds *cmds, int *end, char **env);
 void	execute(char **cmd, char **env);
-void	pipex_launcher(t_cmds *cmds, char **env);
-void	wait_all(pid_t *to_wait, int nbcmds);
+void	pipex_launcher(t_cmds *cmds, char **env, int *ms_status);
+void	wait_all(pid_t *to_wait, int nbcmds, int *ms_status);
 char	*filename(char *str);
 char	**set_args(t_list *lst, int nbargs);
 char	**find_args(t_list *lst);
