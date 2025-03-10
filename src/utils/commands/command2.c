@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/05 14:34:37 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:19:31 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	cnf(t_cmds *cmds)
 int	here_doc(char *limiter)
 {
 	char	*line;
-	int		fd;
+	int		end[2];
 
-	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	pipe(end);
 	while (1)
 	{
 		ft_printf("> ");
@@ -80,10 +80,9 @@ int	here_doc(char *limiter)
 			free(line);
 			break ;
 		}
-		write(fd, line, ft_strlen(line));
+		write(end[1], line, ft_strlen(line));
 		free(line);
 	}
-	close(fd);
-	fd = open(".heredoc", O_RDONLY);
-	return (fd);
+	close(end[1]);
+	return (end[0]);
 }
