@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:03:50 by psoulie           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/03/07 15:05:07 by ktintim-         ###   ########.fr       */
-=======
-/*   Updated: 2025/03/05 13:33:31 by psoulie          ###   ########.fr       */
->>>>>>> achille
+/*   Updated: 2025/03/10 16:51:27 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +31,8 @@ void	pipex_launcher(t_cmds *cmds, char **env, int *ms_status)
 	}
 	close_fds(save);
 	to_wait[i] = -1;
-<<<<<<< HEAD
 	wait_all(to_wait, nbcmds, ms_status);
 	free_stuff(cmds);
-=======
-	wait_all(to_wait, nbcmds);
->>>>>>> achille
 }
 
 void	close_fds(t_cmds *cmds)
