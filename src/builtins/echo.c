@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:13:02 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/04 14:33:47 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:01:03 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,15 @@ void	echo(char **cmd)
 		i++;
 		n_arg = 1;
 	}
-	joined = create_joined(cmd, i);
-	if (!n_arg)
-		printf("%s\n", joined);
+	if (cmd[i])
+	{
+		joined = create_joined(cmd, i);
+		if (!n_arg)
+			printf("%s\n", joined);
+		else
+			printf("%s", joined);
+		free(joined);
+	}
 	else
-		printf("%s", joined);
-	free(joined);
+		printf("\n");
 }

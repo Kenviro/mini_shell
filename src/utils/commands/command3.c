@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:03:50 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/10 16:51:27 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/11 14:04:21 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	pipex_launcher(t_cmds *cmds, char **env, int *ms_status)
 	}
 	close_fds(save);
 	to_wait[i] = -1;
-	wait_all(to_wait, nbcmds, ms_status);
+	wait_all(to_wait, nbcmds - 1, ms_status);
 	free_stuff(cmds);
 }
 
@@ -41,7 +41,7 @@ void	close_fds(t_cmds *cmds)
 	{
 		if (cmds->fds[0] != 0)
 			close(cmds->fds[0]);
-		if (cmds->fds[1] != 1 || cmds->fds[1] != 2)
+		if (cmds->fds[1] != 1 && cmds->fds[1] != 2)
 			close(cmds->fds[1]);
 		cmds = cmds->next;
 	}
