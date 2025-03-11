@@ -1,0 +1,5 @@
+Makefile: No such file or directory
+cat: file1: No such file or directory
+cat: file2: No such file or directory
+rm: cannot remove 'file1': No such file or directory
+rm: cannot remove 'file2': No such file or directory

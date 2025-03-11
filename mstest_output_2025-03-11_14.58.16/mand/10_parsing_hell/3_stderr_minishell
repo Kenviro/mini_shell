@@ -1,0 +1,2 @@
+trailing quote
+/home/ktintim-/42_minishell_tester/tester.sh: line 635: 1794348 Segmentation fault      (core dumped) LD_PRELOAD=/home/ktintim-/42_minishell_tester/utils/libintercept/libintercept.so /home/ktintim-/Desktop/mini_shell/minishell

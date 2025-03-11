@@ -1,0 +1,3 @@
+command not found: (head
+cat: file2: No such file or directory
+rm: cannot remove 'file2': No such file or directory

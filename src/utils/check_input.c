@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:00:16 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/11 14:24:20 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:53:19 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ static char	*replace_mark(char *input, int i, int ms_status)
 	char	*value;
 	char	*suffix;
 
-	if (input[i - 1] != '\'')
-		return (input);
 	if (i != 0)
 		beg = ft_substr(input, 0, i);
 	else
@@ -49,6 +47,8 @@ static char	*replace_mark(char *input, int i, int ms_status)
 	if (!value)
 		return (free(beg), NULL);
 	new_input = ft_strjoin(beg, value);
+	if (!new_input)
+		return (NULL);
 	if (input[i + 2])
 		suffix = ft_strdup(&input[i + 2]);
 	else

@@ -1,0 +1,2 @@
+awk: cmd. line:2: BEGIN{for(i=1;i
+awk: cmd. line:2:                ^ unexpected newline or end of string

@@ -1,0 +1,2 @@
+exit
+minishell: exit: echo: numeric argument required

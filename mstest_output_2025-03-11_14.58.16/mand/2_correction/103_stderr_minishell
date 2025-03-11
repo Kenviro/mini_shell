@@ -1,0 +1,9 @@
+tmp_path_test1/test1.c:1:10: error: #include expects "FILENAME" or <FILENAME>
+    1 | #include
+      |          ^
+tmp_path_test2/test2.c:1:10: error: #include expects "FILENAME" or <FILENAME>
+    1 | #include
+      |          ^
+command not found: a.out
+command not found: a.out
+command not found: /bin/rm

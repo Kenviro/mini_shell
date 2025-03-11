@@ -1,0 +1,4 @@
+command not found: (echo
+cat: ')': No such file or directory
+cat: alt: No such file or directory
+rm: cannot remove 'alt': No such file or directory

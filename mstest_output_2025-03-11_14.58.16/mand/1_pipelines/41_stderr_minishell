@@ -1,0 +1,4 @@
+execute: Permission denied
+command not found: cd
+cat: Makefile: No such file or directory
+command not found: /bin/rm
