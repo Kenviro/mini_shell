@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 11:01:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/06 11:34:11 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:45:42 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	print_export(char **env)
 	int		i;
 
 	i = 0;
+	if (!env)
+		return ;
 	l_env = envnew(env[i]);
 	while (env[++i])
 		envadd_back(&l_env, envnew(env[i]));

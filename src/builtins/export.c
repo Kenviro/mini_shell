@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:58:49 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/04 10:50:41 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:46:54 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,6 @@ int	export(t_list *list, char ***env)
 	char	*value;
 
 	tmp = list;
-	if (tmp->next == NULL)
-	{
-		print_export(*env);
-		return (0);
-	}
 	tmp = tmp->next;
 	while (tmp)
 	{
