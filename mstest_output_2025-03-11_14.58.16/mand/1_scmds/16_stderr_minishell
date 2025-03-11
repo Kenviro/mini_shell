@@ -1,6 +1,0 @@
-awk: cmd. line:1: {sum+= END {print sum/NR}awk: 
-awk: cmd. line:2: cmd. line:1: BEGIN{srand(42); for(i=1;i       ^ syntax error
-
-awk: cmd. line:2:                           ^ unexpected newline or end of string
-awk: cmd. line:1: {sum+= END {print sum/NR}
-awk: cmd. line:1:                          ^ unexpected newline or end of string
