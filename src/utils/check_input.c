@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:00:16 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/10 15:10:15 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:42:09 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static char	*replace_mark(char *input, int i, int ms_status)
 	char	*value;
 	char	*suffix;
 
+	if (input[i - 1] == '\'')
+		return (input);
 	if (i != 0)
 		beg = ft_substr(input, 0, i);
 	else
@@ -47,8 +49,6 @@ static char	*replace_mark(char *input, int i, int ms_status)
 	if (!value)
 		return (free(beg), NULL);
 	new_input = ft_strjoin(beg, value);
-	if (!new_input)
-		return (NULL);
 	if (input[i + 2])
 		suffix = ft_strdup(&input[i + 2]);
 	else
@@ -90,6 +90,8 @@ static char	*replace_variable(char *input, int i, int j, char **env)
 	char	*expanded_value;
 	char	*new_input;
 
+	if (input[i - 1] == '\'')
+		return (input);
 	name_env = ft_substr(input, i + 1, j - i - 1);
 	if (!name_env)
 		return (NULL);

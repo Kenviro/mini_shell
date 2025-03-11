@@ -22,6 +22,7 @@ FILES = minishell \
 		$(UTILS)split_redirect \
 		$(UTILS)ft_strcmp \
 		$(UTILS)check_input \
+		$(UTILS)trailing_quote \
 		$(UTILS)commands/command \
 		$(UTILS)commands/command2 \
 		$(UTILS)commands/command3 \

@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/10 16:50:28 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/11 12:53:56 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ static int	input_work(char *input, char ***env)
 	init_list(splited, &list);
 	if (other_builtin(list, env) == 0)
 		conditioning(list, *env, &ms_status);
-	ft_lstclear(&list);
+	else
+		ft_lstclear(&list);
 	return (0);
 }
 

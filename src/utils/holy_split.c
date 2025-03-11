@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/10 16:32:33 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/11 18:25:32 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,13 @@ static char	*word(char *str, int start, char c)
 		word[i] = str[start + i];
 		i++;
 	}
+	word[i] = 0;
 	if (quote(str[start + i], &in_quote) < 2 &&
 			(in_quote[0] || in_quote[1]) && !quote(str[start + i + 1], &in_quote))
-		return (dup2(2, 1), ft_printf("trailing quote\n"), NULL);
-	word[i] = 0;
+	{
+		word = trailing_quote(word, in_quote);
+		printf("test2 %s\n", word);
+	}
 	return (word);
 }
 
@@ -117,8 +120,8 @@ char	**holy_split(char *str, char c)
 		if (str[i] != c)
 		{
 			quote(str[i], &in_quote);
-			spliff[nbstr++] = word(str, i, c);
-			while (str[++i] && (str[i] != c || in_quote[0] || in_quote[1]))
+			spliff[nbstr++] = word(str, i++, c);
+			while (str[i] && (str[i] != c || in_quote[0] || in_quote[1]))
 				quote(str[i++], &in_quote);
 		}
 		while (str[i] == c && (!in_quote[0] || !in_quote[1]))

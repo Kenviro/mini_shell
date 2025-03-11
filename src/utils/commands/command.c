@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/10 16:42:13 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/11 14:18:43 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	wait_all(pid_t *to_wait, int nbcmds, int *ms_status)
 {
-	while (nbcmds > 0)
+	while (nbcmds >= 0)
 	{
 		waitpid(to_wait[nbcmds], ms_status, 0);
 		nbcmds--;
@@ -65,10 +65,7 @@ void	execute(char **cmd, char **env)
 	if (!path)
 		return ;
 	if (execve(path, cmd, env) == -1)
-	{
-		perror("execute");
-		exit(EXIT_FAILURE);
-	}
+		return ;
 }
 
 pid_t	pipex(t_cmds *cmds, char **env)
@@ -110,12 +107,11 @@ void	command(t_cmds *cmds, char **env, int *ms_status)
 	{
 		status_cpy = 0;
 		pipex_launcher(cmds, env, &status_cpy);
-		free_stuff(cmds);
 		exit(status_cpy >> 8);
 	}
 	else
 	{
-		waitpid(0, ms_status, 0);
+		waitpid(pid, ms_status, 0);
 		*ms_status = *ms_status >> 8;
 		free_stuff(cmds);
 	}
