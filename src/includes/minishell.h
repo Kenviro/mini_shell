@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/10 16:40:24 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/11 15:39:37 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,9 @@ char	**holy_split(char *str, char c);
 // split_redirect.c
 int		found_redirection(char *str, t_list **list);
 
-// check_input.c
+// check_input.c && expension
 char	*found_dollar(char *input, char **env, int ms_status);
+char	*expension(char *input, char **env, int ms_status, int i);
 
 //command.c && command2.c && command3.c
 void	free_stuff(t_cmds *cmds);
