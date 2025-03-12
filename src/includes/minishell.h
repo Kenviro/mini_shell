@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/12 11:34:07 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:41:24 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	free_2d(char ***str);
 void	ft_envclear(t_env **l_env);
 int		quote_cnf(char ***splited, int *ms_status);
 int		check_synt_error(t_list *list, int *ms_status);
+char	*split_redirection(char *input);
+
 // built_in.c
 int		check_built_in(char **cmd, char **env);
 int		other_builtin(t_list *list, char ***env, int *ms_status);

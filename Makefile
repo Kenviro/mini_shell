@@ -18,6 +18,7 @@ BUILTINS = builtins/
 FILES = minishell \
 		$(UTILS)error \
 		$(UTILS)synt_error \
+		$(UTILS)split_redirection \
 		$(UTILS)holy_split \
 		$(UTILS)splitonsteroids \
 		$(UTILS)split_redirect \

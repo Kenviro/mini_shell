@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_redirect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:33:16 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/19 13:34:22 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/12 15:39:46 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	create_node(char *str, t_list **list, int *index)
 	free(index);
 }
 
-static void	split_redirection(char *str, t_list **list)
+static void	split_redirect(char *str, t_list **list)
 {
 	int		*index;
 	int		i;
@@ -107,7 +107,7 @@ int	found_redirection(char *str, t_list **list)
 	{
 		if (count_redirection(str, 0) == ft_strlen(str))
 			return (0);
-		split_redirection(str, list);
+		split_redirect(str, list);
 		return (1);
 	}
 	return (0);
