@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:06:14 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/11 17:55:23 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:57:17 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_built_in(char **cmd, char **env)
 	return (0);
 }
 
-int	other_builtin(t_list *list, char ***env)
+int	other_builtin(t_list *list, char ***env, int *ms_status)
 {
 	if (ft_strcmp(list->content, "unset") == 0)
 	{
@@ -52,9 +52,9 @@ int	other_builtin(t_list *list, char ***env)
 	else if (ft_strcmp(list->content, "cd") == 0)
 	{
 		if (list->next)
-			cd(list->next->content, env);
+			cd(list->next->content, env, ms_status);
 		else
-			cd(NULL, env);
+			cd(NULL, env, ms_status);
 		return (1);
 	}
 	else if (ft_strcmp(list->content, "export") == 0 && \

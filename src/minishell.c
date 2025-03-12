@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/10 17:14:36 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:58:11 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	input_work(char *input, char ***env)
 		return (0);
 	}
 	init_list(splited, &list);
-	if (other_builtin(list, env) == 0)
+	if (other_builtin(list, env, &ms_status) == 0)
 		conditioning(list, *env, &ms_status);
 	else
 		ft_lstclear(&list);

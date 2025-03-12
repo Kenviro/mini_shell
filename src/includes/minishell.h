@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/11 15:39:37 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:57:30 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_envclear(t_env **l_env);
 
 // built_in.c
 int		check_built_in(char **cmd, char **env);
-int		other_builtin(t_list *list, char ***env);
+int		other_builtin(t_list *list, char ***env, int *ms_status);
 
 // echo.c
 void	echo(char **cmd);
@@ -63,7 +63,7 @@ void	echo(char **cmd);
 void	pwd(void);
 
 // cd.c
-void	cd(char *path, char ***env);
+void	cd(char *path, char ***env, int *ms_status);
 
 // unset.c
 void	unset(t_list *list, char ***env);

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:42 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/02/26 18:08:12 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:57:48 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	change_env(char **env, char *old_pwd)
 	free(old_pwd);
 }
 
-void	cd(char *path, char ***env)
+void	cd(char *path, char ***env, int *ms_status)
 {
 	const char	*home;
 	char		*old_pwd;
@@ -56,6 +56,7 @@ void	cd(char *path, char ***env)
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd("No such file or directory", 2);
 		ft_putstr_fd("\n", 2);
+		*ms_status = 1;
 	}
 	else
 		change_env(*env, old_pwd);
