@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/12 10:57:30 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:34:07 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ typedef struct s_env
 
 // minishell.c
 
-// error.c
+// error.c && symt_error.c
 void	error(char *message);
 void	new_line(char *input);
 void	free_2d(char ***str);
 void	ft_envclear(t_env **l_env);
-
+int		quote_cnf(char ***splited, int *ms_status);
+int		check_synt_error(t_list *list, int *ms_status);
 // built_in.c
 int		check_built_in(char **cmd, char **env);
 int		other_builtin(t_list *list, char ***env, int *ms_status);

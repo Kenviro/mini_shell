@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/12 10:58:11 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:34:25 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	init_list(char **splited, t_list **list)
 	free(splited);
 }
 
-static int	input_work(char *input, char ***env)
+static void	input_work(char *input, char ***env)
 {
 	t_list		*list;
 	char		**splited;
@@ -56,24 +56,23 @@ static int	input_work(char *input, char ***env)
 	add_history(input);
 	splited = NULL;
 	list = NULL;
-	input = found_dollar(input, *env, ms_status);
 	if (input[0] == '\0')
-		return (0);
+		return ;
+	input = found_dollar(input, *env, ms_status);
 	splited = holy_split(input, ' ');
 	free(input);
-	if (splited[0][0] == 0)
-	{
-		free_2d(&splited);
-		ms_status = 127;
-		ft_printf("command not found :''\n");
-		return (0);
-	}
+	if (quote_cnf(&splited, &ms_status) == 1)
+		return ;
 	init_list(splited, &list);
+	if (check_synt_error(list, &ms_status) == 1)
+	{
+		ft_lstclear(&list);
+		return ;
+	}
 	if (other_builtin(list, env, &ms_status) == 0)
 		conditioning(list, *env, &ms_status);
 	else
 		ft_lstclear(&list);
-	return (0);
 }
 
 static void	prompt_boucle(char **env)

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:05:04 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/06 11:30:53 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:25:36 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,16 @@ void	ft_envclear(t_env **l_env)
 		*l_env = tmp;
 	}
 	*l_env = NULL;
+}
+
+int	quote_cnf(char ***splited, int *ms_status)
+{
+	if ((*splited)[0][0] == '\0')
+	{
+		free_2d(splited);
+		*ms_status = 127;
+		printf("command not found :''\n");
+		return (1);
+	}
+	return (0);
 }
