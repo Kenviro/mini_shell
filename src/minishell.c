@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:39:29 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:00:35 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static int	prompt_boucle(char **env)
 int	main(int ac, char **av, char **env)
 {
 	int		status;
-	
+
 	(void)ac;
 	(void)av;
 	status = prompt_boucle(env);
