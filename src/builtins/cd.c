@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:42 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/12 10:57:48 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:07:44 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,17 @@ static void	change_env(char **env, char *old_pwd)
 
 void	cd(char *path, char ***env, int *ms_status)
 {
+	int			i;
 	const char	*home;
 	char		*old_pwd;
 
 	old_pwd = getcwd(NULL, 0);
 	if (!path)
 	{
-		home = getenv("HOME");
-		chdir(home);
+		i = 0;
+		while (ft_strncmp((*env)[i], "HOME=", 5) != 0)
+			i++;
+		chdir((*env)[i] + 5);
 		change_env(*env, old_pwd);
 	}
 	else if (chdir(path) == -1)

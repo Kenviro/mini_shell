@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:59:16 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/12 18:32:21 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:40:43 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ static char	*put_space(char *input, int i)
 static int	check_input(char *input, int *i)
 {
 	if ((input[*i] == '|') && input[*i + 1] != ' ')
-	{
-		// *i = *i + 1;
 		return (1);
-	}
 	if ((input[*i] == '<' || input[*i] == '>' || input[*i] == '|') && \
 		input[*i + 1] == input[*i])
 	{

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:28 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/04 10:30:16 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:33:06 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	exit_shell(t_list *list, char ***env)
 		}
 		else
 		{
-			ft_printf("exit\nminishell: exit: %s: numeric argument required\n", \
+			ft_printf("minishell: exit: %s: numeric argument required\n", \
 						list->next->content);
 			proper_exit(list, 2, env);
 		}

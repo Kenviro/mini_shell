@@ -6,22 +6,11 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 15:13:44 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:06:14 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-
-static char	*get_pwd(void)
-{
-	char	*path;
-	char	*joined;
-
-	path = getcwd(NULL, 0);
-	joined = ft_strjoin(path, "$ :3 ");
-	free (path);
-	return (joined);
-}
 
 static void	init_list(char **splited, t_list **list)
 {
@@ -47,6 +36,20 @@ static void	init_list(char **splited, t_list **list)
 	free(splited);
 }
 
+static int	next_step(t_list *list, char ***env, int *ms_status)
+{
+	if (check_synt_error(list, &ms_status) == 1)
+	{
+		ft_lstclear(&list);
+		return (2);
+	}
+	if (other_builtin(list, env, &ms_status) == 0)
+		conditioning(list, *env, &ms_status);
+	else
+		ft_lstclear(&list);
+	return (ms_status;)
+}
+
 static void	input_work(char *input, char ***env)
 {
 	t_list		*list;
@@ -65,15 +68,8 @@ static void	input_work(char *input, char ***env)
 	if (quote_cnf(&splited, &ms_status) == 1)
 		return ;
 	init_list(splited, &list);
-	if (check_synt_error(list, &ms_status) == 1)
-	{
-		ft_lstclear(&list);
-		return ;
-	}
-	if (other_builtin(list, env, &ms_status) == 0)
-		conditioning(list, *env, &ms_status);
-	else
-		ft_lstclear(&list);
+	ms_status = next_step(list, env, &ms_status);
+	return (ms_status);
 }
 
 static void	prompt_boucle(char **env)
@@ -82,6 +78,7 @@ static void	prompt_boucle(char **env)
 	char	*path;
 	char	**envcpy;
 	int		i;
+	int		status;
 
 	envcpy = ft_strdup_2d(env);
 	while (1)
@@ -98,17 +95,18 @@ static void	prompt_boucle(char **env)
 		if (input[i] == '\0')
 			new_line(input);
 		else
-			input_work(input, &envcpy);
+			status = input_work(input, &envcpy);
 	}
-	free_2d(&envcpy);
-	free(input);
+	return (free_2d(&envcpy), free(input), status);
 }
 
 int	main(int ac, char **av, char **env)
 {
+	int		status;
+	
 	(void)ac;
 	(void)av;
-	prompt_boucle(env);
+	status = prompt_boucle(env);
 	printf("exit\n");
-	return (0);
+	return (status);
 }

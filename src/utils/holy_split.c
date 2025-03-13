@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/11 13:52:20 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:49:00 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ static char	*word(char *str, int start, char c)
 		word[i] = str[start + i];
 		i++;
 	}
-	if (quote(str[start + i], &in_quote) < 2 &&
-			(in_quote[0] || in_quote[1]) && !quote(str[start + i + 1], &in_quote))
+	if (quote(str[start + i], &in_quote) < 2 && \
+		(in_quote[0] || in_quote[1]) && !quote(str[start + i + 1], &in_quote))
 		return (dup2(2, 1), ft_printf("trailing quote\n"), NULL);
 	word[i] = 0;
 	return (word);

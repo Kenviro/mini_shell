@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   splitonsteroids.c                                  :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 16:07:01 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/13 16:49:31 by ktintim-         ###   ########.fr       */
+/*   Created: 2025/03/13 16:39:15 by ktintim-          #+#    #+#             */
+/*   Updated: 2025/03/13 16:55:19 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_splitonsteroids(char *str, int start, char c)
+char	*get_pwd(void)
 {
-	int	len;
-	int	i;
-	int	in_quote[2];
+	char	*path;
+	char	*joined;
 
-	len = 0;
-	i = 0;
-	in_quote[0] = 0;
-	in_quote[1] = 0;
-	while (str[start + len + i] && (str[start + len + i] != c || \
-			in_quote[0] || in_quote[1]))
-	{
-		if (quote(str[start + len + i], &in_quote))
-		{
-			len--;
-			i++;
-		}
-		len ++;
-	}
-	return (len);
+	path = getcwd(NULL, 0);
+	joined = ft_strjoin(path, "$ :3 ");
+	free (path);
+	return (joined);
 }
