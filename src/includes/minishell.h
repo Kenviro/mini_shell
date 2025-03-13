@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 16:55:42 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:13:06 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	execute(char **cmd, char **env);
 void	pipex_launcher(t_cmds *cmds, char **env, int *ms_status);
 void	wait_all(pid_t *to_wait, int nbcmds, int *ms_status);
 char	*filename(char *str);
+char	*trailing_quote(char *word, int in_quote[2]);
 char	**set_args(t_list *lst, int nbargs);
 char	**find_args(t_list *lst);
 char	**ft_strdup_2d(char **str);

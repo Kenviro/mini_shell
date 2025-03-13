@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/11 14:18:26 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:16:59 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,7 @@ void	execute(char **cmd, char **env)
 	if (!path)
 		return ;
 	if (execve(path, cmd, env) == -1)
-	{
-		perror("execute");
-		exit(EXIT_FAILURE);
-	}
+		return ;
 }
 
 pid_t	pipex(t_cmds *cmds, char **env)
@@ -114,7 +111,7 @@ void	command(t_cmds *cmds, char **env, int *ms_status)
 	}
 	else
 	{
-		waitpid(0, ms_status, 0);
+		waitpid(pid, ms_status, 0);
 		*ms_status = *ms_status >> 8;
 		free_stuff(cmds);
 	}

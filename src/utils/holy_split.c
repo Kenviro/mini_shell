@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   holy_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/13 16:49:00 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:20:08 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ char	**holy_split(char *str, char c)
 		if (str[i] != c)
 		{
 			quote(str[i], &in_quote);
+			spliff[nbstr++] = word(str, i++, c);
+			while (str[i] && (str[i] != c || in_quote[0] || in_quote[1]))
 			spliff[nbstr++] = word(str, i++, c);
 			while (str[i] && (str[i] != c || in_quote[0] || in_quote[1]))
 				quote(str[i++], &in_quote);
