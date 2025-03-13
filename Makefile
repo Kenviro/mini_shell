@@ -26,6 +26,7 @@ FILES = minishell \
 		$(UTILS)ft_strcmp \
 		$(UTILS)check_input \
 		$(UTILS)expension \
+		$(UTILS)trailing_quote \
 		$(UTILS)commands/command \
 		$(UTILS)commands/command2 \
 		$(UTILS)commands/command3 \
