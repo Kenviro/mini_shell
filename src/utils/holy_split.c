@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/11 18:25:32 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/13 17:05:15 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,7 @@ static char	*word(char *str, int start, char c)
 	word[i] = 0;
 	if (quote(str[start + i], &in_quote) < 2 &&
 			(in_quote[0] || in_quote[1]) && !quote(str[start + i + 1], &in_quote))
-	{
-		word = trailing_quote(word, in_quote);
-		printf("test2 %s\n", word);
-	}
+		return (NULL);
 	return (word);
 }
 
