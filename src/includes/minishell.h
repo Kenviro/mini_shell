@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/12 14:41:24 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:47:17 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ char	**set_args(t_list *lst, int nbargs);
 char	**find_args(t_list *lst);
 char	**ft_strdup_2d(char **str);
 char	***red_init(void);
-int		here_doc(char *limiter);
+int		here_doc(char *limiter, char **env, int ms_status);
 int		ft_strcmp(const char *s1, const char *s2);
 int		find_nbargs(t_list *lst);
 int		red_out(char *red);

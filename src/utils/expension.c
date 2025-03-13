@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:30:30 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/11 16:05:04 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:02:41 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ char	*expension(char *input, char **env, int ms_status, int i)
 		{
 			j++;
 			while (input[j] && input[j] != ' ' && input[j] != '\'' && \
-				input[j] != '"' && input[j] != '$')
+				input[j] != '"' && input[j] != '$' && input[j] != '\n')
 				j++;
 			if (j - i > 1)
 				input = replace_variable(input, i, j, env);

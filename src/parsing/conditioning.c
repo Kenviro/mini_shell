@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/11 13:14:21 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:48:45 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	find_fdout(t_list *lst)
 	return (fd);
 }
 
-int	find_fdin(t_list *lst)
+int	find_fdin(t_list *lst, char **env, int ms_status)
 {
 	int	fd;
 
@@ -71,7 +71,7 @@ int	find_fdin(t_list *lst)
 			else
 			{
 				lst = lst->next;
-				fd = here_doc(lst->content);
+				fd = here_doc(lst->content, env, ms_status);
 			}
 		}
 		lst = lst->next;
@@ -79,14 +79,14 @@ int	find_fdin(t_list *lst)
 	return (fd);
 }
 
-t_cmds	*new_cmd(t_list *lst)
+t_cmds	*new_cmd(t_list *lst, char **env, int ms_status)
 {
 	t_cmds	*cmds;
 
 	cmds = (t_cmds *)malloc(sizeof(t_cmds));
 	cmds->next = NULL;
 	cmds->cmd = find_args(lst);
-	cmds->fds[0] = find_fdin(lst);
+	cmds->fds[0] = find_fdin(lst, env, ms_status);
 	cmds->fds[1] = find_fdout(lst);
 	return (cmds);
 }
@@ -98,12 +98,12 @@ void	conditioning(t_list *lst, char **env, int *ms_status)
 	t_list	*save_list;
 
 	save_list = lst;
-	cmds = new_cmd(lst);
+	cmds = new_cmd(lst, env, *ms_status);
 	save = cmds;
 	next_cmd(&lst);
 	while (lst)
 	{
-		cmds->next = new_cmd(lst);
+		cmds->next = new_cmd(lst, env, *ms_status);
 		cmds = cmds->next;
 		if (cmds->fds[0] == -2)
 		{

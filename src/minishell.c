@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/12 18:34:47 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:13:44 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static void	input_work(char *input, char ***env)
 	add_history(input);
 	splited = NULL;
 	list = NULL;
+	input = found_dollar(input, *env, ms_status);
 	if (input[0] == '\0')
 		return ;
-	input = found_dollar(input, *env, ms_status);
 	input = split_redirection(input);
 	splited = holy_split(input, ' ');
 	free(input);
