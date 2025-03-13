@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:39:15 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 16:55:19 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:31:02 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,25 @@ char	*get_pwd(void)
 	joined = ft_strjoin(path, "$ :3 ");
 	free (path);
 	return (joined);
+}
+
+char	*executable(char *str)
+{
+	int		i;
+	int		j;
+	char	*exe;
+
+	i = 0;
+	while (str && str[i])
+		i++;
+	exe = malloc((i - 1) * sizeof(char));
+	i = 3;
+	j = 0;
+	while (str && str[i])
+	{
+		exe[j] = str[i];
+		i++;
+		j++;
+	}
+	return (exe);
 }

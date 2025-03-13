@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:13:06 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/13 17:31:35 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		quote_cnf(char ***splited, int *ms_status);
 int		check_synt_error(t_list *list, int *ms_status);
 char	*split_redirection(char *input);
 char	*get_pwd(void);
+char	*executable(char *str);
 
 // built_in.c
 int		check_built_in(char **cmd, char **env);
