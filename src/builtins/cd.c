@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:42 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:07:44 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:19:02 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	change_env(char **env, char *old_pwd)
 void	cd(char *path, char ***env, int *ms_status)
 {
 	int			i;
-	const char	*home;
 	char		*old_pwd;
 
 	old_pwd = getcwd(NULL, 0);

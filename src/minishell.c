@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:06:14 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:18:53 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ static void	init_list(char **splited, t_list **list)
 
 static int	next_step(t_list *list, char ***env, int *ms_status)
 {
-	if (check_synt_error(list, &ms_status) == 1)
+	if (check_synt_error(list, ms_status) == 1)
 	{
 		ft_lstclear(&list);
 		return (2);
 	}
-	if (other_builtin(list, env, &ms_status) == 0)
-		conditioning(list, *env, &ms_status);
+	if (other_builtin(list, env, ms_status) == 0)
+		conditioning(list, *env, ms_status);
 	else
 		ft_lstclear(&list);
-	return (ms_status;)
+	return (*ms_status);
 }
 
-static void	input_work(char *input, char ***env)
+static int	input_work(char *input, char ***env)
 {
 	t_list		*list;
 	char		**splited;
@@ -61,18 +61,18 @@ static void	input_work(char *input, char ***env)
 	list = NULL;
 	input = found_dollar(input, *env, ms_status);
 	if (input[0] == '\0')
-		return ;
+		return (0);
 	input = split_redirection(input);
 	splited = holy_split(input, ' ');
 	free(input);
 	if (quote_cnf(&splited, &ms_status) == 1)
-		return ;
+		return (127);
 	init_list(splited, &list);
 	ms_status = next_step(list, env, &ms_status);
 	return (ms_status);
 }
 
-static void	prompt_boucle(char **env)
+static int	prompt_boucle(char **env)
 {	
 	char	*input;
 	char	*path;
