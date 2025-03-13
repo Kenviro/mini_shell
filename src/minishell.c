@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:28:17 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:39:29 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ static int	prompt_boucle(char **env)
 		free(path);
 		if (input == NULL)
 			break ;
-		i = is_whitespace(input);
+		while (input[i] == ' ' || input[i] == '\t')
+			i++;
 		if (input[i] == '\0')
 			new_line(input);
 		else

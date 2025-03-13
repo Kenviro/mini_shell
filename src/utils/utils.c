@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:39:15 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:33:34 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:39:01 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,4 @@ char	*executable(char *str)
 		j++;
 	}
 	return (exe);
-}
-
-int	is_whitespace(char *input)
-{
-	int	i;
-
-	i = 0;
-	while (input[i])
-	{
-		if (input[i] != ' ' || input[i] != '\t' || input[i] != '\v' || \
-				input[i] != '\f' || input[i] != '\r')
-			return (i);
-		i++;
-	}
-	return (i);
 }
