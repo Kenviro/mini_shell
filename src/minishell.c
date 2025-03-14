@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/14 15:59:35 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:18:23 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ static void	init_list(char **splited, t_list **list)
 	i = 0;
 	while (splited[i])
 	{
-		if (found_redirection(splited[i], list) == 0)
-		{
-			new_node = ft_lstnew(ft_strdup(splited[i]));
-			ft_lstadd_back(list, new_node);
-		}
+		new_node = ft_lstnew(ft_strdup(splited[i]));
+		ft_lstadd_back(list, new_node);
 		i++;
 	}
 	i = 0;
