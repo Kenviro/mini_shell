@@ -6,13 +6,13 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:06:14 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/14 14:33:02 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:06:52 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_built_in(char **cmd, char **env)
+int	check_built_in(char **cmd, char **env, pid_t *to_wait)
 {
 	if (ft_strcmp(cmd[0], "echo") == 0)
 	{
@@ -33,6 +33,10 @@ int	check_built_in(char **cmd, char **env)
 	{
 		print_export(env);
 		return (1);
+	}
+	else if (ft_strcmp(cmd[0], "exit") == 0)
+	{
+		return (exit_shell(cmd, env, to_wait), 1);
 	}
 	return (0);
 }
@@ -74,8 +78,6 @@ int	other_builtin(t_list *list, char ***env, int *ms_status)
 	{
 		if (ft_strcmp(list->content, "unset") == 0)
 			return (unset(list, env), 1);
-		else if (ft_strcmp(list->content, "exit") == 0)
-			return (exit_shell(list, env, *ms_status), 1);
 		else if (ft_strcmp(list->content, "cd") == 0)
 		{
 			cd_launcher(list, env, ms_status);

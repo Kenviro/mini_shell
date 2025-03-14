@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/14 15:52:25 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/14 17:04:17 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*get_pwd(void);
 char	*executable(char *str);
 
 // built_in.c
-int		check_built_in(char **cmd, char **env);
+int		check_built_in(char **cmd, char **env, pid_t *to_wait);
 int		other_builtin(t_list *list, char ***env, int *ms_status);
 
 // echo.c
@@ -86,10 +86,11 @@ char	*get_key(char *str);
 char	*get_value(char *str);
 
 // exit.c
-void	exit_shell(t_list *list, char ***env, int status);
+void	exit_shell(char **cmd, char **env, pid_t *to_wait);
 
 // signal/setup_signal.c
 void	handle_signal(int signal);
+void	signal_handler_null(void);
 void	setup_signal_handler(void);
 
 // signal/signal_child.c

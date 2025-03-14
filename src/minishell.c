@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/14 16:18:23 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:18:54 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,24 @@ static void	init_list(char **splited, t_list **list)
 
 static int	next_step(t_list *list, char ***env, int *ms_status)
 {
+	t_list	*tmp;
+
 	if (check_synt_error(list, ms_status) == 1)
 	{
 		ft_lstclear(&list);
 		return (2);
+	}
+	tmp = list;
+	while (tmp)
+	{
+		tmp->content = found_dollar(tmp->content, *env, *ms_status);
+		tmp = tmp->next;
+	}
+	tmp = list;
+	while (tmp)
+	{
+		printf("content: %s\n", tmp->content);
+		tmp = tmp->next;
 	}
 	if (other_builtin(list, env, ms_status) == 0)
 	{
@@ -58,7 +72,6 @@ static int	input_work(char *input, char ***env)
 	add_history(input);
 	splited = NULL;
 	list = NULL;
-	input = found_dollar(input, *env, ms_status);
 	if (input[0] == '\0')
 		return (0);
 	input = split_redirection(input);

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:51:08 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:47:52 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:32:19 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,10 @@ void	setup_signal_handler(void)
 		perror("Erreur lors de la configuration des signaux");
 		exit(EXIT_FAILURE);
 	}
+}
+
+void	signal_handler_null(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 }

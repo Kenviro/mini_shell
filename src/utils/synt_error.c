@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:26:01 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/12 15:59:14 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:55:25 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,24 @@ static int	double_and_solopipe(t_list *list, int *ms_status)
 	return (0);
 }
 
+static int	at_start(t_list *list, int *ms_status)
+{
+	if (list->content[0] == '|' || list->content[0] == '>' || \
+		list->content[0] == '<')
+	{
+		synt_error(list->content, ms_status);
+		return (1);
+	}
+	return (0);
+}
+
 int	check_synt_error(t_list *list, int *ms_status)
 {
 	t_list	*tmp;
 
 	tmp = list;
+	if (at_start(tmp, ms_status))
+		return (1);
 	while (tmp)
 	{
 		if (double_and_solopipe(tmp, ms_status))

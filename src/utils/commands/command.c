@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/14 15:53:09 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:29:53 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,16 +106,17 @@ void	command(t_cmds *cmds, char **env, int *ms_status)
 	pid_t	pid;
 	int		status_cpy;
 
-	signal_handler_child();
 	pid = fork();
 	if (pid == 0)
 	{
+		signal_handler_child();
 		status_cpy = 0;
 		pipex_launcher(cmds, env, &status_cpy);
 		exit(status_cpy >> 8);
 	}
 	else
 	{
+		signal_handler_null();
 		waitpid(pid, ms_status, 0);
 		*ms_status = *ms_status >> 8;
 		free_stuff(cmds);
