@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:28 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 16:33:06 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:52:45 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	proper_exit(t_list *list, int status, char ***env)
 	exit(status);
 }
 
-void	exit_shell(t_list *list, char ***env)
+void	exit_shell(t_list *list, char ***env, int status)
 {
 	if (list->next)
 	{
@@ -42,5 +42,5 @@ void	exit_shell(t_list *list, char ***env)
 		}
 	}
 	else
-		proper_exit(list, EXIT_SUCCESS, env);
+		proper_exit(list, status, env);
 }

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:33:48 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:53:20 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*get_key(char *str);
 char	*get_value(char *str);
 
 // exit.c
-void	exit_shell(t_list *list, char ***env);
+void	exit_shell(t_list *list, char ***env, int status);
 
 // signal/setup_signal.c
 void	handle_signal(int signal);

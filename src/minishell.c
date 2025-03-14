@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 18:00:35 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:51:10 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static int	input_work(char *input, char ***env)
 		return (127);
 	init_list(splited, &list);
 	ms_status = next_step(list, env, &ms_status);
+	printf("ms_status = %d\n", ms_status);
 	return (ms_status);
 }
 
@@ -96,6 +97,7 @@ static int	prompt_boucle(char **env)
 			new_line(input);
 		else
 			status = input_work(input, &envcpy);
+		printf("status = %d\n", status);
 	}
 	return (free_2d(&envcpy), free(input), status);
 }

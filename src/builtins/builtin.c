@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:06:14 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/12 10:57:17 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:53:09 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	other_builtin(t_list *list, char ***env, int *ms_status)
 	}
 	else if (ft_strcmp(list->content, "exit") == 0)
 	{
-		exit_shell(list, env);
+		exit_shell(list, env, *ms_status);
 		return (1);
 	}
 	else if (ft_strcmp(list->content, "cd") == 0)
