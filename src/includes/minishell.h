@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/14 11:21:14 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:27:17 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_envclear(t_env **l_env);
 int		quote_cnf(char ***splited, int *ms_status);
 int		check_synt_error(t_list *list, int *ms_status);
 int		is_whitespace(char *input);
+int		find_other(char **cmds);
 char	*split_redirection(char *input);
 char	*get_pwd(void);
 char	*executable(char *str);

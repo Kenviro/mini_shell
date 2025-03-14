@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:39:15 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:39:01 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:27:01 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,14 @@ char	*executable(char *str)
 		j++;
 	}
 	return (exe);
+}
+
+int	find_other(char **cmds)
+{
+	if (ft_strcmp(cmds[0], "cd") == 0 || \
+		ft_strcmp(cmds[0], "exit") == 0 || \
+		ft_strcmp(cmds[0], "unset") == 0 || \
+		(ft_strcmp(cmds[0], "export") == 0 && cmds[1]))
+		return (1);
+	return (0);
 }

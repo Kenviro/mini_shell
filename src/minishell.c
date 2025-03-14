@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/14 10:29:12 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:19:21 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ static int	next_step(t_list *list, char ***env, int *ms_status)
 		return (2);
 	}
 	if (other_builtin(list, env, ms_status) == 0)
+	{
 		conditioning(list, *env, ms_status);
+	}
 	else
 		ft_lstclear(&list);
 	return (*ms_status);

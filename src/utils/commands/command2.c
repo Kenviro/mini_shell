@@ -27,8 +27,16 @@ void	pipex_child(t_cmds *cmds, int *end, char **env, pid_t *to_wait)
 	}
 	if (!check_built_in(cmds->cmd, env))
 	{
-		execute(cmds->cmd, env);
-		cnf(cmds, env, to_wait);
+		if (find_other(cmds->cmd) == 0)
+		{
+			execute(cmds->cmd, env);
+			cnf(cmds, env, to_wait);
+		}
+		else
+		{
+			free_stuff(cmds);
+			free(to_wait);
+		}
 	}
 }
 
