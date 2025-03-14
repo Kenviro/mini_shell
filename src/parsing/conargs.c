@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:55:44 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/13 17:07:41 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/13 17:53:52 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ char	**set_args(t_list *lst, int nbargs)
 			if (lst)
 				lst = lst->next;
 			continue ;
-		}
+		}/* 
 		if (!ft_strncmp(lst->content, "./", 2))
-			args[i++] = executable(lst->content);
+			args[i++] = executable(lst->content); */
 		else
 			args[i++] = ft_strdup(lst->content);
 		lst = lst->next;

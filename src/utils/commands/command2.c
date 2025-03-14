@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/14 10:34:12 by ktintim-     ,    ###   ########.fr       */
+/*   Updated: 2025/03/14 15:56:56 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ void	pipex_child(t_cmds *cmds, int *end, char **env, pid_t *to_wait)
 	{
 		if (find_other(cmds->cmd) == 0)
 		{
-			execute(cmds->cmd, env);
-			cnf(cmds, env, to_wait);
+			if	(execute(cmds->cmd, env) == -1)
+				cnf(cmds);
+			else
+				isadir(cmds);
 		}
 		else
-		{
-			free_stuff(cmds);
-			free(to_wait);
-		}
+			return (free_stuff(cmds), free(to_wait));
 	}
 }
 
