@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/13 17:16:59 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/14 15:47:13 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static char	*findpath(char *cmd, char **env)
 	int		i;
 
 	i = 0;
-	while (ft_strnstr(env[i], "PATH", 4) == 0)
+	while (env[i] && ft_strnstr(env[i], "PATH", 4) == 0)
 		i++;
+	if (!env[i])
+		return (NULL);
 	paths = ft_split(env[i] + 5, ':');
-	if (!paths)
-		exit(-1);
 	i = -1;
 	while (paths && paths[++i])
 	{
@@ -51,21 +51,25 @@ static char	*findpath(char *cmd, char **env)
 	return (free(paths), NULL);
 }
 
-void	execute(char **cmd, char **env)
+int	execute(char **cmd, char **env)
 {
 	char	*path;
+	DIR		*dir;
 
-	if (!cmd || !*cmd)
-	{
-		dup2(STDERR_FILENO, STDOUT_FILENO);
-		ft_printf("missing command\n");
-		exit(-1);
-	}
 	path = findpath(cmd[0], env);
 	if (!path)
-		return ;
-	if (execve(path, cmd, env) == -1)
-		return ;
+	{
+		path = direct_path(&cmd[0]);
+		if (!path[0])
+			return (free(path), -1);
+	}
+	dir = opendir(path);
+	if (dir)
+	{
+		closedir(dir);
+		return (-2);
+	}
+	return (execve(path, cmd, env));
 }
 
 pid_t	pipex(t_cmds *cmds, char **env)

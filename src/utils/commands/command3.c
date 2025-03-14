@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:03:50 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/13 17:18:32 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/14 15:44:58 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,30 @@ void	close_fds(t_cmds *cmds)
 		close(cmds->fds[1]);
 		cmds = cmds->next;
 	}
+}
+
+char	*direct_path(char **cmd)
+{
+	char	*path;
+	int		i;
+
+	i = 0;
+	path = malloc((ft_strlen(cmd[0]) + 1) * sizeof(char));
+	while (cmd[0][i])
+	{
+		path[i] = (*cmd)[i];
+		i++;
+	}
+	path[i] = 0;
+	return (path);
+}
+
+
+void	isadir(t_cmds *cmds)
+{
+	dup2(STDERR_FILENO, STDOUT_FILENO);
+	ft_printf("is a directory: %s\n", cmds->cmd[0]);
+	close_fds(cmds);
+	free_stuff(cmds);
+	exit(126);
 }

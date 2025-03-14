@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:33:48 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:45:41 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <time.h>
+# include <dirent.h>
 
 typedef struct s_cmds
 {
@@ -111,20 +112,22 @@ char	*expension(char *input, char **env, int ms_status, int i);
 void	free_stuff(t_cmds *cmds);
 void	next_cmd(t_list **lst);
 void	cnf(t_cmds *cmds);
+void	isadir(t_cmds *cmds);
 void	conditioning(t_list *lst, char **env, int *ms_status);
 void	data_init(t_list *lst);
 void	command(t_cmds *cmds, char **env, int *ms_status);
 void	close_fds(t_cmds *cmds);
 void	pipex_child(t_cmds *cmds, int *end, char **env);
-void	execute(char **cmd, char **env);
 void	pipex_launcher(t_cmds *cmds, char **env, int *ms_status);
 void	wait_all(pid_t *to_wait, int nbcmds, int *ms_status);
 char	*filename(char *str);
 char	*trailing_quote(char *word, int in_quote[2]);
+char	*direct_path(char **cmd);
 char	**set_args(t_list *lst, int nbargs);
 char	**find_args(t_list *lst);
 char	**ft_strdup_2d(char **str);
 char	***red_init(void);
+int		execute(char **cmd, char **env);
 int		here_doc(char *limiter, char **env, int ms_status);
 int		ft_strcmp(const char *s1, const char *s2);
 int		find_nbargs(t_list *lst);

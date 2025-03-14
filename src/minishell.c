@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:28:17 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:51:21 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int	main(int ac, char **av, char **env)
 	
 	(void)ac;
 	(void)av;
+	printf("Bienvenue dans minishell! :)\n");
 	status = prompt_boucle(env);
 	printf("exit\n");
 	return (status);
