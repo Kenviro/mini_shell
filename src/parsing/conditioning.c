@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conditioning.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:14:34 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/14 10:24:40 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,6 @@ void	conditioning(t_list *lst, char **env, int *ms_status)
 		next_cmd(&lst);
 	}
 	ft_lstclear(&save_list);
+	printf("list->content: %s\n", save->cmd[0]);
 	command(save, env, ms_status);
 }

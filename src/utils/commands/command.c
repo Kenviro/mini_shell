@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/13 17:16:59 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/14 11:18:54 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	execute(char **cmd, char **env)
 		return ;
 }
 
-pid_t	pipex(t_cmds *cmds, char **env)
+pid_t	pipex(t_cmds *cmds, char **env, pid_t *to_wait)
 {
 	pid_t	pid;
 	int		end[2];
@@ -77,7 +77,8 @@ pid_t	pipex(t_cmds *cmds, char **env)
 	pid = fork();
 	if (pid == 0)
 	{
-		pipex_child(cmds, end, env);
+		pipex_child(cmds, end, env, to_wait);
+		free_2d(&env);
 		exit(0);
 	}
 	else

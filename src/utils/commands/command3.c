@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:03:50 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/13 17:18:32 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/14 11:22:08 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	pipex_launcher(t_cmds *cmds, char **env, int *ms_status)
 	dup2(cmds->fds[0], STDIN_FILENO);
 	while (cmds)
 	{
-		to_wait[i++] = pipex(cmds, env);
+		to_wait[i++] = pipex(cmds, env, to_wait);
 		cmds = cmds->next;
 	}
 	close_fds(save);

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/14 09:53:20 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:21:14 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,12 @@ char	*expension(char *input, char **env, int ms_status, int i);
 //command.c && command2.c && command3.c
 void	free_stuff(t_cmds *cmds);
 void	next_cmd(t_list **lst);
-void	cnf(t_cmds *cmds);
+void	cnf(t_cmds *cmds, char **env, pid_t *to_wait);
 void	conditioning(t_list *lst, char **env, int *ms_status);
 void	data_init(t_list *lst);
 void	command(t_cmds *cmds, char **env, int *ms_status);
 void	close_fds(t_cmds *cmds);
-void	pipex_child(t_cmds *cmds, int *end, char **env);
+void	pipex_child(t_cmds *cmds, int *end, char **env, pid_t *to_wait);
 void	execute(char **cmd, char **env);
 void	pipex_launcher(t_cmds *cmds, char **env, int *ms_status);
 void	wait_all(pid_t *to_wait, int nbcmds, int *ms_status);
@@ -132,6 +132,6 @@ int		red_out(char *red);
 int		red_in(char *red);
 int		count_cmds(t_list *lst);
 int		find_nbcmds(t_cmds *cmds);
-pid_t	pipex(t_cmds *cmds, char **env);
+pid_t	pipex(t_cmds *cmds, char **env, pid_t *to_wait);
 
 #endif

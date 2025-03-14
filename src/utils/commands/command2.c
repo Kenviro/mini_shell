@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   command2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/13 17:17:22 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/14 10:34:12 by ktintim-     ,    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	pipex_child(t_cmds *cmds, int *end, char **env)
+void	pipex_child(t_cmds *cmds, int *end, char **env, pid_t *to_wait)
 {
 	close(end[0]);
 	if (!(cmds->next) || cmds->fds[1] != 1)
@@ -28,7 +28,7 @@ void	pipex_child(t_cmds *cmds, int *end, char **env)
 	if (!check_built_in(cmds->cmd, env))
 	{
 		execute(cmds->cmd, env);
-		cnf(cmds);
+		cnf(cmds, env, to_wait);
 	}
 }
 
@@ -56,13 +56,15 @@ char	*filename(char *str)
 	return (str);
 }
 
-void	cnf(t_cmds *cmds)
+void	cnf(t_cmds *cmds, char **env, pid_t *to_wait)
 {
 	dup2(STDERR_FILENO, STDOUT_FILENO);
 	ft_printf("command not found: %s\n", cmds->cmd[0]);
 	close_fds(cmds);
+	free(to_wait);
 	free_stuff(cmds);
-	exit(EXIT_FAILURE);
+	free_2d(&env);
+	exit(127);
 }
 
 int	here_doc(char *limiter, char **env, int ms_status)
