@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:06:14 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/14 17:06:52 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:39:37 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_built_in(char **cmd, char **env, pid_t *to_wait)
 	}
 	else if (ft_strcmp(cmd[0], "exit") == 0)
 	{
-		return (exit_shell(cmd, env, to_wait), 1);
+		return (exit_child(cmd, env, to_wait), 1);
 	}
 	return (0);
 }
@@ -78,6 +78,12 @@ int	other_builtin(t_list *list, char ***env, int *ms_status)
 	{
 		if (ft_strcmp(list->content, "unset") == 0)
 			return (unset(list, env), 1);
+		else if (ft_strcmp(list->content, "exit") == 0 && \
+					is_there_pipe(list) == 0)
+		{
+			exit_shell(list, *env);
+			return (1);
+		}
 		else if (ft_strcmp(list->content, "cd") == 0)
 		{
 			cd_launcher(list, env, ms_status);

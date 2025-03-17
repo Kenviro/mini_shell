@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/14 17:04:17 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:38:03 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ char	*get_key(char *str);
 char	*get_value(char *str);
 
 // exit.c
-void	exit_shell(char **cmd, char **env, pid_t *to_wait);
+void	exit_shell(t_list *list, char **env);
+void	exit_child(char **cmd, char **env, pid_t *to_wait);
+int		is_there_pipe(t_list *list);
 
 // signal/setup_signal.c
 void	handle_signal(int signal);
