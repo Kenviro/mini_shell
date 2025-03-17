@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conargs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 10:55:44 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/13 17:53:52 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/17 13:40:08 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ char	**set_args(t_list *lst, int nbargs)
 			if (lst)
 				lst = lst->next;
 			continue ;
-		}/* 
-		if (!ft_strncmp(lst->content, "./", 2))
-			args[i++] = executable(lst->content); */
+		}
 		else
 			args[i++] = ft_strdup(lst->content);
 		lst = lst->next;
