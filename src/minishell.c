@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/14 17:18:54 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:22:52 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,6 @@ static int	next_step(t_list *list, char ***env, int *ms_status)
 		ft_lstclear(&list);
 		return (2);
 	}
-	tmp = list;
-	while (tmp)
-	{
-		tmp->content = found_dollar(tmp->content, *env, *ms_status);
-		tmp = tmp->next;
-	}
-	tmp = list;
-	while (tmp)
-	{
-		printf("content: %s\n", tmp->content);
-		tmp = tmp->next;
-	}
 	if (other_builtin(list, env, ms_status) == 0)
 	{
 		conditioning(list, *env, ms_status);
@@ -75,6 +63,7 @@ static int	input_work(char *input, char ***env)
 	if (input[0] == '\0')
 		return (0);
 	input = split_redirection(input);
+	input = found_dollar(input, *env, ms_status);
 	splited = holy_split(input, ' ');
 	free(input);
 	if (quote_cnf(&splited, &ms_status) == 1)
