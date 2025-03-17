@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/17 10:22:52 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:29:04 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static void	init_list(char **splited, t_list **list)
 
 static int	next_step(t_list *list, char ***env, int *ms_status)
 {
-	t_list	*tmp;
-
 	if (check_synt_error(list, ms_status) == 1)
 	{
 		ft_lstclear(&list);
