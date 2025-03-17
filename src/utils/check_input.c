@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:00:16 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:19:26 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/17 16:36:41 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,19 @@ char	*found_dollar(char *input, char **env, int ms_status)
 
 	i = 0;
 	quote = 0;
-	while (input[i])
+	while (input && input[i])
 	{
 		if (input[i] == '\'')
 		{
 			quote = 1;
 			i++;
 		}
-		if (quote == 0)
+		if (quote == 0 && input[i] == '$')
+		{
 			input = expension(input, env, ms_status, i);
-		if (input[i] == '\'' && quote == 1)
+			i = -1;
+		}
+		else if (input[i] == '\'' && quote == 1)
 			quote = 0;
 		i++;
 	}

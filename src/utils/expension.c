@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:30:30 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/13 15:02:41 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:39:19 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,11 @@ static char	*get_expanded_input(char *input, int i, int j, char *expanded_value)
 		return (NULL);
 	temp = ft_strjoin(beg, expanded_value);
 	free(beg);
-	if (!temp)
+	if (!temp || temp[0] == '\0')
+	{
+		free(temp);
 		return (NULL);
+	}
 	if (input[j])
 		new_input = ft_strjoin(temp, &input[j]);
 	else
@@ -96,9 +99,7 @@ static char	*replace_variable(char *input, int i, int j, char **env)
 	expanded_value = ft_getenv(name_env, env);
 	free(name_env);
 	if (!expanded_value)
-		expanded_value = ft_strdup("");
-	if (!expanded_value)
-		return (NULL);
+		return (get_expanded_input(input, i, j, ""));
 	new_input = get_expanded_input(input, i, j, expanded_value);
 	free(expanded_value);
 	return (new_input);
@@ -108,7 +109,7 @@ char	*expension(char *input, char **env, int ms_status, int i)
 {
 	int	j;
 
-	if (input[i] == '$')
+	if (input && input[i] == '$')
 	{
 		j = i;
 		if (input[j + 1] == '?' && \

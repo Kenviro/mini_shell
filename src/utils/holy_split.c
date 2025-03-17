@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   holy_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/14 15:58:13 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/17 16:30:37 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static int	count(char *str, char c)
 	int	count;
 	int	in_quote[2];
 
+	if (!str)
+		return (-1);
 	in_quote[0] = 0;
 	in_quote[1] = 0;
 	i = 0;
@@ -112,7 +114,7 @@ char	**holy_split(char *str, char c)
 	in_quote[1] = 0;
 	i = 0;
 	nbstr = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] != c)
 		{
