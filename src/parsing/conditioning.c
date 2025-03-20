@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/17 13:43:44 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:18:00 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	find_fdin(t_list *lst, char **env, int ms_status)
 		{
 			if (fd != 0)
 				close(fd);
- 			if (lst->content[1] != '<')
+			if (lst->content[1] != '<')
 			{
 				lst = lst->next;
 				fd = open(lst->content, O_RDONLY);
