@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/17 15:38:03 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:55:20 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char	*expension(char *input, char **env, int ms_status, int i);
 void	free_stuff(t_cmds *cmds);
 void	next_cmd(t_list **lst);
 void	cnf(t_cmds *cmds, char **env, pid_t *to_wait);
-void	isadir(t_cmds *cmds);
+void	isadir(t_cmds *cmds, char **env, pid_t *to_wait);
 void	conditioning(t_list *lst, char **env, int *ms_status);
 void	data_init(t_list *lst);
 void	command(t_cmds *cmds, char **env, int *ms_status);

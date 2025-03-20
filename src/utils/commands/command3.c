@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:03:50 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/17 10:29:50 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:57:43 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,17 @@ char	*direct_path(char **cmd)
 		i++;
 	}
 	path[i] = 0;
-	return (path);
+	if (access(path, F_OK) == 0)
+		return (path);
+	return (free(path), NULL);
 }
 
-void	isadir(t_cmds *cmds)
+void	isadir(t_cmds *cmds, char **env, pid_t *to_wait)
 {
 	dup2(STDERR_FILENO, STDOUT_FILENO);
 	ft_printf("is a directory: %s\n", cmds->cmd[0]);
+	free(to_wait);
+	free_2d(&env);
 	close_fds(cmds);
 	free_stuff(cmds);
 	exit(126);

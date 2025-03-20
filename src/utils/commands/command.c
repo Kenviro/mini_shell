@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/14 16:29:53 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:00:21 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,19 @@ int	execute(char **cmd, char **env)
 	if (!path)
 	{
 		path = direct_path(&cmd[0]);
-		if (!path[0])
+		if (!path || !path[0])
 			return (free(path), -1);
 	}
 	dir = opendir(path);
 	if (dir)
 	{
 		closedir(dir);
+		free(path);
 		return (-2);
 	}
-	return (execve(path, cmd, env));
+	if (execve(path, cmd, env) == -1)
+		return (free(path), -1);
+	return (-987654);
 }
 
 pid_t	pipex(t_cmds *cmds, char **env, pid_t *to_wait)
