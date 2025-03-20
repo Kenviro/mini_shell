@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:58:49 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/11 17:46:54 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:11:02 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ int	export(t_list *list, char ***env)
 	{
 		key = get_key(tmp->content);
 		value = get_value(tmp->content);
+		if (value == NULL)
+		{
+			free(key);
+			return (0);
+		}
 		check_env(key, value, env);
 		free(key);
 		free(value);

@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:04:41 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/03 16:38:05 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:08:30 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ char	*get_value(char *str)
 	char	*value;
 
 	i = 0;
-	while (str[i] != '=')
+	while (str[i] && str[i] != '=')
 		i++;
-	while (str[i] == '=')
+	if (str[i] == '\0')
+		return (NULL);
+	while (str[i] && str[i] == '=')
 		i++;
 	if (str[i] == '\0')
 		return (NULL);
@@ -41,20 +43,20 @@ char	*get_key(char *str)
 	char	*key;
 
 	i = 0;
-	while (str[i] != '=')
+	while (str[i] && str[i] != '=')
 		i++;
-	while (str[i] == '=')
+	while (str[i] && str[i] == '=')
 		i++;
 	key = (char *)malloc(sizeof(char) * (i + 1));
 	if (!key)
 		error("Malloc failed");
 	i = 0;
-	while (str[i] != '=')
+	while (str[i] && str[i] != '=')
 	{
 		key[i] = str[i];
 		i++;
 	}
-	while (str[i] == '=')
+	while (str[i] && str[i] == '=')
 	{
 		key[i] = str[i];
 		i++;
