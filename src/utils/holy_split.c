@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/21 15:48:40 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/21 16:48:28 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ static int	count(char *str, char c)
 	return (count);
 }
 
-static char	*word(char *str, int start, char c)
+char	*word(char *str, int start, char c)
 {
 	int		len;
 	char	*word;
-	
+
 	len = ft_splitonsteroids(str, start, c);
 	word = malloc((len + 1) * sizeof(char));
 	if (!word)
@@ -88,34 +88,16 @@ static char	*word(char *str, int start, char c)
 
 char	**holy_split(char *str, char c)
 {
-	size_t	i;
 	size_t	nbstr;
 	char	**spliff;
 	int		in_quote[2];
 
+	in_quote[0] = 0;
+	in_quote[1] = 0;
+	nbstr = 0;
 	spliff = malloc((count((char *)str, c) + 1) * sizeof(char *));
 	if (!spliff)
 		return (NULL);
-	in_quote[0] = 0;
-	in_quote[1] = 0;
-	i = 0;
-	nbstr = 0;
-	while (str && str[i])
-	{
-		if (str[i] != c)
-		{
-			quote(str[i], &in_quote);
-			spliff[nbstr] = word(str, i++, c);
-			if (spliff[nbstr] == NULL)
-				return (dup2(2, 1), ft_printf("trailing quote\n"), free_2d(&spliff), NULL);
-			nbstr++;
-			while (str[i] && (str[i] != c || in_quote[0] || in_quote[1]))
-				quote(str[i++], &in_quote);
-		}
-		while (str[i] == c && (!in_quote[0] || !in_quote[1]))
-			i++;
-	}
-	if (in_quote[0] || in_quote[1])
-		return (dup2(2, 1), ft_printf("trailing quote\n"), spliff[nbstr] = NULL, free_2d(&spliff), NULL);
-	return (spliff[nbstr] = NULL, spliff);
+	spliff = big_loop(str, spliff, nbstr, &in_quote);
+	return (spliff);
 }
