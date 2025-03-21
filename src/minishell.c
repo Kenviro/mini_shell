@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/17 16:33:51 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/21 14:22:05 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	input_work(char *input, char ***env)
 	if (input == NULL)
 		return (0);
 	splited = holy_split(input, ' ');
-	if (splited[0] == NULL)
+	if (splited && splited[0] == NULL)
 	{
 		free(input);
 		free(splited);

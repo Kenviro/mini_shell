@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:05:04 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/17 15:56:32 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/21 14:23:13 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,13 @@ void	ft_envclear(t_env **l_env)
 
 int	quote_cnf(char ***splited, int *ms_status)
 {
-	if (*splited == NULL && (*splited)[0][0] == '\0')
+	if (*splited == NULL)
+	{
+		free_2d(splited);
+		*ms_status = 127;
+		return (1);
+	}
+	if ((*splited)[0][0] == '\0')
 	{
 		free_2d(splited);
 		*ms_status = 127;
