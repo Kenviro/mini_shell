@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:00:16 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/17 16:36:41 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:26:34 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ char	*found_dollar(char *input, char **env, int ms_status)
 		if (input[i] == '\'')
 		{
 			quote = 1;
-			i++;
+			if (input[i + 1] != '\0')
+				i++;
 		}
 		if (quote == 0 && input[i] == '$')
 		{
