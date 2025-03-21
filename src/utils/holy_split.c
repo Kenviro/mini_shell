@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   holy_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/17 16:30:37 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/21 14:25:12 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static char	*word(char *str, int start, char c)
 	}
 	if (quote(str[start + i], &in_quote) < 2 && \
 		(in_quote[0] || in_quote[1]) && !quote(str[start + i + 1], &in_quote))
-		return (dup2(2, 1), ft_printf("trailing quote\n"), NULL);
+		return (free(word), NULL);
 	word[i] = 0;
 	return (word);
 }
@@ -119,12 +119,17 @@ char	**holy_split(char *str, char c)
 		if (str[i] != c)
 		{
 			quote(str[i], &in_quote);
-			spliff[nbstr++] = word(str, i++, c);
+			spliff[nbstr] = word(str, i++, c);
+			if (spliff[nbstr] == NULL)
+				return (dup2(2, 1), ft_printf("trailing quote\n"), free(spliff), NULL);
+			nbstr++;
 			while (str[i] && (str[i] != c || in_quote[0] || in_quote[1]))
 				quote(str[i++], &in_quote);
 		}
 		while (str[i] == c && (!in_quote[0] || !in_quote[1]))
 			i++;
 	}
+	if (in_quote[0] || in_quote[1])
+		return (dup2(2, 1), ft_printf("trailing quote\n"), free(spliff), NULL);
 	return (spliff[nbstr] = NULL, spliff);
 }
