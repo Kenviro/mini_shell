@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   holy_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/21 15:20:19 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:48:40 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,33 +73,16 @@ static int	count(char *str, char c)
 
 static char	*word(char *str, int start, char c)
 {
-	int		i;
 	int		len;
 	char	*word;
-	int		in_quote[2];
-
-	in_quote[0] = 0;
-	in_quote[1] = 0;
-	i = 0;
+	
 	len = ft_splitonsteroids(str, start, c);
 	word = malloc((len + 1) * sizeof(char));
 	if (!word)
 		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		if (quote(str[start + i], &in_quote))
-		{
-			start++;
-			continue ;
-		}
-		word[i] = str[start + i];
-		i++;
-	}
-	if (quote(str[start + i], &in_quote) < 2 && \
-		(in_quote[0] || in_quote[1]) && !quote(str[start + i + 1], &in_quote))
+	word = set_word(word, start, len, str);
+	if (!word)
 		return (free(word), NULL);
-	word[i] = 0;
 	return (word);
 }
 
@@ -124,7 +107,7 @@ char	**holy_split(char *str, char c)
 			quote(str[i], &in_quote);
 			spliff[nbstr] = word(str, i++, c);
 			if (spliff[nbstr] == NULL)
-				return (dup2(2, 1), ft_printf("trailing quote\n"), free(spliff), NULL);
+				return (dup2(2, 1), ft_printf("trailing quote\n"), free_2d(&spliff), NULL);
 			nbstr++;
 			while (str[i] && (str[i] != c || in_quote[0] || in_quote[1]))
 				quote(str[i++], &in_quote);
@@ -133,6 +116,6 @@ char	**holy_split(char *str, char c)
 			i++;
 	}
 	if (in_quote[0] || in_quote[1])
-		return (dup2(2, 1), ft_printf("trailing quote\n"), free(spliff), NULL);
+		return (dup2(2, 1), ft_printf("trailing quote\n"), spliff[nbstr] = NULL, free_2d(&spliff), NULL);
 	return (spliff[nbstr] = NULL, spliff);
 }
