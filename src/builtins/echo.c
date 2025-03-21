@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:13:02 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/11 13:01:03 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/21 10:19:17 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,27 @@ static int	check_echo_arg(char *flag)
 static char	*create_joined(char **cmd, int i)
 {
 	char	*joined;
+	char	*temp;
 
 	joined = ft_strdup(cmd[i]);
 	if (cmd[i + 1])
+	{
+		temp = joined;
 		joined = ft_strjoin(joined, " ");
+		free(temp);
+	}
 	i++;
 	while (cmd[i])
 	{
+		temp = joined;
 		joined = ft_strjoin(joined, cmd[i]);
+		free(temp);
 		if (cmd[i + 1])
+		{
+			temp = joined;
 			joined = ft_strjoin(joined, " ");
+			free(temp);
+		}
 		i++;
 	}
 	return (joined);
