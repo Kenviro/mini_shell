@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:59:16 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/21 15:02:18 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:15:30 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ char	*split_redirection(char *input)
 		if (quote == 0 && (input[i] == '\'' || input[i] == '\"'))
 		{
 			quote = 1;
-			i++;
+			if (input[i + 1] != '\0')
+				i++;
 		}
 		if (quote == 0 && (input[i] == '>' || input[i] == '<' || \
 			input[i] == '|'))
