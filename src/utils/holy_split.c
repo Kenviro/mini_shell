@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/21 15:06:43 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/21 15:11:36 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static int	count(char *str, char c)
 		while (str[i] == c && (!in_quote[0] || !in_quote[1]))
 			i++;
 	}
+	printf("%i\n", count);
 	return (count);
 }
 
