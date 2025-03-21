@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:06:14 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/21 10:15:18 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/21 13:05:06 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,11 @@ int	other_builtin(t_list *list, char ***env, int *ms_status)
 		else if (ft_strcmp(list->content, "export") == 0 && \
 				(list->next && list->next->content[0] != '|'))
 			return (export(list, env), 1);
+		else if (ft_strcmp(list->content, "credits") == 0)
+		{
+			ft_putstr_fd("Tout les royalties de minishell retourne a nrey\n", 1);
+			return (1);
+		}
 	}
 	return (0);
 }
