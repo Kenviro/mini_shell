@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/21 15:48:15 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/21 16:46:35 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int		ft_splitonsteroids(char *str, int start, char c);
 int		toggle_quote(int (*in_quote)[2], char quote);
 char	*set_word(char *word, int start, int len, char *str);
 char	**holy_split(char *str, char c);
+char	**big_loop(char *str, char **spliff, int nbstr, int (*in_quote)[2]);
+char	*word(char *str, int start, char c);
 
 // split_redirect.c
 int		found_redirection(char *str, t_list **list);
