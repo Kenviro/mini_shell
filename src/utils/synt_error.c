@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:26:01 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/17 15:14:23 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:27:37 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int	check_synt_error(t_list *list, int *ms_status)
 			synt_error("newline", ms_status);
 			return (1);
 		}
-		if ((tmp->content[0] == '>' || tmp->content[0] == '<' || \
-			tmp->content[0] == '|') && (tmp->next->content[0] == '>' || \
+		if ((tmp->content[0] == '>' || tmp->content[0] == '<') && \
+			(tmp->next->content[0] == '>' || \
 			tmp->next->content[0] == '<' || tmp->next->content[0] == '|'))
 		{
 			synt_error(tmp->next->content, ms_status);
