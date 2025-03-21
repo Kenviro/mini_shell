@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   splitonsteroids.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 16:07:01 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/13 16:49:31 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:06:22 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	ft_splitonsteroids(char *str, int start, char c)
 	{
 		if (quote(str[start + len + i], &in_quote))
 		{
-			len--;
 			i++;
+			continue ;
 		}
 		len ++;
 	}

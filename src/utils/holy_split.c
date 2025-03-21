@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/21 14:25:12 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/21 15:06:43 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ static char	*word(char *str, int start, char c)
 	while (i < len)
 	{
 		if (quote(str[start + i], &in_quote))
+		{
 			start++;
+			continue ;
+		}
 		word[i] = str[start + i];
 		i++;
 	}
