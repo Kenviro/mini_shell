@@ -3,113 +3,96 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 10:26:26 by ktintim-          #+#    #+#             */
-/*   Updated: 2024/11/26 10:50:58 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:50:35 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*joinfree(char *ret, char *str)
+char	*save_rest(char *stash, int start)
 {
-	char	*retstr;
+	char	*rest;
+	int		len;
 
-	retstr = ft_strjoin(ret, str);
-	free(ret);
-	return (retstr);
+	len = ft_strlen(stash) - start;
+	if (len <= 0 || !stash)
+		return (free(stash), NULL);
+	rest = ft_substr(stash, start, len);
+	if (!rest)
+		return (NULL);
+	free(stash);
+	return (rest);
 }
 
-char	*firstligne(int fd, char *ret)
+char	*get_to_eol(char *stash, int *pointer)
 {
-	char	*str;
+	char	*line;
 	int		i;
 
-	if (!ret)
-		ret = ft_calloc(1, 1);
-	str = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	i = 1;
-	while (i > 0)
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (stash[i] == '\n')
+		*pointer = i + 1;
+	else
 	{
-		i = read(fd, str, BUFFER_SIZE);
-		if (i == -1)
-		{
-			free(ret);
-			free(str);
+		*pointer = i;
+		if (i == 0 && stash[i] == '\0')
 			return (NULL);
-		}
-		str[i] = 0;
-		ret = joinfree(ret, str);
-		if (ft_strchr(ret, '\n'))
-			break ;
 	}
-	free(str);
-	return (ret);
+	line = ft_substr(stash, 0, *pointer);
+	if (!line)
+		return (NULL);
+	return (line);
 }
 
-char	*get_ligne(char *ret)
+char	*read_file(int fd, char *buffer, char *stash)
 {
-	int		i;
-	char	*str;
+	int		bytes_read;
+	char	*new_stash;
 
-	i = 0;
-	if (!ret[i])
-		return (NULL);
-	while (ret[i] && ret[i] != '\n')
-		i++;
-	str = ft_calloc(i + 2, sizeof(char));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (ret[i] && ret[i] != '\n')
+	bytes_read = 1;
+	while (!ft_strchr(stash, '\n') && bytes_read != 0)
 	{
-		str[i] = ret[i];
-		i++;
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if ((!stash && bytes_read == 0) || bytes_read == -1)
+			return (free(buffer), free(stash), new_stash = NULL);
+		buffer[bytes_read] = '\0';
+		new_stash = ft_strjoin(stash, buffer);
+		if (!new_stash)
+			return (NULL);
+		free(stash);
+		stash = new_stash;
 	}
-	if (ret[i] && ret[i] == '\n')
-		str[i++] = '\n';
-	return (str);
-}
-
-char	*free_ligne(char *ret)
-{
-	int		i;
-	int		j;
-	char	*str;
-
-	i = 0;
-	j = 0;
-	while (ret[i] && ret[i] != '\n')
-		i++;
-	if (!ret[i])
-	{
-		free (ret);
-		return (NULL);
-	}
-	str = ft_calloc((ft_strlen(ret) - i + 1), sizeof(*ret));
-	if (!str)
-		return (NULL);
-	while (ret[++i])
-		str[j++] = ret[i];
-	str[j] = '\0';
-	free (ret);
-	return (str);
+	return (stash);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*ret;
-	char		*str;
+	char		*buffer;
+	char		*line;
+	static char	*stash;
+	int			pointer;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	{
+		free(stash);
+		stash = NULL;
 		return (NULL);
-	ret = firstligne(fd, ret);
-	if (!ret)
+	}
+	if (stash == NULL)
+		stash = ft_strdup("");
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
 		return (NULL);
-	str = get_ligne(ret);
-	ret = free_ligne(ret);
-	return (str);
+	stash = read_file(fd, buffer, stash);
+	free(buffer);
+	if (!stash)
+		return (free(stash), NULL);
+	line = get_to_eol(stash, &pointer);
+	stash = save_rest(stash, pointer);
+	return (line);
 }
