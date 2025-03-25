@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/25 17:19:43 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:41:06 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	command(t_cmds *cmds, char **env, int *ms_status)
 		signal_handler_null();
 		waitpid(pid, ms_status, 0);
 		*ms_status = *ms_status >> 8;
+		close_fds2(cmds);
 		free_stuff(cmds);
 	}
 }
