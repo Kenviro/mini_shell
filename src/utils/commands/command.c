@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/25 16:02:14 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/25 17:10:28 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	command(t_cmds *cmds, char **env, int *ms_status)
 		signal_handler_null();
 		waitpid(pid, ms_status, 0);
 		*ms_status = *ms_status >> 8;
+		close_fds2(cmds);
 		free_stuff(cmds);
 	}
 }

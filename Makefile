@@ -29,6 +29,7 @@ FILES = minishell \
 		$(UTILS)commands/command \
 		$(UTILS)commands/command2 \
 		$(UTILS)commands/command3 \
+		$(UTILS)commands/command4 \
 		$(PARSING)conditioning \
 		$(PARSING)conargs \
 		$(SIGNAL)setup_signal \

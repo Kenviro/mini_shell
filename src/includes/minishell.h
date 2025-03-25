@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/25 16:08:34 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/25 17:10:17 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void	conditioning(t_list *lst, char **env, int *ms_status);
 void	data_init(t_list *lst);
 void	command(t_cmds *cmds, char **env, int *ms_status);
 void	close_fds(t_cmds *cmds);
+void	close_fds2(t_cmds *cmds);
 void	pipex_child(t_cmds *cmds, int *end, char **env, pid_t *to_wait);
 void	pipex_launcher(t_cmds *cmds, char **env, int *ms_status);
 void	wait_all(pid_t *to_wait, int nbcmds, int *ms_status);
