@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/21 12:49:04 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:21:26 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	pipex_child(t_cmds *cmds, int *end, char **env, pid_t *to_wait)
 {
+	int	tamere;
+
 	close(end[0]);
 	if (!(cmds->next) || cmds->fds[1] != 1)
 	{
@@ -29,10 +31,13 @@ void	pipex_child(t_cmds *cmds, int *end, char **env, pid_t *to_wait)
 	{
 		if (find_other(cmds->cmd) == 0)
 		{
-			if (execute(cmds->cmd, env) == -1)
+			tamere = execute(cmds->cmd, env);
+			if (tamere == -1)
 				cnf(cmds, env, to_wait);
-			else
+			else if (tamere == -2)
 				isadir(cmds, env, to_wait);
+			else
+				stfu(cmds, env, to_wait);
 		}
 		else
 			return (free_stuff(cmds), free(to_wait));

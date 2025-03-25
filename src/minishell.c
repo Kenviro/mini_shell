@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/21 15:17:40 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:55:52 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,16 @@ static int	next_step(char **splited, char ***env, int *ms_status)
 	return (*ms_status);
 }
 
-static int	input_work(char *input, char ***env)
+static int	input_work(char *input, char ***env, int *ms_status)
 {
 	char		**splited;
-	static int	ms_status = 0;
 
 	add_history(input);
 	splited = NULL;
 	if (input[0] == '\0')
 		return (0);
 	input = split_redirection(input);
-	input = found_dollar(input, *env, ms_status);
+	input = found_dollar(input, *env, *ms_status);
 	if (input == NULL)
 		return (0);
 	splited = holy_split(input, ' ');
@@ -74,21 +73,18 @@ static int	input_work(char *input, char ***env)
 		return (0);
 	}
 	free(input);
-	if (quote_cnf(&splited, &ms_status) == 1)
+	if (quote_cnf(&splited, ms_status) == 1)
 		return (127);
-	ms_status = next_step(splited, env, &ms_status);
-	return (ms_status);
+	*ms_status = next_step(splited, env, ms_status);
+	return (*ms_status);
 }
 
-static int	prompt_boucle(char **env)
+static int	prompt_boucle(char ***env, int *status)
 {	
 	char	*input;
 	char	*path;
-	char	**envcpy;
 	int		i;
-	int		status;
 
-	envcpy = ft_strdup_2d(env);
 	while (1)
 	{
 		i = 0;
@@ -103,19 +99,30 @@ static int	prompt_boucle(char **env)
 		if (input[i] == '\0')
 			new_line(input);
 		else
-			status = input_work(input, &envcpy);
+			*status = input_work(input, env, status);
 	}
-	return (free_2d(&envcpy), free(input), status);
+	return (free_2d(env), free(input), *status);
 }
 
 int	main(int ac, char **av, char **env)
 {
-	int		status;
+	static int	status = 0;
+	char		**envcpy;
 
-	(void)ac;
 	(void)av;
-	printf("Bienvenue dans minishell! :)\n");
-	status = prompt_boucle(env);
+	if (ac != -1)
+	{
+		printf("Bienvenue dans minishell! :)\n");
+		envcpy = ft_strdup_2d(env);
+		status = prompt_boucle(&envcpy, &status);
+	}
+	else
+	{
+		status = 1;
+		envcpy = ft_strdup_2d(env);
+		free_2d(&env);
+		status = prompt_boucle(&envcpy, &status);
+	}
 	printf("exit\n");
 	return (status);
 }

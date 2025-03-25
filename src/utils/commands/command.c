@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/17 17:00:21 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:29:44 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,25 @@ int	execute(char **cmd, char **env)
 	char	*path;
 	DIR		*dir;
 
-	path = findpath(cmd[0], env);
-	if (!path)
+	if (cmd && cmd[0])
 	{
-		path = direct_path(&cmd[0]);
-		if (!path || !path[0])
+		path = findpath(cmd[0], env);
+		if (!path)
+		{
+			path = direct_path(&cmd[0]);
+			if (!path || !path[0])
+				return (free(path), -1);
+		}
+		dir = opendir(path);
+		if (dir)
+		{
+			closedir(dir);
+			free(path);
+			return (-2);
+		}
+		if (execve(path, cmd, env) == -1)
 			return (free(path), -1);
 	}
-	dir = opendir(path);
-	if (dir)
-	{
-		closedir(dir);
-		free(path);
-		return (-2);
-	}
-	if (execve(path, cmd, env) == -1)
-		return (free(path), -1);
 	return (-987654);
 }
 
@@ -109,6 +112,7 @@ void	command(t_cmds *cmds, char **env, int *ms_status)
 	pid_t	pid;
 	int		status_cpy;
 
+	check_fds(cmds, env, ms_status);
 	pid = fork();
 	if (pid == 0)
 	{
