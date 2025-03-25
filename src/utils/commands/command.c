@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/25 10:16:20 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:03:39 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,13 @@ int	execute(char **cmd, char **env)
 	path = findpath(cmd[0], env);
 	if (!path)
 	{
+		signal_handler_null();
 		path = direct_path(&cmd[0]);
 		if (!path || !path[0])
 			return (free(path), -1);
 	}
+	else
+		signal_handler_child();
 	dir = opendir(path);
 	if (dir)
 	{
@@ -112,10 +115,6 @@ void	command(t_cmds *cmds, char **env, int *ms_status)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (cmds->cmd[0][0] == '.' && cmds->cmd[0][1] == '/')
-			signal_handler_null();
-		else
-			signal_handler_child();
 		status_cpy = 0;
 		pipex_launcher(cmds, env, &status_cpy);
 		exit(status_cpy >> 8);
