@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:42 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/14 11:23:18 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:23:10 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ static void	change_env(char **env, char *old_pwd)
 	free(old_pwd);
 }
 
+void	cd_error(int *ms_status)
+{
+	ft_putstr_fd("cd: HOME not set\n", 2);
+	*ms_status = 1;
+	return ;
+}
+
 void	cd(char *path, char ***env, int *ms_status)
 {
 	int			i;
@@ -46,6 +53,8 @@ void	cd(char *path, char ***env, int *ms_status)
 	if (!path)
 	{
 		i = 0;
+		if ((*env)[0] == NULL)
+			return (cd_error(ms_status));
 		while (ft_strncmp((*env)[i], "HOME=", 5) != 0)
 			i++;
 		chdir((*env)[i] + 5);
