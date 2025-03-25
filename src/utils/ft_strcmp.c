@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:53:23 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/25 15:28:49 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/25 17:04:34 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,4 @@ char	**ft_strdup_2d(char **str)
 	}
 	new_str[i] = NULL;
 	return (new_str);
-}
-
-void	check_fds(t_cmds *cmds, char **env, int *ms_status)
-{
-	t_cmds	*save;
-
-	save = cmds;
-	while (cmds)
-	{
-		if (cmds->fds[0] == -1)
-		{
-			free_stuff(save);
-			ft_printf("Invalid file\n");
-			*ms_status = main(-1, NULL, env);
-			exit(*ms_status);
-		}
-		cmds = cmds->next;
-	}
 }

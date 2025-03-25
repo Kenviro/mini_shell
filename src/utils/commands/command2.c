@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/25 15:21:26 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/25 16:52:05 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ void	pipex_child(t_cmds *cmds, int *end, char **env, pid_t *to_wait)
 				stfu(cmds, env, to_wait);
 		}
 		else
-			return (free_stuff(cmds), free(to_wait));
+			return (close_fds(cmds), free_stuff(cmds), free(to_wait));
 	}
+	close_fds(cmds);
 	free_stuff(cmds);
 	free(to_wait);
 }
@@ -91,6 +92,12 @@ int	here_doc(char *limiter, char **env, int ms_status)
 	{
 		ft_printf("> ");
 		line = get_next_line(0);
+		if (!line)
+		{
+			close(end[1]);
+			ft_printf("\n");
+			return (end[0]);
+		}
 		line = found_dollar(line, env, ms_status);
 		if (ft_strcmp(line, limiter) == 10)
 		{
