@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/25 14:03:39 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:02:14 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,27 @@ int	execute(char **cmd, char **env)
 	char	*path;
 	DIR		*dir;
 
-	path = findpath(cmd[0], env);
-	if (!path)
+	if (cmd && cmd[0])
 	{
-		signal_handler_null();
-		path = direct_path(&cmd[0]);
-		if (!path || !path[0])
+		signal_handler_child();
+		path = findpath(cmd[0], env);
+		if (!path)
+		{
+			signal_handler_null();
+			path = direct_path(&cmd[0]);
+			if (!path || !path[0])
+				return (free(path), -1);
+		}
+		dir = opendir(path);
+		if (dir)
+		{
+			closedir(dir);
+			free(path);
+			return (-2);
+		}
+		if (execve(path, cmd, env) == -1)
 			return (free(path), -1);
 	}
-	else
-		signal_handler_child();
-	dir = opendir(path);
-	if (dir)
-	{
-		closedir(dir);
-		free(path);
-		return (-2);
-	}
-	if (execve(path, cmd, env) == -1)
-		return (free(path), -1);
 	return (-987654);
 }
 
@@ -112,6 +114,7 @@ void	command(t_cmds *cmds, char **env, int *ms_status)
 	pid_t	pid;
 	int		status_cpy;
 
+	check_fds(cmds, env, ms_status);
 	pid = fork();
 	if (pid == 0)
 	{

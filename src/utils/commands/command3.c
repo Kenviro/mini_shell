@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:03:50 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/17 16:57:43 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/25 14:19:58 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,20 @@ char	*direct_path(char **cmd)
 void	isadir(t_cmds *cmds, char **env, pid_t *to_wait)
 {
 	dup2(STDERR_FILENO, STDOUT_FILENO);
-	ft_printf("is a directory: %s\n", cmds->cmd[0]);
+	ft_printf("is a directory: %s\n", cmds[0]);
 	free(to_wait);
 	free_2d(&env);
 	close_fds(cmds);
 	free_stuff(cmds);
 	exit(126);
+}
+
+void	stfu(t_cmds *cmds, char **env, pid_t *to_wait)
+{
+	dup2(STDERR_FILENO, STDOUT_FILENO);
+	free(to_wait);
+	free_2d(&env);
+	close_fds(cmds);
+	free_stuff(cmds);
+	exit(0);
 }
