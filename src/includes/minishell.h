@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/25 15:55:50 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/25 17:29:27 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_env
 }				t_env;
 
 // minishell.c
-int	main(int ac, char **av, char **env);
+int		main(int ac, char **av, char **env);
 
 // error.c && symt_error.c && utils.c
 void	error(char *message);
@@ -94,7 +94,8 @@ int		is_there_pipe(t_list *list);
 // signal/setup_signal.c
 void	handle_signal(int signal);
 void	signal_handler_null(void);
-void	setup_signal_handler(void);
+void	setup_signal_handler(int *ms_status);
+int		get_ms_status(int status);
 
 // signal/signal_child.c
 void	handle_signal_child(int signal);

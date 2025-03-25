@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/25 15:59:19 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/25 17:29:03 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,10 @@ static int	prompt_boucle(char ***env, int *status)
 	while (1)
 	{
 		i = 0;
-		setup_signal_handler();
+		setup_signal_handler(status);
 		path = get_pwd();
 		input = readline(path);
+		*status = get_ms_status(*status);
 		free(path);
 		if (input == NULL)
 			break ;
@@ -112,7 +113,6 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	if (ac != -1)
 	{
-		printf("Bienvenue dans minishell! :)\n");
 		envcpy = ft_strdup_2d(env);
 		status = prompt_boucle(&envcpy, &status);
 	}

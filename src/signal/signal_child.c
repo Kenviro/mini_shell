@@ -6,24 +6,12 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:32:25 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/25 10:12:19 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:20:28 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include <signal.h>
-
-void	handle_signal_child(int signal)
-{
-	if (signal == SIGINT)
-	{
-		write(2, "\n", 1);
-	}
-	else if (signal == SIGQUIT)
-	{
-		write(2, "Quit (core dumped)\n", 19);
-	}
-}
 
 void	signal_handler_child(void)
 {

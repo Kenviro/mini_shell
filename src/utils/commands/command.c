@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/25 16:02:14 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/25 17:19:43 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	execute(char **cmd, char **env)
 
 	if (cmd && cmd[0])
 	{
-		signal_handler_child();
 		path = findpath(cmd[0], env);
 		if (!path)
 		{
@@ -119,6 +118,7 @@ void	command(t_cmds *cmds, char **env, int *ms_status)
 	if (pid == 0)
 	{
 		status_cpy = 0;
+		signal_handler_child();
 		pipex_launcher(cmds, env, &status_cpy);
 		exit(status_cpy >> 8);
 	}
