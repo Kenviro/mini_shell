@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/25 15:55:50 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/25 16:08:34 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_env
 }				t_env;
 
 // minishell.c
-int	main(int ac, char **av, char **env);
+int		main(int ac, char **av, char **env);
 
 // error.c && symt_error.c && utils.c
 void	error(char *message);
