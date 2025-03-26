@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:03:50 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/26 12:04:41 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/26 14:17:41 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	close_fds(t_cmds *cmds)
 	while (cmds)
 	{
 		close(cmds->fds[0]);
-		close(cmds->fds[1]);
+		if (cmds->fds[1] != 1)
+			close(cmds->fds[1]);
 		cmds = cmds->next;
 	}
 }
