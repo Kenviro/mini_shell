@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:32:25 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/26 12:50:44 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:01:47 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	handle_signal_child(int signal)
 {
 	if (signal == SIGINT)
 	{
-		fprintf(stderr, "control + C\n");
 		write(2, "\n", 1);
 		exit(130);
 	}
@@ -56,6 +55,7 @@ void	here_doc_signal(void)
 {
 	struct sigaction	sa;
 
+	signal(SIGQUIT, SIG_IGN);
 	sa.sa_handler = signal_here_doc;
 	sa.sa_flags = SA_RESTART | SA_NODEFER;
 	sigemptyset(&sa.sa_mask);
@@ -64,5 +64,4 @@ void	here_doc_signal(void)
 		perror("Erreur lors de la configuration des signaux");
 		exit(EXIT_FAILURE);
 	}
-	signal(SIGQUIT, SIG_IGN);
 }
