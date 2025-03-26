@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:04:19 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/26 12:57:19 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/26 14:08:27 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	**add_lvl(char **env)
 	char	**new_env;
 	char	*lvl;
 	int		lvl_int;
-	int 	i;
+	int		i;
 
 	i = 0;
 	while (env[i] && ft_strncmp(env[i], "SHLVL=", 6) != 0)
@@ -76,4 +76,20 @@ char	**add_lvl(char **env)
 	free(lvl);
 	new_env = ft_strdup_2d(env);
 	return (free_2d(&env), new_env);
+}
+
+void	redirect_out(t_cmds *cmds, int end[2])
+{
+	close(end[0]);
+	if (!(cmds->next) || cmds->fds[1] != 1)
+	{
+		close(end[1]);
+		if (cmds->fds[1] != 1)
+			dup2(cmds->fds[1], STDOUT_FILENO);
+	}
+	else
+	{
+		dup2(end[1], STDOUT_FILENO);
+		close(end[1]);
+	}
 }
