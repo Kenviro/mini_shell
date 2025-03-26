@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/26 13:24:50 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 14:26:54 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void	pipex_launcher(t_cmds *cmds, char **env, int *ms_status);
 void	wait_all(pid_t *to_wait, int nbcmds, int *ms_status);
 void	check_fds(t_cmds *cmds, char **env, int *ms_status);
 void	check_heredoc(t_cmds **cmds, char **env, int ms_status);
+void	redirect_out(t_cmds *cmds, int end[2]);
 char	*filename(char *str);
 char	*trailing_quote(char *word, int in_quote[2]);
 char	*direct_path(char **cmd);

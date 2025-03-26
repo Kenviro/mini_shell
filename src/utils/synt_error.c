@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:26:01 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/21 16:27:37 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:15:09 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	check_synt_error(t_list *list, int *ms_status)
 	t_list	*tmp;
 
 	tmp = list;
+	if (tmp->content[0] == '|')
+		return (synt_error("|", ms_status), 1);
 	while (tmp)
 	{
 		if (double_and_solopipe(tmp, ms_status))

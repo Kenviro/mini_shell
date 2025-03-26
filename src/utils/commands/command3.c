@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:03:50 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/26 13:52:37 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 14:26:49 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	close_fds(t_cmds *cmds)
 	while (cmds)
 	{
 		close(cmds->fds[0]);
-		close(cmds->fds[1]);
+		if (cmds->fds[1] != 1)
+			close(cmds->fds[1]);
 		cmds = cmds->next;
 	}
 }

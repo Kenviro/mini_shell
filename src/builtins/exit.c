@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:59:28 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/17 15:35:49 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 14:28:44 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	exit_shell(t_list *list, char **env)
 			if (list->next->next)
 			{
 				ft_printf("minishell: exit: too many arguments\n");
-				return (proper_exit(list, 1, env));
+				return ;
 			}
 			proper_exit(list, ft_atoi(list->next->content), env);
 		}

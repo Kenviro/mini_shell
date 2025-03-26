@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:00:16 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/21 15:26:34 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:24:28 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 char	*found_dollar(char *input, char **env, int ms_status)
 {
-	int	quote;
-	int	i;
+	int		quote;
+	int		i;
 
-	i = 0;
+	i = -1;
 	quote = 0;
-	while (input && input[i])
+	while (input && input[++i])
 	{
-		if (input[i] == '\'')
+		if (input[i] == '\'' && quote == 0)
 		{
 			quote = 1;
 			if (input[i + 1] != '\0')
@@ -34,7 +34,6 @@ char	*found_dollar(char *input, char **env, int ms_status)
 		}
 		else if (input[i] == '\'' && quote == 1)
 			quote = 0;
-		i++;
 	}
 	return (input);
 }

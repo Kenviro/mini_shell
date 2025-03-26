@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:30:30 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/17 16:39:19 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:21:33 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*replace_mark(char *input, int i, int ms_status)
 	else
 		beg = ft_strdup("");
 	if (!beg)
-		return (NULL);
+		return (free(input), NULL);
 	value = ft_itoa(ms_status);
 	if (!value)
 		return (free(beg), NULL);
@@ -55,8 +55,8 @@ static char	*replace_mark(char *input, int i, int ms_status)
 		suffix = ft_strdup("");
 	if (!suffix)
 		return (free(beg), free(value), free(new_input), NULL);
-	input = ft_strjoin(new_input, suffix);
-	return (free(beg), free(value), free(new_input), free(suffix), input);
+	return (free(input), input = ft_strjoin(new_input, suffix), free(beg), \
+		free(value), free(new_input), free(suffix), input);
 }
 
 static char	*get_expanded_input(char *input, int i, int j, char *expanded_value)
@@ -70,7 +70,7 @@ static char	*get_expanded_input(char *input, int i, int j, char *expanded_value)
 	else
 		beg = ft_strdup("");
 	if (!beg)
-		return (NULL);
+		return (free(input), NULL);
 	temp = ft_strjoin(beg, expanded_value);
 	free(beg);
 	if (!temp || temp[0] == '\0')
@@ -99,7 +99,10 @@ static char	*replace_variable(char *input, int i, int j, char **env)
 	expanded_value = ft_getenv(name_env, env);
 	free(name_env);
 	if (!expanded_value)
-		return (get_expanded_input(input, i, j, ""));
+	{
+		new_input = get_expanded_input(input, i, j, "");
+		return (new_input);
+	}
 	new_input = get_expanded_input(input, i, j, expanded_value);
 	free(expanded_value);
 	return (new_input);
@@ -107,25 +110,29 @@ static char	*replace_variable(char *input, int i, int j, char **env)
 
 char	*expension(char *input, char **env, int ms_status, int i)
 {
-	int	j;
+	char	*new_input;
+	int		j;
 
-	if (input && input[i] == '$')
+	new_input = ft_strdup(input);
+	free(input);
+	if (new_input && new_input[i] == '$')
 	{
 		j = i;
-		if (input[j + 1] == '?' && \
-			(input[j + 2] == ' ' || input[j + 2] == '\0'))
-			input = replace_mark(input, i, ms_status);
+		if (new_input[j + 1] == '?' && \
+			(new_input[j + 2] == ' ' || new_input[j + 2] == '\0'))
+			new_input = replace_mark(new_input, i, ms_status);
 		else
 		{
 			j++;
-			while (input[j] && input[j] != ' ' && input[j] != '\'' && \
-				input[j] != '"' && input[j] != '$' && input[j] != '\n')
+			while (new_input[j] && new_input[j] != ' ' && \
+			new_input[j] != '\'' && new_input[j] != '"' && \
+			new_input[j] != '$' && new_input[j] != '\n')
 				j++;
 			if (j - i > 1)
-				input = replace_variable(input, i, j, env);
+				new_input = replace_variable(new_input, i, j, env);
 			else
-				input[i] = ' ';
+				new_input[i] = ' ';
 		}
 	}
-	return (input);
+	return (new_input);
 }
