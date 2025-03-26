@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:53:23 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/25 17:04:34 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/26 13:22:08 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,19 @@ char	**ft_strdup_2d(char **str)
 	}
 	new_str[i] = NULL;
 	return (new_str);
+}
+
+int	find_minishell(char *str)
+{
+	int		len;
+	int		i;
+
+	len = ft_strlen(str);
+	len = len - 10;
+	if (len < 0)
+		return (0);
+	i = len;
+	if (ft_strcmp(&str[i], "/minishell") == 0)
+		return (1);
+	return (0);
 }

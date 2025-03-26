@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:01:05 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/26 12:56:11 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/26 13:43:09 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ int	execute(char **cmd, char **env)
 		path = findpath(cmd[0], env);
 		if (!path)
 		{
-			signal_handler_null();
 			path = direct_path(&cmd[0]);
+			if (find_minishell(path))
+				signal_handler_null();
 			if (!path || !path[0])
 				return (free(path), -1);
 		}

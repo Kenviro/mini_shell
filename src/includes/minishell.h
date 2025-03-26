@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/26 12:55:56 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/26 13:24:50 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int		found_redirection(char *str, t_list **list);
 char	*found_dollar(char *input, char **env, int ms_status);
 char	*expension(char *input, char **env, int ms_status, int i);
 
-//command.c && command2.c && command3.c
+//command.c && command2.c && command3.c && command4.c
 void	free_stuff(t_cmds *cmds);
 void	next_cmd(t_list **lst);
 void	cnf(t_cmds *cmds, char **env, pid_t *to_wait);
@@ -142,6 +142,7 @@ char	**find_args(t_list *lst);
 char	**ft_strdup_2d(char **str);
 char	**add_lvl(char **env);
 char	***red_init(void);
+int		find_minishell(char *str);
 int		execute(char **cmd, char **env);
 int		here_doc(char *limiter, char **env, int ms_status);
 int		ft_strcmp(const char *s1, const char *s2);
