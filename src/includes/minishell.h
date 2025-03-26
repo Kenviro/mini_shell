@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/25 17:40:57 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:45:38 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int		get_ms_status(int status);
 // signal/signal_child.c
 void	handle_signal_child(int signal);
 void	signal_handler_child(void);
+void	here_doc_signal(void);
 
 //holy_split.c && splitonsteroids.c
 int		quote(char c, int (*in_quote)[2]);
@@ -138,6 +139,7 @@ char	*direct_path(char **cmd);
 char	**set_args(t_list *lst, int nbargs);
 char	**find_args(t_list *lst);
 char	**ft_strdup_2d(char **str);
+char	**add_lvl(char **env);
 char	***red_init(void);
 int		execute(char **cmd, char **env);
 int		here_doc(char *limiter, char **env, int ms_status);

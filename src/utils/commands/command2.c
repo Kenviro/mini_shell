@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/25 16:52:05 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/26 11:46:45 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	pipex_child(t_cmds *cmds, int *end, char **env, pid_t *to_wait)
 	{
 		if (find_other(cmds->cmd) == 0)
 		{
+			env = add_lvl(env);
 			tamere = execute(cmds->cmd, env);
 			if (tamere == -1)
 				cnf(cmds, env, to_wait);
@@ -88,6 +89,7 @@ int	here_doc(char *limiter, char **env, int ms_status)
 	int		end[2];
 
 	pipe(end);
+	here_doc_signal();
 	while (1)
 	{
 		ft_printf("> ");
@@ -107,6 +109,5 @@ int	here_doc(char *limiter, char **env, int ms_status)
 		write(end[1], line, ft_strlen(line));
 		free(line);
 	}
-	close(end[1]);
-	return (end[0]);
+	return (close(end[1]), end[0]);
 }

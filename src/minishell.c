@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:22:23 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/25 17:29:03 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:49:32 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	if (ac != -1)
 	{
+		printf("Bienvenue dans minishell! :)\n");
 		envcpy = ft_strdup_2d(env);
 		status = prompt_boucle(&envcpy, &status);
 	}
