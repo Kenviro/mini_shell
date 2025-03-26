@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:18:24 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/26 11:52:08 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:51:36 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ t_cmds	*new_cmd(t_list *lst)
 			lst = lst->next;
 		cmds->limiter = ft_strdup(lst->content);
 	}
+	else
+		cmds->limiter = NULL;
 	return (cmds);
 }
 

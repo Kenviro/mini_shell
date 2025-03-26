@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:18:49 by achillesoul       #+#    #+#             */
-/*   Updated: 2025/03/26 10:56:18 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:52:02 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	free_stuff(t_cmds *cmds)
 		while (cmds->cmd[i])
 			free(cmds->cmd[i++]);
 		free(cmds->cmd);
+		if (cmds->limiter)
+			free(cmds->limiter);
 		cmds = cmds->next;
 		free(save);
 	}
