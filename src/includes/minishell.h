@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:19:20 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/26 11:45:38 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:55:56 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void	pipex_child(t_cmds *cmds, int *end, char **env, pid_t *to_wait);
 void	pipex_launcher(t_cmds *cmds, char **env, int *ms_status);
 void	wait_all(pid_t *to_wait, int nbcmds, int *ms_status);
 void	check_fds(t_cmds *cmds, char **env, int *ms_status);
+void	check_heredoc(t_cmds **cmds, char **env, int ms_status);
 char	*filename(char *str);
 char	*trailing_quote(char *word, int in_quote[2]);
 char	*direct_path(char **cmd);
