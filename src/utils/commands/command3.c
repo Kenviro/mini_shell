@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:03:50 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/25 17:04:55 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:04:41 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	pipex_launcher(t_cmds *cmds, char **env, int *ms_status)
 	save = cmds;
 	nbcmds = find_nbcmds(cmds);
 	to_wait = (pid_t *)malloc((nbcmds) * sizeof(pid_t));
+	check_heredoc(&cmds, env, *ms_status);
 	dup2(cmds->fds[0], STDIN_FILENO);
 	while (cmds)
 	{

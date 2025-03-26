@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:04:19 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/25 17:07:15 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:04:00 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,18 @@ void	check_fds(t_cmds *cmds, char **env, int *ms_status)
 		}
 		cmds = cmds->next;
 	}
+}
+
+void	check_heredoc(t_cmds **cmds, char **env, int ms_status)
+{
+	t_cmds	*save;
+
+	save = *cmds;
+	while (*cmds)
+	{
+		if ((*cmds)->fds[0] == -20)
+			(*cmds)->fds[0] = here_doc((*cmds)->limiter, env, ms_status);
+		*cmds = (*cmds)->next;
+	}
+	*cmds = save;
 }
