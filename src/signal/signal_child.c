@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:32:25 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/26 11:50:09 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:50:44 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	here_doc_signal(void)
 	sa.sa_handler = signal_here_doc;
 	sa.sa_flags = SA_RESTART | SA_NODEFER;
 	sigemptyset(&sa.sa_mask);
-	if (sigaction(SIGINT, &sa, NULL) == -1 || \
-			sigaction(SIGQUIT, &sa, NULL) == -1)
+	if (sigaction(SIGINT, &sa, NULL) == -1)
 	{
 		perror("Erreur lors de la configuration des signaux");
 		exit(EXIT_FAILURE);
 	}
+	signal(SIGQUIT, SIG_IGN);
 }
