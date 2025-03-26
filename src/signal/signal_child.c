@@ -6,12 +6,27 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:32:25 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/25 16:20:28 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 10:07:47 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include <signal.h>
+
+void	handle_signal_child(int signal)
+{
+	if (signal == SIGINT)
+	{
+		fprintf(stderr, "control + C\n");
+		write(2, "\n", 1);
+		exit(130);
+	}
+	else if (signal == SIGQUIT)
+	{
+		write(2, "Quit (core dumped)\n", 19);
+		exit(131);
+	}
+}
 
 void	signal_handler_child(void)
 {

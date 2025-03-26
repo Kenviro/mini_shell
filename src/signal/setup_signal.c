@@ -6,7 +6,7 @@
 /*   By: ktintim- <ktintim-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:51:08 by ktintim-          #+#    #+#             */
-/*   Updated: 2025/03/25 17:28:58 by ktintim-         ###   ########.fr       */
+/*   Updated: 2025/03/26 10:06:25 by ktintim-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,6 @@ void	handle_signal(int signal)
 		rl_replace_line("", 0);
 		rl_redisplay();
 		g_ms_status = 130;
-	}
-}
-
-void	handle_signal_child(int signal)
-{
-	if (signal == SIGINT)
-	{
-		write(2, "\n", 1);
-		exit(130);
-	}
-	else if (signal == SIGQUIT)
-	{
-		write(2, "Quit (core dumped)\n", 19);
-		exit(131);
 	}
 }
 
